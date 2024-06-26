@@ -22,7 +22,7 @@ copyright = '2024, tc-hirate'
 author = 'tc-hirate'
 
 # The full version, including alpha/beta/rc tags
-release = ''
+release = '1.0'
 
 
 # -- General configuration ---------------------------------------------------
