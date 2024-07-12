@@ -1,0 +1,807 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ラズパイカメラの使い方 &#8212; ros2024 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/basic_mod.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <script src="_static/js/petite-vue.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body data-dark_mode_code_blocks="true">
+
+<div id="top_nav">
+    
+
+    <nav>
+        
+            
+        
+
+        <p id="toggle_sidebar">
+            <a href="#" title="Toggle sidebar">|||</a>
+        </p>
+        <h1><a href="index.html" title="Go to homepage">ros2024 1.0 documentation</a></h1>
+
+        <a id="mode_toggle" href="#" @click.prevent="handleClick" :title="mode">
+    <template v-if="mode == 'light'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_light"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><circle cx="39.311" cy="39.524" r="15.734" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.212,4.901c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901l-0,9.614c-0,2.705 2.196,4.901 4.9,4.901c2.705,0 4.901,-2.196 4.901,-4.901l0,-9.614Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M67.48,18.073c1.913,-1.912 1.913,-5.018 0,-6.931c-1.912,-1.912 -5.018,-1.912 -6.931,0l-6.798,6.799c-1.912,1.912 -1.912,5.018 0,6.931c1.913,1.912 5.018,1.912 6.931,-0l6.798,-6.799Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.728,61.108c1.912,-1.913 1.912,-5.018 -0,-6.931c-1.913,-1.913 -5.019,-1.913 -6.931,-0l-6.799,6.798c-1.912,1.913 -1.912,5.019 0,6.931c1.913,1.913 5.019,1.913 6.931,0l6.799,-6.798Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.682,54.177c-1.913,-1.913 -5.018,-1.913 -6.931,-0c-1.912,1.913 -1.912,5.018 0,6.931l6.798,6.798c1.913,1.913 5.019,1.913 6.931,0c1.913,-1.912 1.913,-5.018 0,-6.931l-6.798,-6.798Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M4.901,34.623c-2.705,0 -4.901,2.196 -4.901,4.901c0,2.705 2.196,4.901 4.901,4.901l9.614,0c2.705,0 4.901,-2.196 4.901,-4.901c0,-2.705 -2.196,-4.901 -4.901,-4.901l-9.614,0Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.212,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901l-0,9.614c-0,2.705 2.196,4.901 4.9,4.901c2.705,-0 4.901,-2.196 4.901,-4.901l0,-9.614Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M18.929,11.142c-1.912,-1.912 -5.018,-1.912 -6.931,0c-1.912,1.913 -1.912,5.019 0,6.931l6.799,6.799c1.912,1.912 5.018,1.912 6.931,-0c1.912,-1.913 1.912,-5.019 -0,-6.931l-6.799,-6.799Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.108,34.623c-2.705,0 -4.901,2.196 -4.901,4.901c-0,2.705 2.196,4.901 4.901,4.901l9.614,0c2.705,0 4.901,-2.196 4.901,-4.901c-0,-2.705 -2.196,-4.901 -4.901,-4.901l-9.614,0Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+
+    <template v-if="mode == 'dark'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_dark"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><circle cx="39.311" cy="39.524" r="15.734" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.212,14.515c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,0 -4.901,2.196 -4.901,4.901c0,2.705 2.197,4.901 4.901,4.901c2.705,0 4.901,-2.196 4.901,-4.901Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M60.662,24.892c1.902,-1.902 1.902,-4.99 0,-6.892l-0.04,-0.039c-1.901,-1.902 -4.989,-1.902 -6.891,-0c-1.901,1.901 -1.901,4.989 0,6.891l0.04,0.04c1.902,1.901 4.989,1.901 6.891,-0Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.732,61.103c1.91,-1.91 1.91,-5.011 0,-6.921l-0.009,-0.01c-1.91,-1.91 -5.012,-1.91 -6.921,-0c-1.91,1.91 -1.91,5.011 -0,6.921l0.01,0.01c1.909,1.91 5.011,1.91 6.92,-0Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.672,54.167c-1.907,-1.907 -5.004,-1.907 -6.911,0l-0.02,0.02c-1.907,1.907 -1.907,5.004 0,6.911c1.907,1.907 5.004,1.907 6.911,-0l0.02,-0.02c1.907,-1.907 1.907,-5.004 0,-6.911Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M14.52,34.623c-2.702,0 -4.896,2.194 -4.896,4.896l0,0.01c0,2.702 2.194,4.896 4.896,4.896c2.702,0 4.896,-2.194 4.896,-4.896l-0,-0.01c-0,-2.702 -2.194,-4.896 -4.896,-4.896Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.212,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.901,2.196 -4.901,4.901c0,2.704 2.197,4.9 4.901,4.9c2.705,0 4.901,-2.196 4.901,-4.9Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M25.73,17.943c-1.911,-1.911 -5.015,-1.911 -6.926,0l-0.005,0.005c-1.911,1.911 -1.911,5.015 0,6.926c1.911,1.911 5.015,1.911 6.926,0l0.005,-0.005c1.911,-1.911 1.911,-5.014 -0,-6.926Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.098,34.623c-2.699,0 -4.891,2.192 -4.891,4.892l-0,0.019c-0,2.699 2.192,4.891 4.891,4.891c2.7,0 4.892,-2.192 4.892,-4.891l0,-0.019c0,-2.7 -2.192,-4.892 -4.892,-4.892Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+
+    <template v-if="mode == 'darkest'">
+        <svg width="100%" height="100%" viewBox="0 0 79 80" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g id="mode_darkest"><rect id="Bounds" x="0" y="-0" width="78.623" height="79.049" style="fill:none;"/><path d="M39.315,23.791c8.684,-0 15.734,7.05 15.734,15.733c0,8.684 -7.05,15.734 -15.734,15.734c-8.683,0 -15.733,-7.05 -15.733,-15.734c-0,-8.683 7.05,-15.733 15.733,-15.733Zm0,4.737c6.069,0 10.997,4.927 10.997,10.996c-0,6.069 -4.928,10.996 -10.997,10.996c-6.068,0 -10.996,-4.927 -10.996,-10.996c0,-6.069 4.928,-10.996 10.996,-10.996Z" style="fill:#fff;"/><g id="beams"><g id="beam"><path id="beam1" serif:id="beam" d="M44.216,14.515c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,0 -4.9,2.196 -4.9,4.901c-0,2.705 2.196,4.901 4.9,4.901c2.705,0 4.901,-2.196 4.901,-4.901Z" style="fill:#fff;"/></g><g id="beam2" serif:id="beam"><path id="beam3" serif:id="beam" d="M60.666,24.892c1.902,-1.902 1.902,-4.99 0,-6.892l-0.04,-0.039c-1.901,-1.902 -4.989,-1.902 -6.891,-0c-1.901,1.901 -1.901,4.989 0,6.891l0.04,0.04c1.902,1.901 4.99,1.901 6.891,-0Z" style="fill:#fff;"/></g><g id="beam4" serif:id="beam"><path id="beam5" serif:id="beam" d="M25.737,61.103c1.909,-1.91 1.909,-5.011 -0,-6.921l-0.01,-0.01c-1.91,-1.91 -5.011,-1.91 -6.921,-0c-1.91,1.91 -1.91,5.011 -0,6.921l0.01,0.01c1.91,1.91 5.011,1.91 6.921,-0Z" style="fill:#fff;"/></g><g id="beam6" serif:id="beam"><path id="beam7" serif:id="beam" d="M60.676,54.167c-1.907,-1.907 -5.004,-1.907 -6.911,0l-0.02,0.02c-1.907,1.907 -1.907,5.004 0,6.911c1.907,1.907 5.004,1.907 6.911,-0l0.02,-0.02c1.907,-1.907 1.907,-5.004 0,-6.911Z" style="fill:#fff;"/></g><g id="beam8" serif:id="beam"><path id="beam9" serif:id="beam" d="M14.524,34.623c-2.702,0 -4.896,2.194 -4.896,4.896l0,0.01c0,2.702 2.194,4.896 4.896,4.896c2.702,0 4.896,-2.194 4.896,-4.896l0,-0.01c0,-2.702 -2.194,-4.896 -4.896,-4.896Z" style="fill:#fff;"/></g><g id="beam10" serif:id="beam"><path id="beam11" serif:id="beam" d="M44.216,64.534c0,-2.705 -2.196,-4.901 -4.901,-4.901c-2.704,-0 -4.9,2.196 -4.9,4.901c-0,2.704 2.196,4.9 4.9,4.9c2.705,0 4.901,-2.196 4.901,-4.9Z" style="fill:#fff;"/></g><g id="beam12" serif:id="beam"><path id="beam13" serif:id="beam" d="M25.734,17.943c-1.911,-1.911 -5.015,-1.911 -6.926,0l-0.005,0.005c-1.911,1.911 -1.911,5.015 0,6.926c1.911,1.911 5.015,1.911 6.926,0l0.005,-0.005c1.911,-1.911 1.911,-5.014 0,-6.926Z" style="fill:#fff;"/></g><g id="beam14" serif:id="beam"><path id="beam15" serif:id="beam" d="M64.103,34.623c-2.7,0 -4.892,2.192 -4.892,4.892l-0,0.019c-0,2.699 2.192,4.891 4.892,4.891c2.699,0 4.891,-2.192 4.891,-4.891l0,-0.019c0,-2.7 -2.192,-4.892 -4.891,-4.892Z" style="fill:#fff;"/></g></g></g></svg>
+    </template>
+</a>
+
+<script>
+(function() {
+    const LOCAL_STORAGE_KEY = 'piccoloThemeMode'
+
+    var initialMode = localStorage.getItem(LOCAL_STORAGE_KEY)
+
+    if (initialMode) {
+        // Make sure the value in local storage is valid
+        if (['light', 'dark', 'darkest'].indexOf(initialMode) == -1) {
+            initialMode = 'light'
+            localStorage.setItem(LOCAL_STORAGE_KEY, initialMode)
+        }
+    } else {
+        // Check if the client prefers dark mode
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            initialMode = 'dark'
+        } else {
+            initialMode = 'light'
+        }
+        localStorage.setItem(LOCAL_STORAGE_KEY, initialMode)
+    }
+
+    document.documentElement.dataset.mode = initialMode
+
+    PetiteVue.createApp({
+        'mode': initialMode,
+        handleClick() {
+            let currentMode = this.mode
+
+            if (currentMode == 'light') {
+                this.mode = 'dark'
+            } else if (currentMode == 'dark') {
+                this.mode = 'darkest'
+            } else if (currentMode == 'darkest') {
+                this.mode = 'light'
+            }
+
+            document.documentElement.dataset.mode = this.mode
+            localStorage.setItem(LOCAL_STORAGE_KEY, this.mode)
+
+            console.log(this.mode)
+        }
+    }).mount('#mode_toggle')
+})()
+</script>
+            <p class="mobile_search_link">
+                <a href="search.html" title="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 65 64" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2">
+                        <path d="M14.873 40.009c-2.315-3.943-3.642-8.532-3.642-13.429C11.231 11.91 23.141 0 37.811 0s26.58 11.91 26.58 26.58-11.91 26.58-26.58 26.58a26.44 26.44 0 0 1-14.277-4.161L9.739 62.794a3.12 3.12 0 0 1-4.413 0L.913 58.382c-1.217-1.218-1.217-3.196 0-4.413l13.96-13.96zM37.811 8.054c10.225 0 18.526 8.301 18.526 18.526s-8.301 18.526-18.526 18.526-18.526-8.301-18.526-18.526S27.586 8.054 37.811 8.054z" fill="#fff" />
+                    </svg>
+                </a>
+            </p>
+        
+
+        <div class="searchbox_wrapper">
+            
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+    </nav>
+</div>
+
+    
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><ul>
+<li class="toctree-l1"><a class="reference internal" href="01_introduction/introduction.html">1. はじめに</a></li>
+<li class="toctree-l1"><a class="reference internal" href="schedule.html">2. スケジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_install_pc.html">3. Linuxのインストール（PC）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linux_basic.html">4. Linux入門</a></li>
+</ul>
+
+        </div>
+      </div>
+
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="id1">
+<h1>ラズパイカメラの使い方<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>カメラを使って、画像処理をする説明をします。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<section id="id2">
+<h2>カメラの有効化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>raspi-configをインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt-get update
+<span class="gp">pi@zumo00:~$ </span>sudo apt-get install raspi-config
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>raspi-configの起動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo raspi-config
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<img alt="img/picam_img_01.png" class="align-center" src="img/picam_img_01.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>[3 Interface Options]を選択。</p>
+<img alt="img/picam_img_02.png" class="align-center" src="img/picam_img_02.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>[I1 Legacy Camera]を選択。</p>
+<img alt="img/picam_img_03.png" class="align-center" src="img/picam_img_03.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Enableに設定。</p>
+<img alt="img/picam_img_04.png" class="align-center" src="img/picam_img_04.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>OK。</p>
+<img alt="img/picam_img_05.png" class="align-center" src="img/picam_img_05.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>終了。</p>
+<img alt="img/picam_img_06.png" class="align-center" src="img/picam_img_06.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>再起動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo shutdown -r now
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id3">
+<h2>必要なパッケージのインストール<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>ユーティリティのインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt install v4l-utils
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>カメラが認識されているか確認。エラーが出る。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl --list-devices
+<span class="go">Failed to open /dev/video0: Permission denied</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>カメラの権限を確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ls /dev/video0 -l
+<span class="go">crw-rw---- 1 root video 81, 12 Mar 20 14:32 /dev/video0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>カメラの権限を変更。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo chmod <span class="m">777</span> /dev/video0
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>カメラの権限が変更されているか確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ls /dev/video0 -l
+<span class="go">crwxrwxrwx 1 root video 81, 12 Mar 20 14:32 /dev/video0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>再度、カメラが認識されているか確認。
+/dev/video0が表示されていて、mmal serviceと出ていればOK。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl --list-devices
+<span class="go">mmal service 16.1 (platform:bcm2835-v4l2-0):</span>
+<span class="go">    /dev/video0</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>カメラパッケージのインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt-get install ros-iron-v4l2-camera
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>カメラパッケージの実行。
+ERRORやWARNが出るが気にしない。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ros2 run v4l2_camera v4l2_camera_node
+<span class="go">[INFO] [1690932868.971591124] [v4l2_camera]: Driver: bm2835 mmal</span>
+<span class="go">[INFO] [1690932868.972720620] [v4l2_camera]: Version: 331619</span>
+<span class="go">[INFO] [1690932868.972842439] [v4l2_camera]: Device: mmal service 16.1</span>
+<span class="go">[INFO] [1690932868.972927488] [v4l2_camera]: Location: platform:bcm2835-v4l2-0</span>
+<span class="go">[INFO] [1690932868.973019777] [v4l2_camera]: Capabilities:</span>
+<span class="go">[INFO] [1690932868.973087327] [v4l2_camera]:   Read/write: YES</span>
+<span class="go">[INFO] [1690932868.973155658] [v4l2_camera]:   Streaming: YES</span>
+<span class="go">[INFO] [1690932868.973260134] [v4l2_camera]: Current pixel format: JPEG @ 1024x768</span>
+<span class="go">[INFO] [1690932868.975125961] [v4l2_camera]: Available pixel formats:</span>
+<span class="go">[INFO] [1690932868.975221479] [v4l2_camera]:   YU12 - Planar YUV 4:2:0</span>
+<span class="go">[INFO] [1690932868.975325538] [v4l2_camera]:   YUYV - YUYV 4:2:2</span>
+<span class="go">[INFO] [1690932868.975395328] [v4l2_camera]:   RGB3 - 24-bit RGB 8-8-8</span>
+<span class="go">[INFO] [1690932868.975464961] [v4l2_camera]:   JPEG - JFIF JPEG</span>
+<span class="go">[INFO] [1690932868.975548031] [v4l2_camera]:   H264 - H.264</span>
+<span class="go">[INFO] [1690932868.975616831] [v4l2_camera]:   MJPG - Motion-JPEG</span>
+<span class="go">[INFO] [1690932868.975685527] [v4l2_camera]:   YVYU - YVYU 4:2:2</span>
+<span class="go">[INFO] [1690932868.975765108] [v4l2_camera]:   VYUY - VYUY 4:2:2</span>
+<span class="go">[INFO] [1690932868.975846824] [v4l2_camera]:   UYVY - UYVY 4:2:2</span>
+<span class="go">[INFO] [1690932868.975937446] [v4l2_camera]:   NV12 - Y/CbCr 4:2:0</span>
+<span class="go">[INFO] [1690932868.976006767] [v4l2_camera]:   BGR3 - 24-bit BGR 8-8-8</span>
+<span class="go">[INFO] [1690932868.976085306] [v4l2_camera]:   YV12 - Planar YVU 4:2:0</span>
+<span class="go">[INFO] [1690932868.976159731] [v4l2_camera]:   NV21 - Y/CrCb 4:2:0</span>
+<span class="go">[INFO] [1690932868.976227958] [v4l2_camera]:   RX24 - 32-bit XBGR 8-8-8-8</span>
+<span class="go">[INFO] [1690932868.976298164] [v4l2_camera]: Available controls:</span>
+<span class="go">[INFO] [1690932868.976417692] [v4l2_camera]:   Brightness (1) = 50</span>
+<span class="go">[INFO] [1690932868.976505658] [v4l2_camera]:   Contrast (1) = 0</span>
+<span class="go">[INFO] [1690932868.976600498] [v4l2_camera]:   Saturation (1) = 0</span>
+<span class="go">[INFO] [1690932868.976686121] [v4l2_camera]:   Red Balance (1) = 1000</span>
+<span class="go">[INFO] [1690932868.977006892] [v4l2_camera]:   Blue Balance (1) = 1000</span>
+<span class="go">[INFO] [1690932868.977110743] [v4l2_camera]:   Horizontal Flip (2) = 0</span>
+<span class="go">[INFO] [1690932868.977196469] [v4l2_camera]:   Vertical Flip (2) = 0</span>
+<span class="go">[INFO] [1690932868.977279540] [v4l2_camera]:   Power Line Frequency (3) = 1</span>
+<span class="go">[INFO] [1690932868.977362610] [v4l2_camera]:   Sharpness (1) = 0</span>
+<span class="go">[INFO] [1690932868.977454118] [v4l2_camera]:   Color Effects (3) = 0</span>
+<span class="go">[INFO] [1690932868.977536719] [v4l2_camera]:   Rotate (1) = 0</span>
+<span class="go">[INFO] [1690932868.977618592] [v4l2_camera]:   Color Effects, CbCr (1) = 32896</span>
+<span class="go">[ERROR] [1690932868.977764108] [v4l2_camera]: Failed getting value for control 10027009: Permission denied (13); returning 0!</span>
+<span class="go">[INFO] [1690932868.978126076] [v4l2_camera]:   Codec Controls (6) = 0</span>
+<span class="go">[INFO] [1690932868.978245864] [v4l2_camera]:   Video Bitrate Mode (3) = 0</span>
+<span class="go">[INFO] [1690932868.978334923] [v4l2_camera]:   Video Bitrate (1) = 10000000</span>
+<span class="go">[INFO] [1690932868.978429504] [v4l2_camera]:   Repeat Sequence Header (2) = 0</span>
+<span class="go">[ERROR] [1690932868.978520855] [v4l2_camera]: Failed getting value for control 10029541: Permission denied (13); returning 0!</span>
+<span class="go">[INFO] [1690932868.978646320] [v4l2_camera]:   Force Key Frame (4) = 0</span>
+<span class="go">[INFO] [1690932868.978732203] [v4l2_camera]:   H264 Minimum QP Value (1) = 0</span>
+<span class="go">[INFO] [1690932868.978815585] [v4l2_camera]:   H264 Maximum QP Value (1) = 0</span>
+<span class="go">[INFO] [1690932868.978905062] [v4l2_camera]:   H264 I-Frame Period (1) = 60</span>
+<span class="go">[INFO] [1690932868.978989486] [v4l2_camera]:   H264 Level (3) = 11</span>
+<span class="go">[INFO] [1690932868.979071515] [v4l2_camera]:   H264 Profile (3) = 4</span>
+<span class="go">[ERROR] [1690932868.979155887] [v4l2_camera]: Failed getting value for control 10092545: Permission denied (13); returning 0!</span>
+<span class="go">[INFO] [1690932868.979263123] [v4l2_camera]:   Camera Controls (6) = 0</span>
+<span class="go">[INFO] [1690932868.979350308] [v4l2_camera]:   Auto Exposure (3) = 0</span>
+<span class="go">[INFO] [1690932868.979441139] [v4l2_camera]:   Exposure Time, Absolute (1) = 1000</span>
+<span class="go">[INFO] [1690932868.979524938] [v4l2_camera]:   Exposure, Dynamic Framerate (2) = 0</span>
+<span class="go">[INFO] [1690932868.979607800] [v4l2_camera]:   Auto Exposure, Bias (9) = 12</span>
+<span class="go">[INFO] [1690932868.979690662] [v4l2_camera]:   White Balance, Auto &amp; Preset (3) = 1</span>
+<span class="go">[INFO] [1690932868.979773160] [v4l2_camera]:   Image Stabilization (2) = 0</span>
+<span class="go">[INFO] [1690932868.979856386] [v4l2_camera]:   ISO Sensitivity (9) = 0</span>
+<span class="go">[INFO] [1690932868.979946019] [v4l2_camera]:   ISO Sensitivity, Auto (3) = 1</span>
+<span class="go">[INFO] [1690932868.980028308] [v4l2_camera]:   Exposure, Metering Mode (3) = 0</span>
+<span class="go">[INFO] [1690932868.980110701] [v4l2_camera]:   Scene Mode (3) = 0</span>
+<span class="go">[ERROR] [1690932868.980264134] [v4l2_camera]: Failed getting value for control 10289153: Permission denied (13); returning 0!</span>
+<span class="go">[INFO] [1690932868.980448243] [v4l2_camera]:   JPEG Compression Controls (6) = 0</span>
+<span class="go">[INFO] [1690932868.980540583] [v4l2_camera]:   Compression Quality (1) = 30</span>
+<span class="go">[INFO] [1690932868.984375515] [v4l2_camera]: Requesting format: 1024x768 YUYV</span>
+<span class="go">[INFO] [1690932868.989716286] [v4l2_camera]: Success</span>
+<span class="go">[INFO] [1690932868.990578498] [v4l2_camera]: Requesting format: 640x480 YUYV</span>
+<span class="go">[INFO] [1690932868.991413472] [v4l2_camera]: Success</span>
+<span class="go">[WARN] [1690932868.993148522] [v4l2_camera]: Control type not currently supported: 6, for control: Codec Controls</span>
+<span class="go">[WARN] [1690932868.993662256] [v4l2_camera]: Control type not currently supported: 4, for control: Force Key Frame</span>
+<span class="go">[WARN] [1690932868.994705036] [v4l2_camera]: Control type not currently supported: 6, for control: Camera Controls</span>
+<span class="go">[WARN] [1690932868.995408034] [v4l2_camera]: Control type not currently supported: 9, for control: Auto Exposure, Bias</span>
+<span class="go">[WARN] [1690932868.995902446] [v4l2_camera]: Control type not currently supported: 9, for control: ISO Sensitivity</span>
+<span class="go">[WARN] [1690932868.996506125] [v4l2_camera]: Control type not currently supported: 6, for control: JPEG Compression Controls</span>
+<span class="go">[INFO] [1690932868.996804657] [v4l2_camera]: Starting camera</span>
+<span class="go">[WARN] [1690932869.777105331] [v4l2_camera]: Image encoding not the same as requested output, performing possibly slow conversion: yuv422_yuy2 =&gt; rgb8</span>
+<span class="go">[INFO] [1690932869.817848274] [v4l2_camera]: using default calibration URL</span>
+<span class="go">[INFO] [1690932869.818274458] [v4l2_camera]: camera calibration URL: file:///home/pi/.ros/camera_info/mmal_service_16.1.yaml</span>
+<span class="go">[ERROR] [1690932869.818839493] [camera_calibration_parsers]: Unable to open camera calibration file [/home/pi/.ros/camera_info/mmal_service_16.1.yaml]</span>
+<span class="go">[WARN] [1690932869.819140525] [v4l2_camera]: Camera calibration file /home/pi/.ros/camera_info/mmal_service_16.1.yaml not found</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>トピックの確認。/image_rawがカメラからのデータ。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ros2 topic list
+<span class="go">/camera_info</span>
+<span class="go">/image_raw</span>
+<span class="go">/parameter_events</span>
+<span class="go">/rosout</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>次に、PCでカメラのデータが受信できるか確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 topic list
+<span class="go">/camera_info</span>
+<span class="go">/image_raw</span>
+<span class="go">/parameter_events</span>
+<span class="go">/rosout</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>rqt_image_viewで表示。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 run rqt_image_view rqt_image_view
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<img alt="img/picam_img_07.png" class="align-center" src="img/picam_img_07.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id4">
+<h2>フレームレートを確認・変更する方法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>カメラのフォーマットを確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl --list-formats-ext
+<span class="go">ioctl: VIDIOC_ENUM_FMT</span>
+<span class="go">    Type: Video Capture</span>
+
+<span class="go">    [0]: &#39;YU12&#39; (Planar YUV 4:2:0)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [1]: &#39;YUYV&#39; (YUYV 4:2:2)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [2]: &#39;RGB3&#39; (24-bit RGB 8-8-8)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [3]: &#39;JPEG&#39; (JFIF JPEG, compressed)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [4]: &#39;H264&#39; (H.264, compressed)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [5]: &#39;MJPG&#39; (Motion-JPEG, compressed)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [6]: &#39;YVYU&#39; (YVYU 4:2:2)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [7]: &#39;VYUY&#39; (VYUY 4:2:2)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [8]: &#39;UYVY&#39; (UYVY 4:2:2)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [9]: &#39;NV12&#39; (Y/CbCr 4:2:0)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [10]: &#39;BGR3&#39; (24-bit BGR 8-8-8)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [11]: &#39;YV12&#39; (Planar YVU 4:2:0)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [12]: &#39;NV21&#39; (Y/CrCb 4:2:0)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+<span class="go">    [13]: &#39;RX24&#39; (32-bit XBGR 8-8-8-8)</span>
+<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>カメラのフレームレートを確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl -P
+<span class="go">Streaming Parameters Video Capture:</span>
+<span class="go">    Capabilities     : timeperframe</span>
+<span class="go">    Frames per second: 30.000 (30000/1000)</span>
+<span class="go">    Read buffers     : 1</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>カメラのフレームレートを変更。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl -p <span class="m">5</span>
+<span class="go">Frame rate set to 5.000 fps</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>変更したカメラのフレームレートを確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl -P
+<span class="go">Streaming Parameters Video Capture:</span>
+<span class="go">    Capabilities     : timeperframe</span>
+<span class="go">    Frames per second: 5.000 (5000/1000)</span>
+<span class="go">    Read buffers     : 1</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id5">
+<h2>画像処理をするプログラムを作る<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>カメラで取得した画像をグレースケールに変換して表示してみましょう。</p>
+<p>パケージはcv_test、ファイル名はcam_gray.pyとします。</p>
+<p>画像処理は次の手順で行っています。ラズパイカメラから取得した画像はROSのImage型であることに注意してください。</p>
+<ul class="simple">
+<li><p>Webカメラの画像を取得する（data）</p></li>
+<li><p>OpenCVの標準データ形式に変換する（cv_image）</p></li>
+<li><p>画像処理をする（cv_gray_image）</p></li>
+<li><p>ROSのImage型に変換する（ros_image）</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>gray.pyをコピーしてcam_gray.pyを作ってください。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">cd</span> ~/ros2_ws/
+<span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/gray.py src/cv_test/cv_test/cam_gray.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>cam_gray.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/cam_gray.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
+<span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">cv_bridge</span> <span class="kn">import</span> <span class="n">CvBridge</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="k">class</span> <span class="nc">ImagePublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;image_publisher&#39;</span><span class="p">)</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">Image</span><span class="p">,</span> <span class="s1">&#39;gray_image&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
+</span><span class="hll">            <span class="n">Image</span><span class="p">,</span>
+</span><span class="hll">            <span class="s1">&#39;image_raw&#39;</span><span class="p">,</span>
+</span><span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">camera_callback</span><span class="p">,</span>
+</span><span class="hll">            <span class="mi">10</span><span class="p">)</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span>
+</span>        <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span> <span class="o">=</span> <span class="n">CvBridge</span><span class="p">()</span>
+
+<span class="hll">    <span class="k">def</span> <span class="nf">camera_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span>        <span class="n">cv_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">imgmsg_to_cv2</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">cv_gray_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+        <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_gray_image</span><span class="p">,</span> <span class="s1">&#39;mono8&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="n">image_publisher</span> <span class="o">=</span> <span class="n">ImagePublisher</span><span class="p">()</span>
+
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">image_publisher</span><span class="p">)</span>
+
+    <span class="n">image_publisher</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>setup.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+
+<span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="n">package_name</span><span class="p">],</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;share/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;package.xml&#39;</span><span class="p">]),</span>
+    <span class="p">],</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">maintainer</span><span class="o">=</span><span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span>
+    <span class="n">maintainer_email</span><span class="o">=</span><span class="s1">&#39;ubuntu@todo.todo&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;TODO: Package description&#39;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s1">&#39;TODO: License declaration&#39;</span><span class="p">,</span>
+    <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;img_publisher = cv_test.image_view:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;gray_publisher = cv_test.gray:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;circle_publisher = cv_test.circle:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;binary_publisher = cv_test.binary:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;edge_publisher = cv_test.edge:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;face_publisher = cv_test.face_detect:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;eye_publisher = cv_test.eye_detect:main&#39;</span><span class="p">,</span>
+<span class="hll">            <span class="s1">&#39;cam_publisher = cv_test.cam_gray:main&#39;</span><span class="p">,</span>
+</span>        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>ビルド。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>セットアップファイルの反映。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>cv_testパッケージのcam_publisherノードの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test cam_publisher
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="id6">
+<h2>演習4「カメラで取得した画像から顔を検出する」<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<section id="id7">
+<h3>（１）カメラの画像を使って、顔認識するプログラムを作ってください。<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>ファイル名は「cam_face_detect.py」とします。</p>
+<p>face_detect.pyをコピーしてcam_face_detect.pyを作ってください。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/cam_face_detect.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>cam_gray.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/cam_face_detect.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
+<span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
+<span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">cv_bridge</span> <span class="kn">import</span> <span class="n">CvBridge</span>
+<span class="kn">import</span> <span class="nn">cv2</span>
+
+<span class="k">class</span> <span class="nc">ImagePublisher</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s1">&#39;image_publisher&#39;</span><span class="p">)</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">Image</span><span class="p">,</span> <span class="s1">&#39;face_detect&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span>
+</span><span class="hll">            <span class="n">Image</span><span class="p">,</span>
+</span><span class="hll">            <span class="s1">&#39;image_raw&#39;</span><span class="p">,</span>
+</span><span class="hll">            <span class="bp">self</span><span class="o">.</span><span class="n">camera_callback</span><span class="p">,</span>
+</span><span class="hll">            <span class="mi">10</span><span class="p">)</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span>
+</span>        <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span> <span class="o">=</span> <span class="n">CvBridge</span><span class="p">()</span>
+
+<span class="hll">    <span class="k">def</span> <span class="nf">camera_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class="hll">        <span class="n">cv_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">imgmsg_to_cv2</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span class="hll">        <span class="n">cv_rotate_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">ROTATE_180</span><span class="p">)</span>
+</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml&#39;</span>
+        <span class="n">cascade</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CascadeClassifier</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+        <span class="n">face</span> <span class="o">=</span> <span class="n">cascade</span><span class="o">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">cv_rotate_image</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">face</span><span class="p">:</span>
+                <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
+                <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">cv_rotate_image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;not detect face&#39;</span><span class="p">)</span>
+
+        <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_rotate_image</span><span class="p">,</span> <span class="s1">&#39;bgr8&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
+
+    <span class="n">image_publisher</span> <span class="o">=</span> <span class="n">ImagePublisher</span><span class="p">()</span>
+
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">image_publisher</span><span class="p">)</span>
+
+    <span class="n">image_publisher</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>setup.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>編集。</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+
+<span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="n">package_name</span><span class="p">],</span>
+    <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
+            <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
+        <span class="p">(</span><span class="s1">&#39;share/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;package.xml&#39;</span><span class="p">]),</span>
+    <span class="p">],</span>
+    <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;setuptools&#39;</span><span class="p">],</span>
+    <span class="n">zip_safe</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">maintainer</span><span class="o">=</span><span class="s1">&#39;ubuntu&#39;</span><span class="p">,</span>
+    <span class="n">maintainer_email</span><span class="o">=</span><span class="s1">&#39;ubuntu@todo.todo&#39;</span><span class="p">,</span>
+    <span class="n">description</span><span class="o">=</span><span class="s1">&#39;TODO: Package description&#39;</span><span class="p">,</span>
+    <span class="n">license</span><span class="o">=</span><span class="s1">&#39;TODO: License declaration&#39;</span><span class="p">,</span>
+    <span class="n">tests_require</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pytest&#39;</span><span class="p">],</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="s1">&#39;img_publisher = cv_test.image_view:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;gray_publisher = cv_test.gray:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;circle_publisher = cv_test.circle:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;binary_publisher = cv_test.binary:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;edge_publisher = cv_test.edge:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;face_publisher = cv_test.face_detect:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;eye_publisher = cv_test.eye_detect:main&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;cam_publisher = cv_test.cam_gray:main&#39;</span><span class="p">,</span>
+<span class="hll">            <span class="s1">&#39;cam_face_publisher = cv_test.cam_face_detect:main&#39;</span><span class="p">,</span>
+</span>        <span class="p">],</span>
+    <span class="p">},</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>ビルド。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>セットアップファイルの反映。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>cv_testパッケージのgray_publisherノードの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test cam_face_publisher
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="cam-face-detect-pylaunch">
+<h3>（２）cam_face_detect.pyを実行するlaunchファイルを作ってください。<a class="headerlink" href="#cam-face-detect-pylaunch" title="Permalink to this headline">¶</a></h3>
+<p>ファイル名はcam_face_detect_launch_pyとします。</p>
+<p>PCからRaspberry Piのカメラを起動できる？</p>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+    
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">ラズパイカメラの使い方</a><ul>
+<li><a class="reference internal" href="#id2">カメラの有効化</a></li>
+<li><a class="reference internal" href="#id3">必要なパッケージのインストール</a></li>
+<li><a class="reference internal" href="#id4">フレームレートを確認・変更する方法</a></li>
+<li><a class="reference internal" href="#id5">画像処理をするプログラムを作る</a></li>
+<li><a class="reference internal" href="#id6">演習4「カメラで取得した画像から顔を検出する」</a><ul>
+<li><a class="reference internal" href="#id7">（１）カメラの画像を使って、顔認識するプログラムを作ってください。</a></li>
+<li><a class="reference internal" href="#cam-face-detect-pylaunch">（２）cam_face_detect.pyを実行するlaunchファイルを作ってください。</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+    
+
+      <div class="clearer"></div>
+    </div>
+    <div class="button_nav_wrapper">
+        <div class="button_nav">
+            <div class="left">
+                
+            </div>
+
+            <div class="right">
+                
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2024, tc-hirate.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.3.2.
+    </div>
+
+<p id="theme_credit">Styled using the <a href="https://github.com/piccolo-orm/piccolo_theme">Piccolo Theme</a></p>
+  </body>
+</html>

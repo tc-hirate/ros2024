@@ -5,6 +5,6 @@ ROSロボットプログラミング
    :numbered:
 
    ./01_introduction/introduction
-   schedule
-   linux_install_pc
-   linux_basic
+   ./02_schedule/schedule
+   ./03_linux_install_pc/linux_install_pc
+   ./04_linux_basic/linux_basic
