@@ -14,16 +14,12 @@ Linuxのダウンロード
 Ubuntu Desktop 24.04 LTSのディスクイメージを `UbuntuのHP <https://releases.ubuntu.com/24.04/>`_ からダウンロードします。
 
 .. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
-   :align: center
 
 |
 
 ダウンロードフォルダに保存されます。
 
 .. image:: ./images/linux_install_pc_img_02.png
-   :width: 800px
-   :align: center
 
 |
 
@@ -37,8 +33,6 @@ Rufus（ルーファス）は起動可能なUSBフラッシュドライブを作
 Rufusを `RufusのHP <http://rufus.ie/ja/>`_ からダウンロードします。
 
 .. image:: ./images/linux_install_pc_img_03.png
-   :width: 800px
-   :align: center
 
 |
 
@@ -47,15 +41,12 @@ Rufusを `RufusのHP <http://rufus.ie/ja/>`_ からダウンロードします�
 ここから、Portableをダウンロードしてください。
 
 .. image:: ./images/linux_install_pc_img_04.png
-   :width: 800px
-   :align: center
 
 |
 
 ダウンロードフォルダに保存されます。
 
 .. image:: ./images/linux_install_pc_img_05.png
-   :align: center
 
 |
 
@@ -69,14 +60,12 @@ Live USBの作成
 [いいえ]ボタンをクリック。
 
 .. image:: ./images/linux_install_pc_img_06.png
-   :align: center
 
 |
 
 [選択]ボタンをクリック。
 
 .. image:: ./images/linux_install_pc_img_07.png
-   :align: center
 
 |
 
@@ -131,142 +120,156 @@ Linuxのインストール
 
 Live USBをPCに挿入してください。
 
-PCの電源ボタンを押したら、［F12］キーを連打し、Boot Optionsの画面を表示させる。
+PCの電源ボタンを押したら、[F12]キーを連打し、Boot Managerの画面を表示させる。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_14.png
    :align: center
 
 |
 
-［↑］キーと［↓］キーを使って「USB Storagr Device」を選択し、［Enter］キーを押す。
+[↑]キーと[↓]キーを使って「USB Storagr Device」を選択し、[Enter]キーを押す。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_15.png
    :align: center
 
 |
 
-「Try or Install Ubuntu」が選択されていることを確認し、［Enter］キーを押す。
+「Try or Install Ubuntu」が選択されていることを確認し、[Enter]キーを押す。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_16.png
    :align: center
 
 |
 
 しばらく待つ。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_17.png
    :align: center
 
 |
 
-もう少し待つ。
+Choose your languageは、「English」が選択されいることを確認し、[Next]ボタンをクリック。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_18.png
    :align: center
 
 |
 
-Welcomeは、「English」が選択されいることを確認し、［Install Ubuntu］ボタンをクリック。
+Accessibility in Ubuntuは、デフォルトのまま[Next]ボタンをクリック。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_19.png
    :align: center
 
 |
 
-Keyboard layoutは、「Japanese」−「Japanese」を選択し、［Continue］ボタンをクリック。
+Select your keyboard layoutは、「Japanese」-「Japanese」を選択し、[Next]ボタンをクリック。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_20.png
    :align: center
 
 |
 
-Updates and other softwareは、デフォルトのまま ［Continue］ボタンをクリックする。
+Connect to the internetは、「Use wired connection」を選択し、 [Next]ボタンをクリック。
 
-※有線LANを接続していないと、Wirelessの設定画面が出てくる。
-
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_21.png
    :align: center
 
 |
 
-Installation typeは、「Erase disc and install Ubuntu」を選択し ［Install Now］ボタンをクリック。
+An update is available for the installerは、[Skip]ボタンをクリック。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_22.png
    :align: center
 
 |
 
-Write the changes to disks?ウィンドウが表示されたら ［Continue］ボタンをクリック。
+What do you want to do with Ubuntu?は、「Install Ubuntu」を選択し、[Next]ボタンをクリック。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_23.png
    :align: center
 
 |
 
-Where are you?は、「Tokyo」が選択されていることを確認したら ［Continue］ボタンをクリック。
+How would you like to install Ubuntu?は、「Intractive installation」を選択し、[Next]ボタンをクリック。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_24.png
    :align: center
 
 |
 
-Who are you?は、次の通り入力してください。
+What apps would you like to install start with? は、「Default selection」を選択し、[Next]ボタンをクリック。
+
+.. image:: ./images/linux_install_pc_img_25.png
+   :align: center
 
 |
 
-Your name: ubuntu
+Install recommended proprietary software?は、「Install third-party software ...」を選択し、[Next]ボタンをクリック。
 
-Your computer's name: mbc***
-
-Pick a username: ubuntu
-
-Choose a password: hirate2020
-
-Confirm your password: hirate2020
-
-Require my password to login: Require my password to log in にチェック
+.. image:: ./images/linux_install_pc_img_26.png
+   :align: center
 
 |
 
-入力できたら［Continue］ボタンをクリック。
+How do you want to install Ubuntu?は、「Erase disc and install Ubuntu」を選択し [Next]ボタンをクリック。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_27.png
+   :align: center
+
+|
+
+Create your accountは、次の通り入力し[Next]ボタンをクリック。
+
+- Your name: ubuntu
+- Your computer's name: mbc***
+- Your username: ubuntu
+- Password: hirate2020
+- Confirm password: hirate2020
+- 「Require my password to login」にチェック
+
+.. image:: ./images/linux_install_pc_img_28.png
+   :align: center
+
+|
+
+Select your timezoneは、「Tokyo(Tokyo, Japan)」-「Asia/Tokyo」が選択されいることを確認し、[Next]ボタンをクリック。
+
+.. image:: ./images/linux_install_pc_img_29.png
+   :align: center
+
+|
+
+Review your choicesは、[Install]ボタンをクリック。
+
+.. image:: ./images/linux_install_pc_img_30.png
    :align: center
 
 |
 
 インストールが始まる。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_31.png
    :align: center
 
 |
 
-インストールが終了すると、 Installation Completeウィンドウが表示されるので ［Restart Now］ボタンをクリック。
+インストールが終了すると、 Installation Completeウィンドウが表示されるので[Restart Now]ボタンをクリック。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_32.png
    :align: center
 
 |
 
-「Please remove the installation medium, then press ENTER」というメッセージが表示されるので Live USBを抜いて［Enter］を押す。
+しばらく待つ。
 
-.. image:: ./images/linux_install_pc_img_01.png
-   :width: 800px
+.. image:: ./images/linux_install_pc_img_33.png
+   :align: center
+
+|
+
+「Please remove the installation medium, then press ENTER」というメッセージが表示されるので Live USBを抜いて[Enter]を押す。
+
+.. image:: ./images/linux_install_pc_img_34.png
    :align: center
 
 |
