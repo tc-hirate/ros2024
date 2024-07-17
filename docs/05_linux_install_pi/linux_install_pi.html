@@ -17,6 +17,7 @@
     <script src="../_static/js/petite-vue.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="6. SSH接続" href="../06_ssh/ssh.html" />
     <link rel="prev" title="4. Linux入門" href="../04_linux_basic/linux_basic.html" /> 
   </head><body data-dark_mode_code_blocks="true">
 
@@ -125,6 +126,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../03_linux_install_pc/linux_install_pc.html">3. Linuxのインストール（PC）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_linux_basic/linux_basic.html">4. Linux入門</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">5. Linuxのインストール（Raspberry Pi）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_ssh/ssh.html">6. SSH接続</a></li>
 </ul>
 
         </div>
@@ -270,157 +272,6 @@
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="ssh">
-<h2><span class="section-number">5.4. </span>ssh接続<a class="headerlink" href="#ssh" title="Permalink to this headline">¶</a></h2>
-<p>PCからRaspberry Piを遠隔操作するためにssh接続をします。</p>
-<p>今回は、Ubuntuに標準でインストールされているRemminaを使います。</p>
-<p>はじめに、Raspberry PiのIPアドレスを調べます。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ip a
-<span class="go">1: lo:  mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span>
-<span class="go">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span>
-<span class="go">    inet 127.0.0.1/8 scope host lo</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">    inet6 ::1/128 scope host</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">2: eth0:  mtu 1500 qdisc fq_codel state UP group default qlen 1000</span>
-<span class="go">    link/ether b8:27:eb:71:91:bf brd ff:ff:ff:ff:ff:ff</span>
-<span class="hll"><span class="go">    inet 192.168.1.31/24 brd 192.168.1.255 scope global dynamic eth0</span>
-</span><span class="go">       valid_lft 258007sec preferred_lft 258007sec</span>
-<span class="go">    inet6 fe80::ba27:ebff:fe71:91bf/64 scope link</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">3: wlan0:  mtu 1500 qdisc noop state DOWN group default qlen 1000</span>
-<span class="go">    link/ether b8:27:eb:24:c4:ea brd ff:ff:ff:ff:ff:ff</span>
-</pre></div>
-</div>
-<p>Remminaを起動します。</p>
-<p>次のウィンドウが出てきたら、［閉じる］ボタンをクリック。</p>
-<img alt="05_linux_install_pi/img/ssh_img_01.png" class="align-center" src="05_linux_install_pi/img/ssh_img_01.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>［New connection profile］ボタンをクリック。</p>
-<img alt="05_linux_install_pi/img/ssh_img_02.png" class="align-center" src="05_linux_install_pi/img/ssh_img_02.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>「リモートデスクトップの設定」ウィンドウが立ち上がります。</p>
-<p>必要な情報を入力して、［保存］ボタンをクリック。</p>
-<img alt="05_linux_install_pi/img/ssh_img_03.png" class="align-center" src="05_linux_install_pi/img/ssh_img_03.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>zumo00という名前の接続が追加されました。</p>
-<p>zumo00をダブルクリックするとラズベリーパイと接続されます。</p>
-<img alt="05_linux_install_pi/img/ssh_img_04.png" class="align-center" src="05_linux_install_pi/img/ssh_img_04.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>zumo00と接続されました。</p>
-<p>以降、Raspberry Piの操作はこの画面から行います。</p>
-<img alt="05_linux_install_pi/img/ssh_img_05.png" class="align-center" src="05_linux_install_pi/img/ssh_img_05.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</section>
-<section id="lan">
-<h2><span class="section-number">5.5. </span>無線LANの設定<a class="headerlink" href="#lan" title="Permalink to this headline">¶</a></h2>
-<p>現在のネットワークの設定を確認します。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>cat /etc/netplan/50-cloud-init.yaml
-<span class="gp"># </span>This file is generated from information provided by the datasource.  Changes
-<span class="gp"># </span>to it will not persist across an instance reboot.  To disable cloud-inits
-<span class="gp"># </span>network configuration capabilities, write a file
-<span class="gp"># </span>/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
-<span class="gp"># </span>network: <span class="o">{</span>config: disabled<span class="o">}</span>
-<span class="go">network:</span>
-<span class="go">    ethernets:</span>
-<span class="go">        eth0:</span>
-<span class="go">            dhcp4: true</span>
-<span class="go">            optional: true</span>
-<span class="go">    version: 2</span>
-</pre></div>
-</div>
-<p>現在の設定ファイルをコピーして、新しい設定ファイルを作ります。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo cp /etc/netplan/50-cloud-init.yaml /etc/netplan/99_config.yaml
-<span class="go">[sudo] password for pi:</span>
-</pre></div>
-</div>
-<p>新しい設定ファイルを編集します。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo nano /etc/netplan/99_config.yaml
-</pre></div>
-</div>
-<p>IPアドレスには、自分が使っているZumoに割り振られたIPアドレスを入力してください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp"># </span>This file is generated from information provided by the datasource.  Changes
-<span class="gp"># </span>to it will not persist across an instance reboot.  To disable cloud-inits
-<span class="gp"># </span>network configuration capabilities, write a file
-<span class="gp"># </span>/etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
-<span class="gp"># </span>network: <span class="o">{</span>config: disabled<span class="o">}</span>
-<span class="go">network:</span>
-<span class="go">    ethernets:</span>
-<span class="go">        eth0:</span>
-<span class="go">            dhcp4: true</span>
-<span class="go">            optional: true</span>
-<span class="hll"><span class="go">    wifis:</span>
-</span><span class="hll"><span class="go">        wlan0:</span>
-</span><span class="hll"><span class="go">            dhcp4: false</span>
-</span><span class="hll"><span class="go">            optional: true</span>
-</span><span class="hll"><span class="go">            addresses: [192.168.1.250/24]</span>
-</span><span class="hll"><span class="go">            routes:</span>
-</span><span class="hll"><span class="go">              - to: default</span>
-</span><span class="hll"><span class="go">                via: 192.168.1.1</span>
-</span><span class="hll"><span class="go">            nameservers:</span>
-</span><span class="hll"><span class="go">                addresses: [192.168.1.1]</span>
-</span><span class="hll"><span class="go">                search: []</span>
-</span><span class="hll"><span class="go">            access-points:</span>
-</span><span class="hll"><span class="go">                htc-s-ap:</span>
-</span><span class="hll"><span class="go">                    password: &quot;E4LEHeJnS7&quot;</span>
-</span><span class="go">    version: 2</span>
-</pre></div>
-</div>
-<p>設定を反映させます。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo netplan apply
-</pre></div>
-</div>
-<p>Raspberry Piを終了します。（Remminaのssh接続は切断されます）</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>sudo shutdown -h now
-</pre></div>
-</div>
-<p>wifiでネットワークに接続されているか確認します。
-LANケーブルを抜いてからRaspberry Piの電源を入れてください。</p>
-<p>IPアドレスを確認します。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ip a
-<span class="go">1: lo:  mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span>
-<span class="go">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span>
-<span class="go">    inet 127.0.0.1/8 scope host lo</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">    inet6 ::1/128 scope host</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">2: eth0:  mtu 1500 qdisc fq_codel state DOWN group default qlen 1000</span>
-<span class="go">    link/ether b8:27:eb:71:91:bf brd ff:ff:ff:ff:ff:ff</span>
-<span class="go">3: wlan0:  mtu 1500 qdisc fq_codel state UP group default qlen 1000</span>
-<span class="go">    link/ether b8:27:eb:24:c4:ea brd ff:ff:ff:ff:ff:ff</span>
-<span class="hll"><span class="go">    inet 192.168.1.250/24 brd 192.168.1.255 scope global wlan0</span>
-</span><span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">    inet6 fe80::ba27:ebff:fe24:c4ea/64 scope link</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-</pre></div>
-</div>
-<p>次のコマンドを実行して、インターネットとつながっているか確認してください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ping youtube.com
-<span class="go">PING youtube.com (172.217.27.78) 56(84) bytes of data.</span>
-<span class="go">64 bytes from nrt12s15-in-f14.1e100.net (172.217.27.78): icmp_seq=1 ttl=113 time=61.6 ms</span>
-<span class="go">64 bytes from nrt12s15-in-f14.1e100.net (172.217.27.78): icmp_seq=2 ttl=113 time=20.7 ms</span>
-<span class="go">64 bytes from nrt12s15-in-f14.1e100.net (172.217.27.78): icmp_seq=3 ttl=113 time=19.2 ms</span>
-<span class="go">・・・</span>
-</pre></div>
-</div>
-<p>Remminaでwifi用の接続も作成しておきましょう。
-名前はzumo00-wifiとします。</p>
-<img alt="05_linux_install_pi/img/ssh_img_06.png" class="align-center" src="05_linux_install_pi/img/ssh_img_06.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="05_linux_install_pi/img/ssh_img_07.png" class="align-center" src="05_linux_install_pi/img/ssh_img_07.png" />
-</section>
 </section>
 
 
@@ -441,8 +292,6 @@ LANケーブルを抜いてからRaspberry Piの電源を入れてください�
 <li><a class="reference internal" href="#raspberry-pi-imager">5.1. Raspberry Pi Imagerのインストール</a></li>
 <li><a class="reference internal" href="#id1">5.2. ディスクイメージの書き込み</a></li>
 <li><a class="reference internal" href="#linux">5.3. Linuxへのログイン</a></li>
-<li><a class="reference internal" href="#ssh">5.4. ssh接続</a></li>
-<li><a class="reference internal" href="#lan">5.5. 無線LANの設定</a></li>
 </ul>
 </li>
 </ul>
@@ -463,6 +312,8 @@ LANケーブルを抜いてからRaspberry Piの電源を入れてください�
             </div>
 
             <div class="right">
+                
+                    <a href="../06_ssh/ssh.html"><span><span class="section-number">6. </span>SSH接続</span><span class="icon">&gt;</span></a>
                 
             </div>
         </div>

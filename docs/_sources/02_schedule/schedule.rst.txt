@@ -10,6 +10,7 @@
    | Python入門"
    "8月28日(水)", "| Linuxのインストール（Raspberry Pi）
    | ROS2のインストール（Raspberry Pi）
+   | ssh接続
    | ROS2 Tutorial"
    "8月29日(木)", "ROS2 Tutorial（つづき）"
    "8月30日(金)", "| ジョイスティックの使い方

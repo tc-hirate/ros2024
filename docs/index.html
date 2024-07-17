@@ -124,7 +124,10 @@
 <li class="toctree-l1"><a class="reference internal" href="02_schedule/schedule.html">2. スケジュール</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_linux_install_pc/linux_install_pc.html">3. Linuxのインストール（PC）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_linux_basic/linux_basic.html">4. Linux入門</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_linux_install_pi/linux_install_pi.html">5. Linuxのインストール（Raspberry Pi）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_python_basic/python_basic.html">5. Python入門</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_linux_install_pi/linux_install_pi.html">6. Linuxのインストール（Raspberry Pi）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_ssh/ssh.html">7. SSH接続</a></li>
+<li class="toctree-l1"><a class="reference internal" href="10_ros2_tutorial/ros2_tutorial.html">8. ROS2 Tutorial</a></li>
 </ul>
 
         </div>
@@ -181,14 +184,45 @@
 <li class="toctree-l2"><a class="reference internal" href="04_linux_basic/linux_basic.html#id23">4.23. もっと詳しく知りたい場合は</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="05_linux_install_pi/linux_install_pi.html">5. Linuxのインストール（Raspberry Pi）</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="05_linux_install_pi/linux_install_pi.html#raspberry-pi-imager">5.1. Raspberry Pi Imagerのインストール</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_linux_install_pi/linux_install_pi.html#id1">5.2. ディスクイメージの書き込み</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_linux_install_pi/linux_install_pi.html#linux">5.3. Linuxへのログイン</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_linux_install_pi/linux_install_pi.html#ssh">5.4. ssh接続</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_linux_install_pi/linux_install_pi.html#lan">5.5. 無線LANの設定</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_python_basic/python_basic.html">5. Python入門</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id1">5.1. Pythonの実行</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id2">5.2. 文字列の出力</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id3">5.3. 文字列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id4">5.4. コメント</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id5">5.5. 数値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id6">5.6. 文字列と数値の違い</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id7">5.7. 変数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#if">5.8. if文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id8">5.9. リスト</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#for">5.10. for文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id9">5.11. 辞書</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#while">5.12. while文</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#break">5.13. break</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#continue">5.14. continue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id10">5.15. 関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id11">5.16. 引数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id12">5.17. スコープ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id13">5.18. 複数の引数を持つ関数</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id14">5.19. 引数の初期値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id15">5.20. 戻り値</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id16">5.21. モジュール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id17">5.22. クラスの定義</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#id18">5.23. メソッド</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_python_basic/python_basic.html#init">5.24. __init__メソッド</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="07_linux_install_pi/linux_install_pi.html">6. Linuxのインストール（Raspberry Pi）</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="07_linux_install_pi/linux_install_pi.html#raspberry-pi-imager">6.1. Raspberry Pi Imagerのインストール</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_linux_install_pi/linux_install_pi.html#id1">6.2. ディスクイメージの書き込み</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_linux_install_pi/linux_install_pi.html#linux">6.3. Linuxへのログイン</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="08_ssh/ssh.html">7. SSH接続</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="08_ssh/ssh.html#id1">7.1. ssh接続</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_ssh/ssh.html#lan">7.2. 無線LANの設定</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="10_ros2_tutorial/ros2_tutorial.html">8. ROS2 Tutorial</a></li>
 </ul>
 </div>
 </section>

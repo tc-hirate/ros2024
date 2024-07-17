@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2. スケジュール &#8212; ros2024 1.0 documentation</title>
+    <title>6. Linuxのインストール（Raspberry Pi） &#8212; ros2024 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/basic_mod.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -17,8 +17,8 @@
     <script src="../_static/js/petite-vue.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Linuxのインストール（PC）" href="../03_linux_install_pc/linux_install_pc.html" />
-    <link rel="prev" title="1. はじめに" href="../01_introduction/introduction.html" /> 
+    <link rel="next" title="7. SSH接続" href="../08_ssh/ssh.html" />
+    <link rel="prev" title="5. Python入門" href="../06_python_basic/python_basic.html" /> 
   </head><body data-dark_mode_code_blocks="true">
 
 <div id="top_nav">
@@ -122,13 +122,12 @@
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper"><ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../01_introduction/introduction.html">1. はじめに</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. スケジュール</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_schedule/schedule.html">2. スケジュール</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_linux_install_pc/linux_install_pc.html">3. Linuxのインストール（PC）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_linux_basic/linux_basic.html">4. Linux入門</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_python_basic/python_basic.html">5. Python入門</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../07_linux_install_pi/linux_install_pi.html">6. Linuxのインストール（Raspberry Pi）</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">6. Linuxのインストール（Raspberry Pi）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../08_ssh/ssh.html">7. SSH接続</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../10_ros2_tutorial/ros2_tutorial.html">8. ROS2 Tutorial</a></li>
 </ul>
 
         </div>
@@ -140,67 +139,140 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <section id="id1">
-<h1><span class="section-number">2. </span>スケジュール<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<table class="docutils align-default">
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="row-odd"><th class="head"><p>日付</p></th>
-<th class="head"><p>内容</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>8月27日(火)</p></td>
-<td><div class="line-block">
-<div class="line">Linuxのインストール（PC）</div>
-<div class="line">Linux入門</div>
-<div class="line">ROS2のインストール（PC）</div>
-<div class="line">Python入門</div>
+  <section id="linux-raspberry-pi">
+<h1><span class="section-number">6. </span>Linuxのインストール（Raspberry Pi）<a class="headerlink" href="#linux-raspberry-pi" title="Permalink to this headline">¶</a></h1>
+<p>Linuxはオープンソースのオペレーティングシステム（OS）です。</p>
+<p>Raspberry PiではUbuntu Server 24.04 LTSを使います。</p>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
-</td>
-</tr>
-<tr class="row-odd"><td><p>8月28日(水)</p></td>
-<td><div class="line-block">
-<div class="line">Linuxのインストール（Raspberry Pi）</div>
-<div class="line">ROS2のインストール（Raspberry Pi）</div>
-<div class="line">ssh接続</div>
-<div class="line">ROS2 Tutorial</div>
+<section id="raspberry-pi-imager">
+<h2><span class="section-number">6.1. </span>Raspberry Pi Imagerのインストール<a class="headerlink" href="#raspberry-pi-imager" title="Permalink to this headline">¶</a></h2>
+<p>公式のディスクイメージ書き込みツールRaspberry Pi Imagerを使ってSDカードにディスクイメージを書き込みます。</p>
+<p>詳しくは、 <a class="reference external" href="https://www.raspberrypi.com/software/">Raspberry Pi OSのHP</a> を参照してください。</p>
+<p>以下のコマンドを実行してRaspberry Pi Imagerをインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo apt install rpi-imager
+</pre></div>
 </div>
-</td>
-</tr>
-<tr class="row-even"><td><p>8月29日(木)</p></td>
-<td><p>ROS2 Tutorial（つづき）</p></td>
-</tr>
-<tr class="row-odd"><td><p>8月30日(金)</p></td>
-<td><div class="line-block">
-<div class="line">ジョイスティックの使い方</div>
-<div class="line">Arduinoの使い方</div>
-<div class="line">OpenCVの使い方</div>
-<div class="line">Webカメラの使い方</div>
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
-</td>
-</tr>
-<tr class="row-even"><td><p>9月2日(火)</p></td>
-<td><p>課題1「」</p></td>
-</tr>
-<tr class="row-odd"><td><p>9月3日(水)</p></td>
-<td><p>課題2「」</p></td>
-</tr>
-<tr class="row-even"><td><p>9月4日(木)</p></td>
-<td><p>課題3「」</p></td>
-</tr>
-<tr class="row-odd"><td><p>9月5日(金)</p></td>
-<td><div class="line-block">
-<div class="line">まとめ</div>
-<div class="line">成果報告会</div>
+</section>
+<section id="id1">
+<h2><span class="section-number">6.2. </span>ディスクイメージの書き込み<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Raspberry Pi Imagerを起動。</p>
+<p>[デバイスを選択]ボタンをクリック。</p>
+<img alt="../_images/linux_install_pi_img_01.png" src="../_images/linux_install_pi_img_01.png" />
+<div class="line-block">
+<div class="line"><br /></div>
 </div>
-</td>
-</tr>
-</tbody>
-</table>
+<p>「Raspberry Pi 5」を選択。</p>
+<img alt="../_images/linux_install_pi_img_02.png" src="../_images/linux_install_pi_img_02.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>[OSを選択]ボタンをクリック。</p>
+<img alt="../_images/linux_install_pi_img_03.png" src="../_images/linux_install_pi_img_03.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>「Other general-purpose OS」を選択。</p>
+<img alt="../_images/linux_install_pi_img_04.png" src="../_images/linux_install_pi_img_04.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>「Ubuntu」を選択。</p>
+<img alt="../_images/linux_install_pi_img_05.png" src="../_images/linux_install_pi_img_05.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>［Ubuntu Server 24.04.2 LTS (64bit)］を選択。</p>
+<img alt="../_images/linux_install_pi_img_06.png" src="../_images/linux_install_pi_img_06.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>SDカードを挿入して、[ストレージを選択]ボタンをクリック。</p>
+<img alt="../_images/linux_install_pi_img_07.png" src="../_images/linux_install_pi_img_07.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>挿入したSDカードを選択。</p>
+<img alt="../_images/linux_install_pi_img_08.png" src="../_images/linux_install_pi_img_08.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>[次へ]ボタンをクリック。</p>
+<img alt="../_images/linux_install_pi_img_09.png" src="../_images/linux_install_pi_img_09.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>[設定を編集する]ボタンをクリック。</p>
+<img alt="../_images/linux_install_pi_img_10.png" src="../_images/linux_install_pi_img_10.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>次の通り入力し[保存]ボタンをクリック。</p>
+<ul class="simple">
+<li><p>「ホスト名」にチェック</p></li>
+<li><p>ホスト名：zumo01.local</p></li>
+<li><p>「ユーザー名とパスワードを設定する」にチェック</p></li>
+<li><p>ユーザー名：pi</p></li>
+<li><p>パスワード：hirate2020</p></li>
+<li><p>「ロケールを設定する」にチェック</p></li>
+<li><p>タイムゾーン：Asia/Tokyo</p></li>
+<li><p>キーボードレイアウト：jp</p></li>
+</ul>
+<img alt="../_images/linux_install_pi_img_11.png" src="../_images/linux_install_pi_img_11.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>[はい]ボタンをクリック。</p>
+<img alt="../_images/linux_install_pi_img_12.png" src="../_images/linux_install_pi_img_12.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>[はい]ボタンをクリック。</p>
+<img alt="../_images/linux_install_pi_img_13.png" src="../_images/linux_install_pi_img_13.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>書き込み中。</p>
+<img alt="../_images/linux_install_pi_img_14.png" src="../_images/linux_install_pi_img_14.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>［続ける］ボタンをクリック。</p>
+<img alt="../_images/linux_install_pi_img_15.png" src="../_images/linux_install_pi_img_15.png" />
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Raspberry Pi Imagerを終了し、SDカードをUnmountして取り出す。</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="linux">
+<h2><span class="section-number">6.3. </span>Linuxへのログイン<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
+<p>Raspberry Piにモニター、キーボード、LANケーブルを接続してください。</p>
+<p>SDカードを挿入して電源を入れます。</p>
+<p>しばらくすると次のような場面が表示されます。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Ubuntu 24.04 LTS zumo01 tty1</span>
+
+<span class="go">zumo01 login: pi</span>
+<span class="go">Password: hirate2020</span>
+</pre></div>
+</div>
+<p>ユーザー名にpi、パスワードにhirate2020を入力してログイン。</p>
+<p>※パスワードは表示されません</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.8.0-1004-raspi aarch64)</span>
+<span class="go">・・・</span>
+<span class="gp">pi@zumo01:~$</span>
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
 </section>
 
 
@@ -209,6 +281,25 @@
         </div>
       </div>
     
+        <div id="show_right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&lt;</span><span>Page contents</span></a></p>
+        </div>
+
+        <div id="right_sidebar">
+            <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
+            <div class="page_toc">
+                <ul>
+<li><a class="reference internal" href="#">6. Linuxのインストール（Raspberry Pi）</a><ul>
+<li><a class="reference internal" href="#raspberry-pi-imager">6.1. Raspberry Pi Imagerのインストール</a></li>
+<li><a class="reference internal" href="#id1">6.2. ディスクイメージの書き込み</a></li>
+<li><a class="reference internal" href="#linux">6.3. Linuxへのログイン</a></li>
+</ul>
+</li>
+</ul>
+
+            </div>
+        </div>
+    
 
       <div class="clearer"></div>
     </div>
@@ -216,14 +307,14 @@
         <div class="button_nav">
             <div class="left">
                 
-                <a href="../01_introduction/introduction.html">
-                    <span class="icon">&lt;</span><span><span class="section-number">1. </span>はじめに</span></a>
+                <a href="../06_python_basic/python_basic.html">
+                    <span class="icon">&lt;</span><span><span class="section-number">5. </span>Python入門</span></a>
                 
             </div>
 
             <div class="right">
                 
-                    <a href="../03_linux_install_pc/linux_install_pc.html"><span><span class="section-number">3. </span>Linuxのインストール（PC）</span><span class="icon">&gt;</span></a>
+                    <a href="../08_ssh/ssh.html"><span><span class="section-number">7. </span>SSH接続</span><span class="icon">&gt;</span></a>
                 
             </div>
         </div>
