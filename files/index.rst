@@ -8,3 +8,5 @@ ROSロボットプログラミング
    ./02_schedule/schedule
    ./03_linux_install_pc/linux_install_pc
    ./04_linux_basic/linux_basic
+   ./05_linux_install_pi/linux_install_pi
+   
