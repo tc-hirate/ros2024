@@ -147,7 +147,7 @@
 <p>PCからRaspberry Piを遠隔操作するためにssh接続をします。</p>
 <section id="remmina">
 <h2><span class="section-number">8.1. </span>Remminaのインストール<a class="headerlink" href="#remmina" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://remmina.org/how-to-install-remmina/">https://remmina.org/how-to-install-remmina/</a></p>
+<p><a class="reference external" href="https://remmina.org/how-to-install-remmina/">RemminaのHP</a> の手順に従ってインストールします。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
 <span class="gp">ubuntu@mbc112:~$ </span>sudo apt update
 <span class="gp">ubuntu@mbc112:~$ </span>sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret
@@ -199,21 +199,18 @@
 <section id="lan">
 <h2><span class="section-number">8.3. </span>無線LANの設定<a class="headerlink" href="#lan" title="Permalink to this headline">¶</a></h2>
 <p>現在のネットワークの設定を確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>ip a
-<span class="go">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span>
-<span class="go">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span>
-<span class="go">    inet 127.0.0.1/8 scope host lo</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">    inet6 ::1/128 scope host noprefixroute</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000</span>
-<span class="go">    link/ether 2c:cf:67:28:d6:a0 brd ff:ff:ff:ff:ff:ff</span>
-<span class="hll"><span class="go">    inet 192.168.1.45/24 metric 100 brd 192.168.1.255 scope global dynamic eth0</span>
-</span><span class="go">       valid_lft 258392sec preferred_lft 258392sec</span>
-<span class="go">    inet6 fe80::2ecf:67ff:fe28:d6a0/64 scope link</span>
-<span class="go">       valid_lft forever preferred_lft forever</span>
-<span class="go">3: wlan0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000</span>
-<span class="go">    link/ether 2c:cf:67:28:d6:a1 brd ff:ff:ff:ff:ff:ff</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span>pi@zumo01:~$ sudo cat /etc/netplan/50-cloud-init.yaml
+# This file is generated from information provided by the datasource.  Changes
+# to it will not persist across an instance reboot.  To disable cloud-init&#39;s
+# network configuration capabilities, write a file
+# /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+# network: {config: disabled}
+network:
+    ethernets:
+        eth0:
+            dhcp4: true
+            optional: true
+    version: 2
 </pre></div>
 </div>
 <p>現在の設定ファイルをコピーして、新しい設定ファイルを作成。</p>
@@ -259,7 +256,7 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo netplan apply
 </pre></div>
 </div>
-<p>Raspberry Piを終了。（Remminaのssh接続は切断されます）</p>
+<p>Raspberry Piを終了。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo shutdown -h now
 </pre></div>
 </div>

@@ -7,7 +7,7 @@ PCからRaspberry Piを遠隔操作するためにssh接続をします。
 Remminaのインストール
 ============================================================
 
-https://remmina.org/how-to-install-remmina/
+`RemminaのHP <https://remmina.org/how-to-install-remmina/>`_ の手順に従ってインストールします。
 
 .. code-block:: console
 
@@ -71,23 +71,19 @@ Remminaを起動し、[新しい接続プロファイル]ボタンをクリッ�
 現在のネットワークの設定を確認。
 
 .. code-block:: console
-    :emphasize-lines: 10
 
-    pi@zumo01:~$ ip a
-    1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-        link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
-        inet 127.0.0.1/8 scope host lo
-           valid_lft forever preferred_lft forever
-        inet6 ::1/128 scope host noprefixroute 
-           valid_lft forever preferred_lft forever
-    2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-        link/ether 2c:cf:67:28:d6:a0 brd ff:ff:ff:ff:ff:ff
-        inet 192.168.1.45/24 metric 100 brd 192.168.1.255 scope global dynamic eth0
-           valid_lft 258392sec preferred_lft 258392sec
-        inet6 fe80::2ecf:67ff:fe28:d6a0/64 scope link 
-           valid_lft forever preferred_lft forever
-    3: wlan0: <BROADCAST,MULTICAST> mtu 1500 qdisc noop state DOWN group default qlen 1000
-        link/ether 2c:cf:67:28:d6:a1 brd ff:ff:ff:ff:ff:ff
+    pi@zumo01:~$ sudo cat /etc/netplan/50-cloud-init.yaml 
+    # This file is generated from information provided by the datasource.  Changes
+    # to it will not persist across an instance reboot.  To disable cloud-init's
+    # network configuration capabilities, write a file
+    # /etc/cloud/cloud.cfg.d/99-disable-network-config.cfg with the following:
+    # network: {config: disabled}
+    network:
+        ethernets:
+            eth0:
+                dhcp4: true
+                optional: true
+        version: 2
 
 現在の設定ファイルをコピーして、新しい設定ファイルを作成。
 
@@ -139,7 +135,7 @@ IPアドレスには、自分が使っているZumoに割り振られたIPアド
 
     pi@zumo01:~$ sudo netplan apply
 
-Raspberry Piを終了。（Remminaのssh接続は切断されます）
+Raspberry Piを終了。
 
 .. code-block:: console
 
