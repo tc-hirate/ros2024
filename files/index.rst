@@ -3,6 +3,7 @@ ROSロボットプログラミング
 
 .. toctree::
    :numbered:
+   :maxdepth: 1
 
    ./01_introduction/introduction
    ./02_schedule/schedule
