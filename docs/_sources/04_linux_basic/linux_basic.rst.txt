@@ -28,7 +28,6 @@ Linux入門
 ターミナル（端末）を起動するとウィンドウが開き、下記のような文字列が表示されます。
 
 .. image:: ./images/linux_basic_img_01.png
-    :align: center
 
 |
 
@@ -40,9 +39,8 @@ Linux入門
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ls
+    ubuntu@mbc112:~$ ls
     Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  snap
-    ubuntu@mbc084:~$ 
 
 |
 
@@ -54,23 +52,23 @@ Linux入門
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cd Downloads
-    ubuntu@mbc084:~/Downloads$ 
+    ubuntu@mbc112:~$ cd Downloads
+    ubuntu@mbc112:~/Downloads$
 
 「..」 は、一つ上のディレクトリを意味します。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/Downloads$ cd ..
-    ubuntu@mbc084:~$ 
+    ubuntu@mbc112:~/Downloads$ cd ..
+    ubuntu@mbc112:~$
 
 また、cdコマンドをディレクトリを指定せずに実行すると、 ホームディレクトリに戻ります。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cd Downloads
-    ubuntu@mbc084:~/Downloads$ cd
-    ubuntu@mbc084:~$ 
+    ubuntu@mbc112:~$ cd Downloads
+    ubuntu@mbc112:~/Downloads$ cd
+    ubuntu@mbc112:~$ 
 
 |
 
@@ -83,9 +81,8 @@ pwdコマンドを実行すると、ルートディレクトリからカレン�
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ pwd
+    ubuntu@mbc112:~$ pwd
     /home/ubuntu
-    ubuntu@mbc084:~$ 
 
 |
 
@@ -97,11 +94,10 @@ pwdコマンドを実行すると、ルートディレクトリからカレン�
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ touch ros.txt
-    ubuntu@mbc084:~$ ls
+    ubuntu@mbc112:~$ touch ros.txt
+    ubuntu@mbc112:~$ ls
     Desktop    Downloads  Pictures  Templates  ros.txt
     Documents  Music      Public    Videos     snap
-    ubuntu@mbc084:~$ 
 
 |
 
@@ -113,10 +109,9 @@ viなど他のエディタを使いたい場合は、それを使ってくださ
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ nano ros.txt 
+    ubuntu@mbc112:~$ nano ros.txt 
 
-.. image:: ./images/linux_basic_img_01.png
-    :align: center
+.. image:: ./images/linux_basic_img_02.png
 
 保存するときはCtrl + S、終了するときはCtrl + Xを押してください。
 
@@ -129,7 +124,7 @@ viなど他のエディタを使いたい場合は、それを使ってくださ
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cat ros.txt 
+    ubuntu@mbc112:~$ cat ros.txt
     ros robot programming
 
 |
@@ -141,7 +136,7 @@ catコマンドを実行したときに、 存在しないファイルを指定�
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cat bos.txt 
+    ubuntu@mbc112:~$ cat bos.txt
     cat: bos.txt: そのようなファイルやディレクトリはありません
 
 |
@@ -154,9 +149,9 @@ catコマンドを実行したときに、 存在しないファイルを指定�
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cd ~/M [Tab]
-    ubuntu@mbc084:~$ cd ~/Music/
-    ubuntu@mbc084:~/Music$ 
+    ubuntu@mbc112:~$ cd ~/M [Tab]
+    ubuntu@mbc112:~$ cd ~/Music/
+    ubuntu@mbc112:~/Music$ 
 
 |
 
@@ -171,15 +166,14 @@ mkdirコマンドは「mkdir ディレクトリ名」と入力することで �
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/Music$ cd /tmp/
-    ubuntu@mbc084:/tmp$ ls
+    ubuntu@mbc112:~/Music$ cd /tmp/
+    ubuntu@mbc112:/tmp$ ls
     .....
-    ubuntu@mbc084:/tmp$ mkdir test-directory
-    ubuntu@mbc084:/tmp$ ls
+    ubuntu@mbc112:/tmp$ mkdir test-directory
+    ubuntu@mbc112:/tmp$ ls
     .....
     test-directory
     .....
-    ubuntu@mbc084:/tmp$ 
 
 |
 
@@ -191,12 +185,11 @@ mkdirコマンドは「mkdir ディレクトリ名」と入力することで �
 
 .. code-block:: console
 
-    ubuntu@mbc084:/tmp$ cd
-    ubuntu@mbc084:~$ mv ros.txt Documents/
-    ubuntu@mbc084:~$ cd Documents/
-    ubuntu@mbc084:~/Documents$ ls
+    ubuntu@mbc112:/tmp$ cd
+    ubuntu@mbc112:~$ mv ros.txt Documents/
+    ubuntu@mbc112:~$ cd Documents/
+    ubuntu@mbc112:~/Documents$ ls
     ros.txt
-    ubuntu@mbc084:~/Documents$ 
 
 |
 
@@ -208,10 +201,9 @@ mvコマンドは、ファイル名を変更することにも使えます。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/Documents$ mv ros.txt ros2.txt 
-    ubuntu@mbc084:~/Documents$ ls
+    ubuntu@mbc112:~/Documents$ mv ros.txt ros2.txt 
+    ubuntu@mbc112:~/Documents$ ls
     ros2.txt
-    ubuntu@mbc084:~/Documents$ 
 
 |
 
@@ -223,10 +215,9 @@ mvコマンドは、ファイル名を変更することにも使えます。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/Documents$ cp ros2.txt ros3.txt 
-    ubuntu@mbc084:~/Documents$ ls
+    ubuntu@mbc112:~/Documents$ cp ros2.txt ros3.txt 
+    ubuntu@mbc112:~/Documents$ ls
     ros2.txt  ros3.txt
-    ubuntu@mbc084:~/Documents$ 
 
 |
 
@@ -247,10 +238,9 @@ cpコマンドでは、「-r」をつけずにディレクトリをコピーし�
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/Documents$ rm ros3.txt 
-    ubuntu@mbc084:~/Documents$ ls
+    ubuntu@mbc112:~/Documents$ rm ros3.txt 
+    ubuntu@mbc112:~/Documents$ ls
     ros2.txt
-    ubuntu@mbc084:~/Documents$ 
 
 |
 
@@ -271,14 +261,13 @@ Ctrl+cでそれを停止しています。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/Documents$ yes
+    ubuntu@mbc112:~/Documents$ yes
     y
     y
     y
     ....
     y
     ^C
-    ubuntu@mbc084:~/Documents$ 
 
 |
 
@@ -290,13 +279,13 @@ Ctrl+cでそれを停止しています。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/Documents$ cd
-    ubuntu@mbc084:~$ ls
+    ubuntu@mbc112:~/Documents$ cd
+    ubuntu@mbc112:~$ ls
     Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  snap
     [Desktopを選択して（ドラッグして）Ctrl+Shift+c]
-    ubuntu@mbc084:~$ cd [Ctrl+Shift+v]
-    ubuntu@mbc084:~$ cd Desktop
-    ubuntu@mbc084:~/Desktop$ 
+    ubuntu@mbc112:~$ cd [Ctrl+Shift+v]
+    ubuntu@mbc112:~$ cd Desktop
+    ubuntu@mbc112:~/Desktop$ 
 
 なお、ブラウザなど、端末以外のソフトでは、Ctrl+cでコピーができます。
 
@@ -304,12 +293,12 @@ Ctrl+cでそれを停止しています。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/Desktop$ cd
-    ubuntu@mbc084:~$ ls
+    ubuntu@mbc112:~/Desktop$ cd
+    ubuntu@mbc112:~$ ls
     Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  snap
-    ubuntu@mbc084:~$ cd [選択して（ドラッグして）中クリック]
-    ubuntu@mbc084:~$ cd Desktop
-    ubuntu@mbc084:~/Desktop$ 
+    ubuntu@mbc112:~$ cd [選択して（ドラッグして）中クリック]
+    ubuntu@mbc112:~$ cd Desktop
+    ubuntu@mbc112:~/Desktop$ 
 
 |
 
@@ -328,7 +317,7 @@ Ctrl+Shift+nで新しいウインドウを、 Ctrl+Shift+tで新しいタブを�
 
 .. code-block:: console
 
-    $ [上下キー]
+    ubuntu@mbc112:~$ [上下キー]
 
 |
 
