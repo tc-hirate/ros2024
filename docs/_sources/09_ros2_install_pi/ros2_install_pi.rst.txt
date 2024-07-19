@@ -9,7 +9,7 @@ Raspberry PiにROS2をインストールします。
 ROS2のインストール
 ============================================================
 
-`ROS2のHP <https://docs.ros.org/en/iron/Installation.html>`_ の手順に従ってインストールします。
+`ROS2のHP <https://docs.ros.org/en/jazzy/Installation.html>`_ の手順に従ってインストールします。
 
 手順はPCと同じです。
 
@@ -19,7 +19,7 @@ ROS2のインストール
 
 .. code-block:: console
 
-    pi@zumo00:~$ locale
+    pi@zumo01:~$ locale
     LANG=C.UTF-8
     LANGUAGE=
     LC_CTYPE="C.UTF-8"
@@ -42,8 +42,11 @@ Universeレポジトリを追加。
 
 .. code-block:: console
 
-    pi@zumo00:~$ sudo apt install software-properties-common
-    pi@zumo00:~$ sudo add-apt-repository universe
+    pi@zumo01:~$ sudo apt install software-properties-common
+
+.. code-block:: console
+
+    pi@zumo01:~$ sudo add-apt-repository universe
 
 |
 
@@ -51,9 +54,15 @@ ROS 2 GPG(GNU Privacy Guard) keyの追加。
 
 .. code-block:: console
 
-    pi@zumo00:~$ sudo apt update
-    pi@zumo00:~$ sudo apt install curl -y
-    pi@zumo00:~$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+    pi@zumo01:~$ sudo apt update
+
+.. code-block:: console
+
+    pi@zumo01:~$ sudo apt install curl
+
+.. code-block:: console
+
+    pi@zumo01:~$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 
 |
 
@@ -61,7 +70,7 @@ ROS 2 GPG(GNU Privacy Guard) keyの追加。
 
 .. code-block:: console
 
-    pi@zumo00:~$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+    pi@zumo01:~$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
 |
 
@@ -69,30 +78,19 @@ ROS2のインストール。
 
 .. code-block:: console
 
-    pi@zumo00:~$ sudo apt update
-    pi@zumo00:~$ sudo apt install ros-iron-ros-base
+    pi@zumo01:~$ sudo apt update
 
-.. warning::
+.. code-block:: console
 
-   upgradeすると「Unable to locate package ros-iron-ros-base」というエラーが出る。
+    pi@zumo01:~$ sudo apt upgrade
+
+.. code-block:: console
+
+    pi@zumo01:~$ sudo apt install ros-jazzy-ros-base
 
 .. note::
 
    Raspberry PiにはROS-Baseをインストールします。
-
-|
-
-インストールの途中で次のようなウィンドウが出てきたら、
-
-.. image:: ./img/ros_install_pi_img_01.png
-   :align: center
-
-|
-
-［OK］を選択。
-
-.. image:: ./img/ros_install_pi_img_02.png
-   :align: center
 
 |
 
@@ -101,49 +99,58 @@ ROS2のインストール。
 
 インストールが正しく行われたか確認するために、サンプルプログラムを実行します。
 
-はじめに、setup fileを実行するコマンドをshellのstartup scriptに書いておきます。
+setup fileの実行。
+
+.. code-block:: console
+
+    pi@zumo01:~$ source /opt/ros/jazzy/setup.bash
+
+
+ROS_DOMAIN_IDの設定。
+
+.. code-block:: console
+
+    pi@zumo01:~$ export ROS_DOMAIN_ID=1
+
+PCで次のコマンドを実行。
+
+.. code-block:: console
+
+    ubuntu@mbc112:~$ ros2 run demo_nodes_py listener
+
+Raspberry Piで次のコマンドを実行。
+
+.. code-block:: console
+
+    pi@zumo01:~$ ros2 topic list
+    /chatter
+    /parameter_events
+    /rosout
+
+Raspberry Piで次のコマンドを実行。
+
+.. code-block:: console
+
+    pi@zumo01:~$ ros2 topic echo /chatter 
+    data: 'Hello World: 35'
+    ---
+    data: 'Hello World: 36'
+    ---
+    data: 'Hello World: 37'
+    ---
+    data: 'Hello World: 38'
+    ---
+    data: 'Hello World: 39'
+    ---
+    data: 'Hello World: 40'
+    ---
+
+shellのstartup scriptの追加。
 
 .. code-block:: console
 
     pi@zumo00:~$ echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
 
-|
-
-続いて、IDを設定するコマンドもshellのstartup scriptに書いておきます。
-
-IDはZumoの番号と同じにし、Zumo-00を使っている場合は0となります。
-
 .. code-block:: console
 
-    pi@zumo00:~$ echo "export ROS_DOMAIN_ID=0" >> ~/.bashrc
-
-|
-
-PCで次のコマンドを実行してください。
-
-.. code-block:: console
-
-    ubuntu@mbc084:~$ ros2 run demo_nodes_cpp talker
-
-|
-
-Raspberry Piで次のコマンドを実行してください。
-
-.. code-block:: console
-
-    pi@zumo00:~$ ros2 topic list
-    /chatter
-    /parameter_events
-    /rosout
-
-.. code-block:: console
-
-    pi@zumo00:~$ ros2 topic echo /chatter
-    data: 'Hello World: 39'
-    ---
-    data: 'Hello World: 40'
-    ---
-    data: 'Hello World: 41'
-    ---
-    data: 'Hello World: 42'
-    ---
+    pi@zumo00:~$ echo "export ROS_DOMAIN_ID=1" >> ~/.bashrc

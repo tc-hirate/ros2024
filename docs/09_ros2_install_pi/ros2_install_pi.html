@@ -150,13 +150,13 @@
 </div>
 <section id="ros2">
 <h2><span class="section-number">9.1. </span>ROS2のインストール<a class="headerlink" href="#ros2" title="Permalink to this headline">¶</a></h2>
-<p><a class="reference external" href="https://docs.ros.org/en/iron/Installation.html">ROS2のHP</a> の手順に従ってインストールします。</p>
+<p><a class="reference external" href="https://docs.ros.org/en/jazzy/Installation.html">ROS2のHP</a> の手順に従ってインストールします。</p>
 <p>手順はPCと同じです。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>ロケールの確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>locale
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>locale
 <span class="go">LANG=C.UTF-8</span>
 <span class="go">LANGUAGE=</span>
 <span class="go">LC_CTYPE=&quot;C.UTF-8&quot;</span>
@@ -178,37 +178,44 @@
 <div class="line"><br /></div>
 </div>
 <p>Universeレポジトリを追加。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt install software-properties-common
-<span class="gp">pi@zumo00:~$ </span>sudo add-apt-repository universe
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo apt install software-properties-common
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo add-apt-repository universe
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>ROS 2 GPG(GNU Privacy Guard) keyの追加。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt update
-<span class="gp">pi@zumo00:~$ </span>sudo apt install curl -y
-<span class="gp">pi@zumo00:~$ </span>sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo apt update
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo apt install curl
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>レポジトリ情報をsource listに追加。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span> <span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu </span><span class="k">$(</span>. /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nv">$UBUNTU_CODENAME</span><span class="k">)</span><span class="s2"> main&quot;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span><span class="nb">echo</span> <span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu </span><span class="k">$(</span>. /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nv">$UBUNTU_CODENAME</span><span class="k">)</span><span class="s2"> main&quot;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>ROS2のインストール。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt update
-<span class="gp">pi@zumo00:~$ </span>sudo apt install ros-iron-ros-base
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo apt update
 </pre></div>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>upgradeすると「Unable to locate package ros-iron-ros-base」というエラーが出る。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo apt upgrade
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo apt install ros-jazzy-ros-base
+</pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -217,58 +224,50 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>インストールの途中で次のようなウィンドウが出てきたら、</p>
-<img alt="09_ros2_install_pi/img/ros_install_pi_img_01.png" class="align-center" src="09_ros2_install_pi/img/ros_install_pi_img_01.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>［OK］を選択。</p>
-<img alt="09_ros2_install_pi/img/ros_install_pi_img_02.png" class="align-center" src="09_ros2_install_pi/img/ros_install_pi_img_02.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id1">
 <h2><span class="section-number">9.2. </span>サンプルプログラムの実行<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>インストールが正しく行われたか確認するために、サンプルプログラムを実行します。</p>
-<p>はじめに、setup fileを実行するコマンドをshellのstartup scriptに書いておきます。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span> <span class="s2">&quot;source /opt/ros/iron/setup.bash&quot;</span> &gt;&gt; ~/.bashrc
+<p>setup fileの実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span><span class="nb">source</span> /opt/ros/jazzy/setup.bash
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>続いて、IDを設定するコマンドもshellのstartup scriptに書いておきます。</p>
-<p>IDはZumoの番号と同じにし、Zumo-00を使っている場合は0となります。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span> <span class="s2">&quot;export ROS_DOMAIN_ID=0&quot;</span> &gt;&gt; ~/.bashrc
+<p>ROS_DOMAIN_IDの設定。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span><span class="nb">export</span> <span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="m">1</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>PCで次のコマンドを実行してください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 run demo_nodes_cpp talker
+<p>PCで次のコマンドを実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 run demo_nodes_py listener
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>Raspberry Piで次のコマンドを実行してください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ros2 topic list
+<p>Raspberry Piで次のコマンドを実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>ros2 topic list
 <span class="go">/chatter</span>
 <span class="go">/parameter_events</span>
 <span class="go">/rosout</span>
 </pre></div>
 </div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ros2 topic <span class="nb">echo</span> /chatter
+<p>Raspberry Piで次のコマンドを実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>ros2 topic <span class="nb">echo</span> /chatter
+<span class="go">data: &#39;Hello World: 35&#39;</span>
+<span class="go">---</span>
+<span class="go">data: &#39;Hello World: 36&#39;</span>
+<span class="go">---</span>
+<span class="go">data: &#39;Hello World: 37&#39;</span>
+<span class="go">---</span>
+<span class="go">data: &#39;Hello World: 38&#39;</span>
+<span class="go">---</span>
 <span class="go">data: &#39;Hello World: 39&#39;</span>
 <span class="go">---</span>
 <span class="go">data: &#39;Hello World: 40&#39;</span>
 <span class="go">---</span>
-<span class="go">data: &#39;Hello World: 41&#39;</span>
-<span class="go">---</span>
-<span class="go">data: &#39;Hello World: 42&#39;</span>
-<span class="go">---</span>
+</pre></div>
+</div>
+<p>shellのstartup scriptの追加。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span> <span class="s2">&quot;source /opt/ros/iron/setup.bash&quot;</span> &gt;&gt; ~/.bashrc
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span><span class="nb">echo</span> <span class="s2">&quot;export ROS_DOMAIN_ID=1&quot;</span> &gt;&gt; ~/.bashrc
 </pre></div>
 </div>
 </section>
