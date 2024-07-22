@@ -15,8 +15,8 @@ Pythonの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ python3
-    Python 3.10.6 (main, May 29 2023, 11:10:38) [GCC 11.3.0] on linux
+    ubuntu@mbc112:~$ python3
+    Python 3.12.3 (main, Apr 10 2024, 05:33:47) [GCC 13.2.0] on linux
     Type "help", "copyright", "credits" or "license" for more information.
 
 インタラクティブシェルの実行中は、先頭に「>>>」という記号が表示されます。
@@ -35,7 +35,7 @@ Pythonの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ python
+    ubuntu@mbc112:~$ python
     コマンド 'python' が見つかりません。もしかして:
       command 'python3' from deb python3
       command 'python' from deb python-is-python3
