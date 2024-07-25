@@ -15,3 +15,7 @@ ROSロボットプログラミング
    ./08_ssh/ssh
    ./09_ros2_install_pi/ros2_install_pi
    ./10_ros2_tutorial/ros2_tutorial
+   ./11_joystick/joystick
+   ./12_arduino/arduino
+   ./13_opencv/opencv
+   ./14_camera/camera
