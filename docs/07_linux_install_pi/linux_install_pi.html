@@ -131,6 +131,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../08_ssh/ssh.html">8. SSH接続</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09_ros2_install_pi/ros2_install_pi.html">9. ROS2のインストール（Raspberry Pi）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10_ros2_tutorial/ros2_tutorial.html">10. ROS2 Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_joystick/joystick.html">11. ジョイスティックの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_arduino/arduino.html">12. Arduinoの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_opencv/opencv.html">13. OpenCVの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_camera/camera.html">14. ラズパイカメラの使い方</a></li>
 </ul>
 
         </div>
@@ -146,9 +150,6 @@
 <h1><span class="section-number">7. </span>Linuxのインストール（Raspberry Pi）<a class="headerlink" href="#linux-raspberry-pi" title="Permalink to this headline">¶</a></h1>
 <p>Linuxはオープンソースのオペレーティングシステム（OS）です。</p>
 <p>Raspberry PiではUbuntu Server 24.04 LTSを使います。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <section id="raspberry-pi-imager">
 <h2><span class="section-number">7.1. </span>Raspberry Pi Imagerのインストール<a class="headerlink" href="#raspberry-pi-imager" title="Permalink to this headline">¶</a></h2>
 <p>公式のディスクイメージ書き込みツールRaspberry Pi Imagerを使ってSDカードにディスクイメージを書き込みます。</p>
@@ -157,63 +158,30 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo apt install rpi-imager
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id1">
 <h2><span class="section-number">7.2. </span>ディスクイメージの書き込み<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Raspberry Pi Imagerを起動。</p>
 <p>[デバイスを選択]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pi_img_01.png" src="../_images/linux_install_pi_img_01.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「Raspberry Pi 5」を選択。</p>
 <img alt="../_images/linux_install_pi_img_02.png" src="../_images/linux_install_pi_img_02.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[OSを選択]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pi_img_03.png" src="../_images/linux_install_pi_img_03.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「Other general-purpose OS」を選択。</p>
 <img alt="../_images/linux_install_pi_img_04.png" src="../_images/linux_install_pi_img_04.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「Ubuntu」を選択。</p>
 <img alt="../_images/linux_install_pi_img_05.png" src="../_images/linux_install_pi_img_05.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>［Ubuntu Server 24.04.2 LTS (64bit)］を選択。</p>
 <img alt="../_images/linux_install_pi_img_06.png" src="../_images/linux_install_pi_img_06.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>SDカードを挿入して、[ストレージを選択]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pi_img_07.png" src="../_images/linux_install_pi_img_07.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>挿入したSDカードを選択。</p>
 <img alt="../_images/linux_install_pi_img_08.png" src="../_images/linux_install_pi_img_08.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[次へ]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pi_img_09.png" src="../_images/linux_install_pi_img_09.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[設定を編集する]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pi_img_10.png" src="../_images/linux_install_pi_img_10.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>次の通り入力し[保存]ボタンをクリック。</p>
 <ul class="simple">
 <li><p>「ホスト名」にチェック</p></li>
@@ -226,33 +194,15 @@
 <li><p>キーボードレイアウト：jp</p></li>
 </ul>
 <img alt="../_images/linux_install_pi_img_11.png" src="../_images/linux_install_pi_img_11.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[はい]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pi_img_12.png" src="../_images/linux_install_pi_img_12.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[はい]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pi_img_13.png" src="../_images/linux_install_pi_img_13.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>書き込み中。</p>
 <img alt="../_images/linux_install_pi_img_14.png" src="../_images/linux_install_pi_img_14.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>［続ける］ボタンをクリック。</p>
 <img alt="../_images/linux_install_pi_img_15.png" src="../_images/linux_install_pi_img_15.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Raspberry Pi Imagerを終了し、SDカードをUnmountして取り出す。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="linux">
 <h2><span class="section-number">7.3. </span>Linuxへのログイン<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
@@ -271,9 +221,6 @@
 <span class="go">・・・</span>
 <span class="gp">pi@zumo01:~$</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 </section>

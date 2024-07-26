@@ -4,8 +4,6 @@ ROS2のインストール（PC）
 
 PCにROS2をインストールします。
 
-|
-
 ROS2のインストール
 ============================================================
 
@@ -14,8 +12,6 @@ ROS2のインストール
 Binary packagesのDebian packagesを選択してください。
 
 .. image:: ./images/ros2_install_pc_img_01.png
-
-|
 
 ロケールの確認。
 
@@ -38,8 +34,6 @@ Binary packagesのDebian packagesを選択してください。
     LC_IDENTIFICATION=en_US.UTF-8
     LC_ALL=
 
-|
-
 Universeレポジトリを追加。
 
 .. code-block:: console
@@ -49,8 +43,6 @@ Universeレポジトリを追加。
 .. code-block:: console
 
     ubuntu@mbc112:~$ sudo add-apt-repository universe
-
-|
 
 ROS 2 GPG(GNU Privacy Guard) keyの追加。
 
@@ -66,15 +58,11 @@ ROS 2 GPG(GNU Privacy Guard) keyの追加。
 
     ubuntu@mbc112:~$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 
-|
-
 レポジトリ情報をsource listに追加。
 
 .. code-block:: console
 
     ubuntu@mbc112:~$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-
-|
 
 ROS2のインストール。
 
@@ -93,8 +81,6 @@ ROS2のインストール。
 .. note::
 
    PCにはGUIツールやデモが含まれるDesktopをインストールします。
-
-|
 
 サンプルプログラムの実行
 ============================================================
@@ -120,8 +106,6 @@ ROS2のインストール。
     [INFO] [1721350082.408486524] [talker]: Publishing: 'Hello World: 10'
     ・・・
 
-|
-
 新しい端末を開いて、次のコマンドを実行してください。
 
 .. code-block:: console
@@ -143,15 +127,11 @@ ROS2のインストール。
     [INFO] [1721350082.411981922] [listener]: I heard: [Hello World: 10]
     ・・・
 
-|
-
 Terminalを起動するたびにsetup fileを実行するのは面倒なので、shellのstartup scriptに書いておきます。
 
 .. code-block:: console
 
     ubuntu@mbc112:~$ echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
-
-|
 
 ROS_DOMAIN_IDの設定
 ============================================================
@@ -167,8 +147,6 @@ ROS2はネットワーク上のnodeを自動的に発見します。そのため
 .. code-block:: console
 
     ubuntu@mbc112:~$ export ROS_DOMAIN_ID=1
-
-|
 
 Terminalを起動するたびにIDを設定するのは面倒なので、shellのstartup scriptに書いておきます。
 

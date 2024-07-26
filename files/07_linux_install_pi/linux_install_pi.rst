@@ -6,8 +6,6 @@ Linuxはオープンソースのオペレーティングシステム（OS）で�
 
 Raspberry PiではUbuntu Server 24.04 LTSを使います。
 
-|
-
 Raspberry Pi Imagerのインストール
 ============================================================
 
@@ -21,8 +19,6 @@ Raspberry Pi Imagerのインストール
 
     ubuntu@mbc084:~$ sudo apt install rpi-imager
 
-|
-
 ディスクイメージの書き込み
 ============================================================
 
@@ -32,61 +28,41 @@ Raspberry Pi Imagerを起動。
 
 .. image:: ./images/linux_install_pi_img_01.png
 
-|
-
 「Raspberry Pi 5」を選択。
 
 .. image:: ./images/linux_install_pi_img_02.png
-
-|
 
 [OSを選択]ボタンをクリック。
 
 .. image:: ./images/linux_install_pi_img_03.png
 
-|
-
 「Other general-purpose OS」を選択。
 
 .. image:: ./images/linux_install_pi_img_04.png
-
-|
 
 「Ubuntu」を選択。
 
 .. image:: ./images/linux_install_pi_img_05.png
 
-|
-
 ［Ubuntu Server 24.04.2 LTS (64bit)］を選択。
 
 .. image:: ./images/linux_install_pi_img_06.png
-
-|
 
 SDカードを挿入して、[ストレージを選択]ボタンをクリック。
 
 .. image:: ./images/linux_install_pi_img_07.png
 
-|
-
 挿入したSDカードを選択。
 
 .. image:: ./images/linux_install_pi_img_08.png
-
-|
 
 [次へ]ボタンをクリック。
 
 .. image:: ./images/linux_install_pi_img_09.png
 
-|
-
 [設定を編集する]ボタンをクリック。
 
 .. image:: ./images/linux_install_pi_img_10.png
-
-|
 
 次の通り入力し[保存]ボタンをクリック。
 
@@ -101,35 +77,23 @@ SDカードを挿入して、[ストレージを選択]ボタンをクリック�
 
 .. image:: ./images/linux_install_pi_img_11.png
 
-|
-
 [はい]ボタンをクリック。
 
 .. image:: ./images/linux_install_pi_img_12.png
-
-|
 
 [はい]ボタンをクリック。
 
 .. image:: ./images/linux_install_pi_img_13.png
 
-|
-
 書き込み中。
 
 .. image:: ./images/linux_install_pi_img_14.png
-
-|
 
 ［続ける］ボタンをクリック。
 
 .. image:: ./images/linux_install_pi_img_15.png
 
-|
-
 Raspberry Pi Imagerを終了し、SDカードをUnmountして取り出す。
-
-|
 
 Linuxへのログイン
 ============================================================
@@ -156,5 +120,3 @@ SDカードを挿入して電源を入れます。
     Welcome to Ubuntu 24.04 LTS (GNU/Linux 6.8.0-1004-raspi aarch64)
     ・・・
     pi@zumo01:~$
-
-|

@@ -4,8 +4,6 @@ ROS2のインストール（Raspberry Pi）
 
 Raspberry PiにROS2をインストールします。
 
-|
-
 ROS2のインストール
 ============================================================
 
@@ -36,8 +34,6 @@ ROS2のインストール
     LC_IDENTIFICATION="C.UTF-8"
     LC_ALL=
 
-|
-
 Universeレポジトリを追加。
 
 .. code-block:: console
@@ -47,8 +43,6 @@ Universeレポジトリを追加。
 .. code-block:: console
 
     pi@zumo01:~$ sudo add-apt-repository universe
-
-|
 
 ROS 2 GPG(GNU Privacy Guard) keyの追加。
 
@@ -64,15 +58,11 @@ ROS 2 GPG(GNU Privacy Guard) keyの追加。
 
     pi@zumo01:~$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 
-|
-
 レポジトリ情報をsource listに追加。
 
 .. code-block:: console
 
     pi@zumo01:~$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
-
-|
 
 ROS2のインストール。
 
@@ -91,8 +81,6 @@ ROS2のインストール。
 .. note::
 
    Raspberry PiにはROS-Baseをインストールします。
-
-|
 
 サンプルプログラムの実行
 ============================================================

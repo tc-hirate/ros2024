@@ -131,6 +131,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../08_ssh/ssh.html">8. SSH接続</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09_ros2_install_pi/ros2_install_pi.html">9. ROS2のインストール（Raspberry Pi）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10_ros2_tutorial/ros2_tutorial.html">10. ROS2 Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_joystick/joystick.html">11. ジョイスティックの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_arduino/arduino.html">12. Arduinoの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_opencv/opencv.html">13. OpenCVの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_camera/camera.html">14. ラズパイカメラの使い方</a></li>
 </ul>
 
         </div>
@@ -145,17 +149,11 @@
   <section id="ros2-pc">
 <h1><span class="section-number">5. </span>ROS2のインストール（PC）<a class="headerlink" href="#ros2-pc" title="Permalink to this headline">¶</a></h1>
 <p>PCにROS2をインストールします。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <section id="ros2">
 <h2><span class="section-number">5.1. </span>ROS2のインストール<a class="headerlink" href="#ros2" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://docs.ros.org/en/jazzy/Installation.html">ROS2のHP</a> の手順に従ってインストールします。</p>
 <p>Binary packagesのDebian packagesを選択してください。</p>
 <img alt="../_images/ros2_install_pc_img_01.png" src="../_images/ros2_install_pc_img_01.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>ロケールの確認。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>locale
 <span class="go">LANG=ja_JP.UTF-8</span>
@@ -175,18 +173,12 @@
 <span class="go">LC_ALL=</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Universeレポジトリを追加。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt install software-properties-common
 </pre></div>
 </div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo add-apt-repository universe
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ROS 2 GPG(GNU Privacy Guard) keyの追加。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt update
@@ -198,15 +190,9 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>レポジトリ情報をsource listに追加。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">echo</span> <span class="s2">&quot;deb [arch=</span><span class="k">$(</span>dpkg --print-architecture<span class="k">)</span><span class="s2"> signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu </span><span class="k">$(</span>. /etc/os-release <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="nv">$UBUNTU_CODENAME</span><span class="k">)</span><span class="s2"> main&quot;</span> <span class="p">|</span> sudo tee /etc/apt/sources.list.d/ros2.list &gt; /dev/null
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ROS2のインストール。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt update
@@ -221,9 +207,6 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>PCにはGUIツールやデモが含まれるDesktopをインストールします。</p>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id1">
@@ -246,9 +229,6 @@
 <span class="go">・・・</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>新しい端末を開いて、次のコマンドを実行してください。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">source</span> /opt/ros/iron/setup.bash
 </pre></div>
@@ -267,15 +247,9 @@
 <span class="go">・・・</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Terminalを起動するたびにsetup fileを実行するのは面倒なので、shellのstartup scriptに書いておきます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">echo</span> <span class="s2">&quot;source /opt/ros/jazzy/setup.bash&quot;</span> &gt;&gt; ~/.bashrc
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="ros-domain-id">
@@ -286,9 +260,6 @@
 <p>次のコマンドを実行してROS_DOMAIN_IDを設定してください。IDはZumoの番号と同じにします。Zumo-01を使っている場合は1とします。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">export</span> <span class="nv">ROS_DOMAIN_ID</span><span class="o">=</span><span class="m">1</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>Terminalを起動するたびにIDを設定するのは面倒なので、shellのstartup scriptに書いておきます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">echo</span> <span class="s2">&quot;export ROS_DOMAIN_ID=1&quot;</span> &gt;&gt; ~/.bashrc

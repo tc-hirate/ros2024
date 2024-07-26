@@ -131,6 +131,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../08_ssh/ssh.html">8. SSH接続</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09_ros2_install_pi/ros2_install_pi.html">9. ROS2のインストール（Raspberry Pi）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10_ros2_tutorial/ros2_tutorial.html">10. ROS2 Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_joystick/joystick.html">11. ジョイスティックの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_arduino/arduino.html">12. Arduinoの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_opencv/opencv.html">13. OpenCVの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_camera/camera.html">14. ラズパイカメラの使い方</a></li>
 </ul>
 
         </div>
@@ -146,169 +150,76 @@
 <h1><span class="section-number">3. </span>Linuxのインストール（PC）<a class="headerlink" href="#linux-pc" title="Permalink to this headline">¶</a></h1>
 <p>Linuxはオープンソースのオペレーティングシステム（OS）です。</p>
 <p>PCにはUbuntu Desktop 24.04 LTSをインストールします。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <section id="linux">
 <h2><span class="section-number">3.1. </span>Linuxのダウンロード<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h2>
 <p>Ubuntu Desktop 24.04 LTSのディスクイメージを <a class="reference external" href="https://releases.ubuntu.com/24.04/">UbuntuのHP</a> からダウンロードします。</p>
 <img alt="../_images/linux_install_pc_img_01.png" src="../_images/linux_install_pc_img_01.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>ダウンロードフォルダに保存されます。</p>
 <img alt="../_images/linux_install_pc_img_02.png" src="../_images/linux_install_pc_img_02.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="rufus">
 <h2><span class="section-number">3.2. </span>Rufusのダウンロード<a class="headerlink" href="#rufus" title="Permalink to this headline">¶</a></h2>
 <p>Rufus（ルーファス）は起動可能なUSBフラッシュドライブを作成することができるソフトウェアです。</p>
 <p>Rufusを <a class="reference external" href="http://rufus.ie/ja/">RufusのHP</a> からダウンロードします。</p>
 <img alt="../_images/linux_install_pc_img_03.png" src="../_images/linux_install_pc_img_03.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>下のほうにスクロールしていくと、ダウンロードのリンクがあります。</p>
 <p>ここから、Portableをダウンロードしてください。</p>
 <img alt="../_images/linux_install_pc_img_04.png" src="../_images/linux_install_pc_img_04.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>ダウンロードフォルダに保存されます。</p>
 <img alt="../_images/linux_install_pc_img_05.png" src="../_images/linux_install_pc_img_05.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="live-usb">
 <h2><span class="section-number">3.3. </span>Live USBの作成<a class="headerlink" href="#live-usb" title="Permalink to this headline">¶</a></h2>
 <p>ダウンロードしたRufusをダブルクリックすると、Rufusが起動します。</p>
 <p>[いいえ]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_06.png" src="../_images/linux_install_pc_img_06.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[選択]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_07.png" src="../_images/linux_install_pc_img_07.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Ubuntuのイメージディスクファイルを選択して、[開く]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_08.png" src="../_images/linux_install_pc_img_08.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>USBメモリを挿入するとデバイスに認識される。</p>
 <p>[スタート]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_09.png" src="../_images/linux_install_pc_img_09.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「ISOイメージモードで書き込む」が選択されていることを確認して、[OK]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_10.png" src="../_images/linux_install_pc_img_10.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[OK]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_11.png" src="../_images/linux_install_pc_img_11.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>インストールメディアの作成中。</p>
 <img alt="../_images/linux_install_pc_img_12.png" src="../_images/linux_install_pc_img_12.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「準備完了」と表示されたら、[閉じる]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_13.png" src="../_images/linux_install_pc_img_13.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id1">
 <h2><span class="section-number">3.4. </span>Linuxのインストール<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Live USBをPCに挿入してください。</p>
 <p>PCの電源ボタンを押したら、[F12]キーを連打し、Boot Managerの画面を表示させる。</p>
 <img alt="../_images/linux_install_pc_img_14.png" src="../_images/linux_install_pc_img_14.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[↑]キーと[↓]キーを使って「USB Storagr Device」を選択し、[Enter]キーを押す。</p>
 <img alt="../_images/linux_install_pc_img_15.png" src="../_images/linux_install_pc_img_15.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「Try or Install Ubuntu」が選択されていることを確認し、[Enter]キーを押す。</p>
 <img alt="../_images/linux_install_pc_img_16.png" src="../_images/linux_install_pc_img_16.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>しばらく待つ。</p>
 <img alt="../_images/linux_install_pc_img_17.png" src="../_images/linux_install_pc_img_17.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Choose your languageは、「English」が選択されいることを確認し、[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_18.png" src="../_images/linux_install_pc_img_18.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Accessibility in Ubuntuは、デフォルトのまま[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_19.png" src="../_images/linux_install_pc_img_19.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Select your keyboard layoutは、「Japanese」-「Japanese」を選択し、[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_20.png" src="../_images/linux_install_pc_img_20.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Connect to the internetは、「Use wired connection」を選択し、 [Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_21.png" src="../_images/linux_install_pc_img_21.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>An update is available for the installerは、[Skip]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_22.png" src="../_images/linux_install_pc_img_22.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>What do you want to do with Ubuntu?は、「Install Ubuntu」を選択し、[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_23.png" src="../_images/linux_install_pc_img_23.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>How would you like to install Ubuntu?は、「Intractive installation」を選択し、[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_24.png" src="../_images/linux_install_pc_img_24.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>What apps would you like to install start with? は、「Default selection」を選択し、[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_25.png" src="../_images/linux_install_pc_img_25.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Install recommended proprietary software?は、「Install third-party software …」を選択し、[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_26.png" src="../_images/linux_install_pc_img_26.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>How do you want to install Ubuntu?は、「Erase disc and install Ubuntu」を選択し [Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_27.png" src="../_images/linux_install_pc_img_27.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Create your accountは、次の通り入力し[Next]ボタンをクリック。</p>
 <ul class="simple">
 <li><p>Your name: ubuntu</p></li>
@@ -319,170 +230,77 @@
 <li><p>「Require my password to login」にチェック</p></li>
 </ul>
 <img alt="../_images/linux_install_pc_img_28.png" src="../_images/linux_install_pc_img_28.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Select your timezoneは、「Tokyo(Tokyo, Japan)」-「Asia/Tokyo」が選択されいることを確認し、[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_29.png" src="../_images/linux_install_pc_img_29.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>Review your choicesは、[Install]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_30.png" src="../_images/linux_install_pc_img_30.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>インストールが始まる。</p>
 <img alt="../_images/linux_install_pc_img_31.png" src="../_images/linux_install_pc_img_31.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>インストールが終了すると、 Installation Completeウィンドウが表示されるので[Restart Now]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_32.png" src="../_images/linux_install_pc_img_32.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>しばらく待つ。</p>
 <img alt="../_images/linux_install_pc_img_33.png" src="../_images/linux_install_pc_img_33.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「Please remove the installation medium, then press ENTER」というメッセージが表示されるので Live USBを抜いて[Enter]を押す。</p>
 <img alt="../_images/linux_install_pc_img_34.png" src="../_images/linux_install_pc_img_34.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id2">
 <h2><span class="section-number">3.5. </span>Linuxへのログイン<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>ログイン画面が表示されたら、 ユーザーを選択。</p>
 <img alt="../_images/linux_install_pc_img_35.png" src="../_images/linux_install_pc_img_35.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>パスワードを入力してログイン。</p>
 <img alt="../_images/linux_install_pc_img_36.png" src="../_images/linux_install_pc_img_36.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>はじめに、各種設定の画面が表示されますが、 全てデフォルトのままとする。</p>
 <p>[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_37.png" src="../_images/linux_install_pc_img_37.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_38.png" src="../_images/linux_install_pc_img_38.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[Next]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_39.png" src="../_images/linux_install_pc_img_39.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[Finish]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_40.png" src="../_images/linux_install_pc_img_40.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>Software Updaterが出てきたら、[Install Now]ボタンをクリック。</p>
+<p>「Software Updater」が出てきたら、[Install Now]ボタンをクリック。</p>
 <img alt="../_images/linux_install_pc_img_41.png" src="../_images/linux_install_pc_img_41.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>アップデート中。</p>
 <img alt="../_images/linux_install_pc_img_42.png" src="../_images/linux_install_pc_img_42.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>アップデートが終了したら、[OK]ボタンをクリック。※[Restart Now]から再起動の場合も。</p>
 <img alt="../_images/linux_install_pc_img_43.png" src="../_images/linux_install_pc_img_43.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id3">
 <h2><span class="section-number">3.6. </span>Linuxの日本語化<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>左下のワッフルメニュー（アプリケーションを表示する）をクリックして、アプリケーションを表示。</p>
-<p>[Settings]をクリック。</p>
+<p>「Settings」をクリック。</p>
 <img alt="../_images/linux_install_pc_img_44.png" src="../_images/linux_install_pc_img_44.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>[Settings]が起動。</p>
+<p>「Settings」が起動。</p>
 <img alt="../_images/linux_install_pc_img_45.png" src="../_images/linux_install_pc_img_45.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[System]を選択し、[Region &amp; Language]をクリック。</p>
 <img alt="../_images/linux_install_pc_img_46.png" src="../_images/linux_install_pc_img_46.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[Manage Installed Languages]をクリック。</p>
 <img alt="../_images/linux_install_pc_img_47.png" src="../_images/linux_install_pc_img_47.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[Install]をクリック。※ここでパスワードの入力を求められるので、パスワードを入力。</p>
 <img alt="../_images/linux_install_pc_img_48.png" src="../_images/linux_install_pc_img_48.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>変更の適用中。</p>
 <img alt="../_images/linux_install_pc_img_49.png" src="../_images/linux_install_pc_img_49.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[Install/Remove Languages]をクリック。</p>
 <img alt="../_images/linux_install_pc_img_50.png" src="../_images/linux_install_pc_img_50.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「Japanese」を選択して[Apply]をクリック。</p>
 <img alt="../_images/linux_install_pc_img_51.png" src="../_images/linux_install_pc_img_51.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>変更の適用中。</p>
 <img alt="../_images/linux_install_pc_img_52.png" src="../_images/linux_install_pc_img_52.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[Language]に日本語（まだグレー）があることを確認し、[Close]をクリック。</p>
 <img alt="../_images/linux_install_pc_img_53.png" src="../_images/linux_install_pc_img_53.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>ここで、再起動。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>[Language]をクリック。</p>
+<p>再度「Settings」を起動して、[Language]をクリック。</p>
 <img alt="../_images/linux_install_pc_img_54.png" src="../_images/linux_install_pc_img_54.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>「日本語」を選択して、[Select]をクリック。</p>
 <img alt="../_images/linux_install_pc_img_55.png" src="../_images/linux_install_pc_img_55.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>[Log Out]をクリックして、再度ログイン。</p>
 <img alt="../_images/linux_install_pc_img_56.png" src="../_images/linux_install_pc_img_56.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>再起動すると次のウィンドウが出てくる。</p>
 <p>「次回から表示しない」にチェックをして、[古い名前のままにする]をクリック。</p>
 <img alt="../_images/linux_install_pc_img_57.png" src="../_images/linux_install_pc_img_57.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>表示が日本語になっていることを確認。</p>
 <p>日本語と英語の切り替えは、［半角／全角］で行う。</p>
 </section>

@@ -154,11 +154,11 @@
 </div>
 <section id="id2">
 <h2><span class="section-number">11.1. </span>必要なパッケージのインストール<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>ジョイスティックを使うために必要なパッケージをインストールします。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo apt install ros-iron-joy
+<p>ジョイスティックを使うために必要なパッケージをインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt install ros-jazzy-joy
 </pre></div>
 </div>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo apt install ros-iron-teleop-tools
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt install ros-jazzy-teleop-tools
 </pre></div>
 </div>
 <div class="line-block">
@@ -167,37 +167,37 @@
 </section>
 <section id="id3">
 <h2><span class="section-number">11.2. </span>ジョイスティックの動作確認<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>PCにジョイスティックを接続し、次のコマンドを実行してください。</p>
-<p>接続したジョイスティックが確認できます。（名前はF310かF150のどちらか）</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>lsusb
+<p>PCにジョイスティックを接続し、次のコマンドを実行。</p>
+<p>接続したジョイスティックが認識されているか確認。（名前はF310かF150のどちらか）</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>lsusb
 <span class="go">...</span>
-<span class="go">Bus 002 Device 005: ID 046d:c21e Logitech, Inc. F510 Gamepad [XInput Mode]</span>
+<span class="go">Bus 003 Device 003: ID 046d:c21d Logitech, Inc. F310 Gamepad [XInput Mode]</span>
 <span class="go">...</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>続いて、次のコマンドを実行してください。</p>
-<p>js0があればジョイスティックは認識されています。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ls /dev/input/
-<span class="go">by-id    event0  event10  event12  event2  event4  event6  event8  js0   mouse0</span>
-<span class="go">by-path  event1  event11  event13  event3  event5  event7  event9  mice  mouse1</span>
+<p>続いて、次のコマンドを実行。</p>
+<p>js0があることを確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ls /dev/input/
+<span class="go">by-id    event0  event10  event2  event4  event6  event8  js0   mouse0</span>
+<span class="go">by-path  event1  event11  event3  event5  event7  event9  mice  mouse1</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>joyパッケージのjoy-nodeの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 run joy joy_node
-<span class="go">[INFO] [1689135140.406199333] [joy_node]: Opened joystick: Logitech Gamepad F510.  deadzone: 0.050000</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 run joy joy_node
+<span class="go">[INFO] [1721881976.291969275] [joy_node]: Opened joystick: Logitech Gamepad F310.  deadzone: 0.050000</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>Topicの確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 topic list
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 topic list
 <span class="go">/joy</span>
 <span class="go">/joy/set_feedback</span>
 <span class="go">/parameter_events</span>
@@ -208,11 +208,11 @@
 <div class="line"><br /></div>
 </div>
 <p>/joyの表示。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 topic <span class="nb">echo</span> /joy
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 topic <span class="nb">echo</span> /joy
 <span class="go">header:</span>
 <span class="go">  stamp:</span>
-<span class="go">    sec: 1689135223</span>
-<span class="go">    nanosec: 171012534</span>
+<span class="go">    sec: 1721882069</span>
+<span class="go">    nanosec: 177840952</span>
 <span class="go">  frame_id: joy</span>
 <span class="go">axes:</span>
 <span class="go">- -0.0</span>
@@ -242,19 +242,19 @@
 <div class="line"><br /></div>
 </div>
 <p>teleop_twist_joyパッケージのteleop-nodeの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 run teleop_twist_joy teleop_node
-<span class="go">[INFO] [1689135379.152090618] [TeleopTwistJoy]: Teleop enable button 5.</span>
-<span class="go">[INFO] [1689135379.152189267] [TeleopTwistJoy]: Linear axis x on 5 at scale 0.500000.</span>
-<span class="go">[INFO] [1689135379.152221882] [TeleopTwistJoy]: Angular axis yaw on 2 at scale 0.500000.</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 run teleop_twist_joy teleop_node
+<span class="go">[INFO] [1721882162.749896744] [TeleopTwistJoy]: Teleop enable button 5.</span>
+<span class="go">[INFO] [1721882162.749961916] [TeleopTwistJoy]: Linear axis x on 5 at scale 0.500000.</span>
+<span class="go">[INFO] [1721882162.749975854] [TeleopTwistJoy]: Angular axis yaw on 2 at scale 0.500000.</span>
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>Topicの確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 topic list
-<span class="go">/cmd_vel</span>
-<span class="go">/joy</span>
+<p>Topicの確認（/cmd_velが増えている）。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 topic list
+<span class="hll"><span class="go">/cmd_vel</span>
+</span><span class="go">/joy</span>
 <span class="go">/joy/set_feedback</span>
 <span class="go">/parameter_events</span>
 <span class="go">/rosout</span>
@@ -265,7 +265,7 @@
 </div>
 <p>/cmd_velの表示。</p>
 <p>RBを押しながらRTを操作するとxの値が-0.5〜0.5で変化し、LTを操作するとzの値が-0.5〜0.5で変化します。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 topic <span class="nb">echo</span> /cmd_vel
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 topic <span class="nb">echo</span> /cmd_vel
 <span class="go">linear:</span>
 <span class="go">  x: 0.5</span>
 <span class="go">  y: 0.0</span>
@@ -283,17 +283,27 @@
 </section>
 <section id="id4">
 <h2><span class="section-number">11.3. </span>パッケージの作成<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>joy_testという名前のパッケージを作ります。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">cd</span> ros2_ws/src/
-<span class="gp">ubuntu@mbc084:~/ros2_ws/src$ </span>ros2 pkg create --build-type ament_python joy_test
+<p>joy_testという名前のパッケージを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> ros2_ws/src/
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>launchファイル用のディレクトリを作ります。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src$ </span><span class="nb">cd</span> joy_test/
-<span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span>mkdir launch
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src$ </span>ros2 pkg create --build-type ament_python joy_test
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>launchファイル用のディレクトリを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src$ </span><span class="nb">cd</span> joy_test/
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test$ </span>mkdir launch
 </pre></div>
 </div>
 <div class="line-block">
@@ -302,27 +312,20 @@
 </section>
 <section id="turtlesim">
 <h2><span class="section-number">11.4. </span>演習1「ジョイスティックを使ってturtlesimを動かす」<a class="headerlink" href="#turtlesim" title="Permalink to this headline">¶</a></h2>
+<p>joy-nodeとteleop-nodeを使ってturtlesimを動かします。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<section id="joy-nodeteleop-nodeturtlesim">
-<h3><span class="section-number">11.4.1. </span>（１）joy-nodeとteleop-nodeを使ってturtlesimを動かす<a class="headerlink" href="#joy-nodeteleop-nodeturtlesim" title="Permalink to this headline">¶</a></h3>
 <p>turtlesimパッケージのturtlesim_nodeの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span>ros2 run turtlesim turtlesim_node
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test$ </span>ros2 run turtlesim turtlesim_node
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>joyパッケージのjoy-nodeの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span>ros2 run joy joy_node
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test$ </span>ros2 run joy joy_node
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>teleop_twist_joyパッケージのteleop_nodeの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span>ros2 run teleop_twist_joy teleop_node --ros-args --remap /cmd_vel:<span class="o">=</span>/turtle1/cmd_vel
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test$ </span>ros2 run teleop_twist_joy teleop_node --ros-args --remap /cmd_vel:<span class="o">=</span>/turtle1/cmd_vel
 </pre></div>
 </div>
 <div class="line-block">
@@ -330,21 +333,22 @@
 </div>
 </section>
 <section id="launch">
-<h3><span class="section-number">11.4.2. </span>（２）launchファイルの作成<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h3>
+<h2><span class="section-number">11.5. </span>演習2「演習1をlaunchファイルから実行」<a class="headerlink" href="#launch" title="Permalink to this headline">¶</a></h2>
 <p>joy-nodeとteleop-nodeを使ってturtlesimを動かすためのlaunchファイルを作成してください。</p>
 <p>ファイル名は「turtle_teleop_joy_launch.py」とします。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>turtle_teleop_joy_launch.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span><span class="nb">cd</span> launch/
-<span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ </span>nano turtle_teleop_joy_launch.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test$ </span><span class="nb">cd</span> launch/
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test/launch$ </span>nano turtle_teleop_joy_launch.py
+</pre></div>
 </div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">turtle_teleop_joy_launch.py</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
 <span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
 
@@ -371,18 +375,17 @@
     <span class="p">])</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ </span><span class="nb">cd</span> ..
-<span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span>nano setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test/launch$ </span><span class="nb">cd</span> ..
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test$ </span>nano setup.py
+</pre></div>
 </div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="kn">import</span> <span class="nn">os</span>
 </span><span class="hll"><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 </span>
@@ -414,61 +417,43 @@
 <span class="p">)</span>
 </pre></div>
 </div>
+</div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>ワークスペースに移動。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src/joy_test$ </span><span class="nb">cd</span> ~/ros2_ws/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src/joy_test$ </span><span class="nb">cd</span> ~/ros2_ws/
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select joy_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select joy_test
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>setupファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/setup.bash
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>launchファイルの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 launch joy_test turtle_teleop_joy_launch.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/setup.bash
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 launch joy_test turtle_teleop_joy_launch.py
+</pre></div>
 </div>
 <p>ノードの確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 node list
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 node list
 <span class="go">/joy</span>
 <span class="go">/sim</span>
 <span class="go">/teleop</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>rqt_graphでノードの確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>rqt_graph
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>rqt_graph
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="11_joystick/img/joystick_img_01.png" class="align-center" src="11_joystick/img/joystick_img_01.png" />
+<img alt="../_images/joystick_img_01.png" src="../_images/joystick_img_01.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
 <section id="id5">
-<h3><span class="section-number">11.4.3. </span>（３）ジョイスティックの方向キーでturtlesimを動かす<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h2><span class="section-number">11.6. </span>演習3「ジョイスティックの方向キーでturtlesimを動かす」<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>ジョイスティックの方向キーでturtlesimを動かすプログラムを作ってください。</p>
 <p>ファイル名は「turtle_joy.py」、仕様はturtle_teleop_keyと同じとします。</p>
 <div class="admonition note">
@@ -479,13 +464,12 @@
 <div class="line"><br /></div>
 </div>
 <p>turtle_joy.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/joy_test/joy_test/turtle_joy.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/joy_test/joy_test/turtle_joy.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">turtle_joy.py</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 
@@ -537,17 +521,14 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>package.xmlを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/joy_test/package.xml
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/joy_test/package.xml
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">package.xml</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;?xml-model href=&quot;http://download.ros.org/schema/package_format3.xsd&quot; schematyp&gt;
 &lt;package format=&quot;3&quot;&gt;
@@ -573,17 +554,14 @@
 &lt;/package&gt;
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/joy_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/joy_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 
@@ -616,39 +594,24 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select joy_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select joy_test
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>setupファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/setup.bash
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>turtlesimパッケージのturtlesim_nodeの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run turtlesim turtlesim_node
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run turtlesim turtlesim_node
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>joyパッケージのjoy-nodeの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run joy joy_node
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run joy joy_node
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>joy_testパッケージのjoy_twistノードの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run joy_test joy_twist
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/setup.bash
+</pre></div>
+</div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run joy_test joy_twist
 </pre></div>
 </div>
 <div class="line-block">
@@ -656,20 +619,19 @@
 </div>
 </section>
 <section id="id6">
-<h3><span class="section-number">11.4.4. </span>（４）launchファイルの作成<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h2><span class="section-number">11.7. </span>演習4「演習3をlaunchファイルから実行」<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>「turtle_joy.py」を実行するlaunchファイルを作成してください。</p>
 <p>ファイル名は「turtle_joy_launch.py」とします。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <p>turtle_joy_launch.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/joy_test/launch/turtle_joy_launch.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/joy_test/launch/turtle_joy_launch.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">turtle_joy_launch.py</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">launch</span> <span class="kn">import</span> <span class="n">LaunchDescription</span>
 <span class="kn">from</span> <span class="nn">launch_ros.actions</span> <span class="kn">import</span> <span class="n">Node</span>
 
@@ -693,31 +655,18 @@
 <span class="p">])</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select joy_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select joy_test
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>setupファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/setup.bash
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>launchファイルの実行。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 launch joy_test turtle_joy_launch.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/setup.bash
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 launch joy_test turtle_joy_launch.py
+</pre></div>
 </div>
-</section>
 </section>
 </section>
 
@@ -739,13 +688,10 @@
 <li><a class="reference internal" href="#id2">11.1. 必要なパッケージのインストール</a></li>
 <li><a class="reference internal" href="#id3">11.2. ジョイスティックの動作確認</a></li>
 <li><a class="reference internal" href="#id4">11.3. パッケージの作成</a></li>
-<li><a class="reference internal" href="#turtlesim">11.4. 演習1「ジョイスティックを使ってturtlesimを動かす」</a><ul>
-<li><a class="reference internal" href="#joy-nodeteleop-nodeturtlesim">11.4.1. （１）joy-nodeとteleop-nodeを使ってturtlesimを動かす</a></li>
-<li><a class="reference internal" href="#launch">11.4.2. （２）launchファイルの作成</a></li>
-<li><a class="reference internal" href="#id5">11.4.3. （３）ジョイスティックの方向キーでturtlesimを動かす</a></li>
-<li><a class="reference internal" href="#id6">11.4.4. （４）launchファイルの作成</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#turtlesim">11.4. 演習1「ジョイスティックを使ってturtlesimを動かす」</a></li>
+<li><a class="reference internal" href="#launch">11.5. 演習2「演習1をlaunchファイルから実行」</a></li>
+<li><a class="reference internal" href="#id5">11.6. 演習3「ジョイスティックの方向キーでturtlesimを動かす」</a></li>
+<li><a class="reference internal" href="#id6">11.7. 演習4「演習3をlaunchファイルから実行」</a></li>
 </ul>
 </li>
 </ul>

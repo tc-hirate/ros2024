@@ -43,27 +43,19 @@ Remminaを起動し、[新しい接続プロファイル]ボタンをクリッ�
 
 .. image:: ./images/ssh_img_01.png
 
-|
-
 必要な情報を入力して、［保存］ボタンをクリック。
 
 .. image:: ./images/ssh_img_02.png
 
-|
-
 「zumo01」が作成された。
 
 .. image:: ./images/ssh_img_03.png
-
-|
 
 「zumo01」をダブルクリックして（右クリックから「接続」でも可）、ラズベリーパイと接続。
 
 以降、Raspberry Piの操作はこの画面から行います。
 
 .. image:: ./images/ssh_img_04.png
-
-|
 
 無線LANの設定
 ============================================================
@@ -177,8 +169,6 @@ IPアドレスを確認。
     ・・・
 
 Remminaでwifi用の接続も作成。
-名前はzumo00-wifiとする。
+名前はzumo01-wifiとする。
 
 .. image:: ./images/ssh_img_05.png
-
-|

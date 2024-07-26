@@ -131,6 +131,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../08_ssh/ssh.html">8. SSH接続</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09_ros2_install_pi/ros2_install_pi.html">9. ROS2のインストール（Raspberry Pi）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10_ros2_tutorial/ros2_tutorial.html">10. ROS2 Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_joystick/joystick.html">11. ジョイスティックの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_arduino/arduino.html">12. Arduinoの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_opencv/opencv.html">13. OpenCVの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_camera/camera.html">14. ラズパイカメラの使い方</a></li>
 </ul>
 
         </div>
@@ -145,32 +149,20 @@
   <section id="linux">
 <h1><span class="section-number">4. </span>Linux入門<a class="headerlink" href="#linux" title="Permalink to this headline">¶</a></h1>
 <p>基本的なLinuxの端末の操作方法を学習します。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <section id="id1">
 <h2><span class="section-number">4.1. </span>コマンドラインとは<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>コマンドラインとは、文字だけでコンピュータを操作するためのものです。
 サイトやアプリなどを開発する上で必須のツールです。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id2">
 <h2><span class="section-number">4.2. </span>コマンド（命令）<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>ターミナルと呼ばれるものにコマンド（命令）を入力することで、 コンピュータに指示を与えることができます。
 これから、実際にどのようなコマンドがあるかを見ていきましょう。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id3">
 <h2><span class="section-number">4.3. </span>ターミナルの起動<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>ターミナル（端末）を起動するとウィンドウが開き、下記のような文字列が表示されます。</p>
 <img alt="../_images/linux_basic_img_01.png" src="../_images/linux_basic_img_01.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id4">
 <h2><span class="section-number">4.4. </span>ディレクトリの中身の表示<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
@@ -179,9 +171,6 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ls
 <span class="go">Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos  snap</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id5">
@@ -203,9 +192,6 @@
 <span class="gp">ubuntu@mbc112:~$</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id6">
 <h2><span class="section-number">4.6. </span>カレントディレクトリの確認<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
@@ -215,9 +201,6 @@ pwdコマンドを実行すると、ルートディレクトリからカレン�
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">pwd</span>
 <span class="go">/home/ubuntu</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id7">
@@ -230,9 +213,6 @@ pwdコマンドを実行すると、ルートディレクトリからカレン�
 <span class="go">Documents  Music      Public    Videos     snap</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id8">
 <h2><span class="section-number">4.8. </span>ファイルの編集<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
@@ -243,9 +223,6 @@ viなど他のエディタを使いたい場合は、それを使ってくださ
 </div>
 <img alt="../_images/linux_basic_img_02.png" src="../_images/linux_basic_img_02.png" />
 <p>保存するときはCtrl + S、終了するときはCtrl + Xを押してください。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id9">
 <h2><span class="section-number">4.9. </span>ファイルの中身の表示<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
@@ -253,9 +230,6 @@ viなど他のエディタを使いたい場合は、それを使ってくださ
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>cat ros.txt
 <span class="go">ros robot programming</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id10">
@@ -265,21 +239,23 @@ viなど他のエディタを使いたい場合は、それを使ってくださ
 <span class="go">cat: bos.txt: そのようなファイルやディレクトリはありません</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id11">
 <h2><span class="section-number">4.11. </span>補間機能<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
 <p>コマンドラインには補間機能というものがあります。 補間機能とは、ファイル名やディレクトリ名を入力するときに、 ファイル名の入力途中にTabキーを押すことで、 残りのファイル名を補間してくれる機能です。
 これを使うことにより、効率がよくなるだけでなく、 先程のようなファイル名によるエラーを防ぐことができます。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> ~/M <span class="o">[</span>Tab<span class="o">]</span>
-<span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> ~/Music/
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> M <span class="o">[</span>Tab<span class="o">]</span>
+<span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> Music/
 <span class="gp">ubuntu@mbc112:~/Music$</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/Music$ </span><span class="nb">cd</span>
+<span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> Do <span class="o">[</span>Tab<span class="o">]</span>✕2
+<span class="go">Documents/ Downloads/</span>
+<span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> Doc <span class="o">[</span>Tab<span class="o">]</span>
+<span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> Documents/
+<span class="gp">ubuntu@mbc112:~/Documents$</span>
+</pre></div>
 </div>
 </section>
 <section id="id12">
@@ -298,9 +274,6 @@ mkdirコマンドは「mkdir ディレクトリ名」と入力することで �
 <span class="go">.....</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id13">
 <h2><span class="section-number">4.13. </span>ファイルの移動<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
@@ -313,9 +286,6 @@ mkdirコマンドは「mkdir ディレクトリ名」と入力することで �
 <span class="go">ros.txt</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id14">
 <h2><span class="section-number">4.14. </span>ファイル名の変更<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
@@ -325,9 +295,6 @@ mkdirコマンドは「mkdir ディレクトリ名」と入力することで �
 <span class="gp">ubuntu@mbc112:~/Documents$ </span>ls
 <span class="go">ros2.txt</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id15">
@@ -339,18 +306,12 @@ mkdirコマンドは「mkdir ディレクトリ名」と入力することで �
 <span class="go">ros2.txt  ros3.txt</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id16">
 <h2><span class="section-number">4.16. </span>ディレクトリのコピー<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
 <p>cpコマンドでは「-r」を付けることで、 ファイルだけでなくディレクトリもコピーすることができます。
 「cp -r コピーするディレクトリ名 新しいディレクトリ名」 とすることでコピーできます。</p>
 <p>cpコマンドでは、「-r」をつけずにディレクトリをコピーしようとすると、 エラーが出力され、コピーは実行されません。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id17">
 <h2><span class="section-number">4.17. </span>ファイルの削除<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h2>
@@ -359,9 +320,6 @@ mkdirコマンドは「mkdir ディレクトリ名」と入力することで �
 <span class="gp">ubuntu@mbc112:~/Documents$ </span>ls
 <span class="go">ros2.txt</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id18">
@@ -385,9 +343,6 @@ Ctrl+cでそれを停止しています。</p>
 <span class="go">y</span>
 <span class="go">^C</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id20">
@@ -413,26 +368,17 @@ Ctrl+cでそれを停止しています。</p>
 <span class="gp">ubuntu@mbc112:~/Desktop$</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id21">
 <h2><span class="section-number">4.21. </span>端末を複数開く<a class="headerlink" href="#id21" title="Permalink to this headline">¶</a></h2>
 <p>ロボットのプログラムを実行する際、 複数の端末ウインドウを使って操作する場合があります。
 Ctrl+Shift+nで新しいウインドウを、 Ctrl+Shift+tで新しいタブを開くことができます。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id22">
 <h2><span class="section-number">4.22. </span>コマンドの履歴<a class="headerlink" href="#id22" title="Permalink to this headline">¶</a></h2>
 <p>端末のコマンド入力時に、上キーを押すと、 これまでに入力したコマンドを再度呼び出すことができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="o">[</span>上下キー<span class="o">]</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id23">

@@ -9,43 +9,43 @@ PCでジョイスティックが使えるように設定します。
 必要なパッケージのインストール
 ============================================================
 
-ジョイスティックを使うために必要なパッケージをインストールします。
+ジョイスティックを使うために必要なパッケージをインストール。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ sudo apt install ros-iron-joy
+    ubuntu@mbc112:~$ sudo apt install ros-jazzy-joy
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ sudo apt install ros-iron-teleop-tools
+    ubuntu@mbc112:~$ sudo apt install ros-jazzy-teleop-tools
 
 |
 
 ジョイスティックの動作確認
 ============================================================
 
-PCにジョイスティックを接続し、次のコマンドを実行してください。
+PCにジョイスティックを接続し、次のコマンドを実行。
 
-接続したジョイスティックが確認できます。（名前はF310かF150のどちらか）
+接続したジョイスティックが認識されているか確認。（名前はF310かF150のどちらか）
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ lsusb
+    ubuntu@mbc112:~$ lsusb
     ...
-    Bus 002 Device 005: ID 046d:c21e Logitech, Inc. F510 Gamepad [XInput Mode]
+    Bus 003 Device 003: ID 046d:c21d Logitech, Inc. F310 Gamepad [XInput Mode]
     ...
 
 |
 
-続いて、次のコマンドを実行してください。
+続いて、次のコマンドを実行。
 
-js0があればジョイスティックは認識されています。
+js0があることを確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ls /dev/input/
-    by-id    event0  event10  event12  event2  event4  event6  event8  js0   mouse0
-    by-path  event1  event11  event13  event3  event5  event7  event9  mice  mouse1
+    ubuntu@mbc112:~$ ls /dev/input/
+    by-id    event0  event10  event2  event4  event6  event8  js0   mouse0
+    by-path  event1  event11  event3  event5  event7  event9  mice  mouse1
 
 |
 
@@ -53,8 +53,8 @@ joyパッケージのjoy-nodeの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ros2 run joy joy_node 
-    [INFO] [1689135140.406199333] [joy_node]: Opened joystick: Logitech Gamepad F510.  deadzone: 0.050000
+    ubuntu@mbc112:~$ ros2 run joy joy_node
+    [INFO] [1721881976.291969275] [joy_node]: Opened joystick: Logitech Gamepad F310.  deadzone: 0.050000
 
 |
 
@@ -62,7 +62,7 @@ Topicの確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ros2 topic list
+    ubuntu@mbc112:~$ ros2 topic list
     /joy
     /joy/set_feedback
     /parameter_events
@@ -74,11 +74,11 @@ Topicの確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ros2 topic echo /joy
+    ubuntu@mbc112:~$ ros2 topic echo /joy
     header:
       stamp:
-        sec: 1689135223
-        nanosec: 171012534
+        sec: 1721882069
+        nanosec: 177840952
       frame_id: joy
     axes:
     - -0.0
@@ -109,18 +109,19 @@ teleop_twist_joyパッケージのteleop-nodeの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ros2 run teleop_twist_joy teleop_node 
-    [INFO] [1689135379.152090618] [TeleopTwistJoy]: Teleop enable button 5.
-    [INFO] [1689135379.152189267] [TeleopTwistJoy]: Linear axis x on 5 at scale 0.500000.
-    [INFO] [1689135379.152221882] [TeleopTwistJoy]: Angular axis yaw on 2 at scale 0.500000.
+    ubuntu@mbc112:~$ ros2 run teleop_twist_joy teleop_node
+    [INFO] [1721882162.749896744] [TeleopTwistJoy]: Teleop enable button 5.
+    [INFO] [1721882162.749961916] [TeleopTwistJoy]: Linear axis x on 5 at scale 0.500000.
+    [INFO] [1721882162.749975854] [TeleopTwistJoy]: Angular axis yaw on 2 at scale 0.500000.
 
 |
 
-Topicの確認。
+Topicの確認（/cmd_velが増えている）。
 
 .. code-block:: console
+    :emphasize-lines: 2
 
-    ubuntu@mbc084:~$ ros2 topic list
+    ubuntu@mbc112:~$ ros2 topic list
     /cmd_vel
     /joy
     /joy/set_feedback
@@ -135,7 +136,7 @@ RBを押しながらRTを操作するとxの値が-0.5〜0.5で変化し、LTを
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ros2 topic echo /cmd_vel 
+    ubuntu@mbc112:~$ ros2 topic echo /cmd_vel
     linear:
       x: 0.5
       y: 0.0
@@ -151,58 +152,63 @@ RBを押しながらRTを操作するとxの値が-0.5〜0.5で変化し、LTを
 パッケージの作成
 ============================================================
 
-joy_testという名前のパッケージを作ります。
+joy_testという名前のパッケージを作成。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cd ros2_ws/src/
-    ubuntu@mbc084:~/ros2_ws/src$ ros2 pkg create --build-type ament_python joy_test
+    ubuntu@mbc112:~$ cd ros2_ws/src/
 
 |
 
-launchファイル用のディレクトリを作ります。
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws/src$ ros2 pkg create --build-type ament_python joy_test
+
+|
+
+launchファイル用のディレクトリを作成。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws/src$ cd joy_test/
-    ubuntu@mbc084:~/ros2_ws/src/joy_test$ mkdir launch
+    ubuntu@mbc112:~/ros2_ws/src$ cd joy_test/
+
+|
+
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws/src/joy_test$ mkdir launch
 
 |
 
 演習1「ジョイスティックを使ってturtlesimを動かす」
 ============================================================
 
-|
+joy-nodeとteleop-nodeを使ってturtlesimを動かします。
 
-（１）joy-nodeとteleop-nodeを使ってturtlesimを動かす
-------------------------------------------------------------
+|
 
 turtlesimパッケージのturtlesim_nodeの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws/src/joy_test$ ros2 run turtlesim turtlesim_node
-
-|
+    ubuntu@mbc112:~/ros2_ws/src/joy_test$ ros2 run turtlesim turtlesim_node
 
 joyパッケージのjoy-nodeの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws/src/joy_test$ ros2 run joy joy_node
-
-|
+    ubuntu@mbc112:~/ros2_ws/src/joy_test$ ros2 run joy joy_node
 
 teleop_twist_joyパッケージのteleop_nodeの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws/src/joy_test$ ros2 run teleop_twist_joy teleop_node --ros-args --remap /cmd_vel:=/turtle1/cmd_vel
+    ubuntu@mbc112:~/ros2_ws/src/joy_test$ ros2 run teleop_twist_joy teleop_node --ros-args --remap /cmd_vel:=/turtle1/cmd_vel
 
 |
 
-（２）launchファイルの作成
-------------------------------------------------------------
+演習2「演習1をlaunchファイルから実行」
+============================================================
 
 joy-nodeとteleop-nodeを使ってturtlesimを動かすためのlaunchファイルを作成してください。
 
@@ -214,14 +220,16 @@ turtle_teleop_joy_launch.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws/src/joy_test$ cd launch/
-    ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ nano turtle_teleop_joy_launch.py
+    ubuntu@mbc112:~/ros2_ws/src/joy_test$ cd launch/
 
-|
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws/src/joy_test/launch$ nano turtle_teleop_joy_launch.py
 
 編集。
 
 .. code-block:: python
+    :caption: turtle_teleop_joy_launch.py
 
     from launch import LaunchDescription
     from launch_ros.actions import Node
@@ -248,21 +256,21 @@ turtle_teleop_joy_launch.pyを開く。
             ),
         ])
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws/src/joy_test/launch$ cd ..
-    ubuntu@mbc084:~/ros2_ws/src/joy_test$ nano setup.py
+    ubuntu@mbc112:~/ros2_ws/src/joy_test/launch$ cd ..
 
-|
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws/src/joy_test$ nano setup.py 
 
 編集。
 
 .. code-block:: python
     :emphasize-lines: 1, 2, 16
+    :caption: setup.py
 
     import os
     from glob import glob
@@ -300,60 +308,45 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws/src/joy_test$ cd ~/ros2_ws/
-
-|
+    ubuntu@mbc112:~/ros2_ws/src/joy_test$ cd ~/ros2_ws/
 
 ビルド。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select joy_test
-
-|
-
-setupファイルの反映。
-
-.. code-block:: console
-
-    ubuntu@mbc084:~/ros2_ws$ source install/setup.bash
-
-|
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select joy_test
 
 launchファイルの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 launch joy_test turtle_teleop_joy_launch.py
+    ubuntu@mbc112:~/ros2_ws$ source install/setup.bash
 
-|
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws$ ros2 launch joy_test turtle_teleop_joy_launch.py
 
 ノードの確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 node list
+    ubuntu@mbc112:~/ros2_ws$ ros2 node list
     /joy
     /sim
     /teleop
-
-|
 
 rqt_graphでノードの確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ rqt_graph
+    ubuntu@mbc112:~/ros2_ws$ rqt_graph
+
+.. image:: ./images/joystick_img_01.png
 
 |
 
-.. image:: ./img/joystick_img_01.png
-   :align: center
-
-|
-
-（３）ジョイスティックの方向キーでturtlesimを動かす
-------------------------------------------------------------
+演習3「ジョイスティックの方向キーでturtlesimを動かす」
+============================================================
 
 ジョイスティックの方向キーでturtlesimを動かすプログラムを作ってください。
 
@@ -369,13 +362,12 @@ turtle_joy.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/joy_test/turtle_joy.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/joy_test/joy_test/turtle_joy.py
 
 編集。
 
 .. code-block:: python
+    :caption: turtle_joy.py
 
     import rclpy
     from rclpy.node import Node
@@ -427,20 +419,17 @@ turtle_joy.pyを開く。
     if __name__ == '__main__':
         main()
 
-|
-
 package.xmlを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/package.xml
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/joy_test/package.xml
 
 編集。
 
 .. code-block:: none
     :emphasize-lines: 10-13
+    :caption: package.xml
 
     <?xml version="1.0"?>
     <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematyp>
@@ -466,20 +455,17 @@ package.xmlを開く。
       </export>
     </package>
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/setup.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/joy_test/setup.py
 
 編集。
 
 .. code-block:: python
     :emphasize-lines: 27
+    :caption: setup.py
 
     import os
     from glob import glob
@@ -512,50 +498,38 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select joy_test
-
-|
-
-setupファイルの反映。
-
-.. code-block:: console
-
-    ubuntu@mbc084:~/ros2_ws$ source install/setup.bash
-
-|
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select joy_test
 
 turtlesimパッケージのturtlesim_nodeの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run turtlesim turtlesim_node
-
-|
+    ubuntu@mbc112:~/ros2_ws$ ros2 run turtlesim turtlesim_node
 
 joyパッケージのjoy-nodeの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run joy joy_node
-
-|
+    ubuntu@mbc112:~/ros2_ws$ ros2 run joy joy_node
 
 joy_testパッケージのjoy_twistノードの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run joy_test joy_twist
+    ubuntu@mbc112:~/ros2_ws$ source install/setup.bash
+
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws$ ros2 run joy_test joy_twist
 
 |
 
-（４）launchファイルの作成
-------------------------------------------------------------
+演習4「演習3をlaunchファイルから実行」
+============================================================
 
 「turtle_joy.py」を実行するlaunchファイルを作成してください。
 
@@ -567,13 +541,12 @@ turtle_joy_launch.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/joy_test/launch/turtle_joy_launch.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/joy_test/launch/turtle_joy_launch.py
 
 編集。
 
 .. code-block:: python
+    :caption: turtle_joy_launch.py
 
     from launch import LaunchDescription
     from launch_ros.actions import Node
@@ -597,28 +570,18 @@ turtle_joy_launch.pyを開く。
             ),
     ])
 
-|
-
 ビルド。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select joy_test
-
-|
-
-setupファイルの反映。
-
-.. code-block:: console
-
-    ubuntu@mbc084:~/ros2_ws$ source install/setup.bash
-
-|
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select joy_test
 
 launchファイルの実行。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 launch joy_test turtle_joy_launch.py
+    ubuntu@mbc112:~/ros2_ws$ source install/setup.bash
 
-|
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws$ ros2 launch joy_test turtle_joy_launch.py

@@ -131,6 +131,10 @@
 <li class="toctree-l1"><a class="reference internal" href="../08_ssh/ssh.html">8. SSH接続</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../09_ros2_install_pi/ros2_install_pi.html">9. ROS2のインストール（Raspberry Pi）</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../10_ros2_tutorial/ros2_tutorial.html">10. ROS2 Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../11_joystick/joystick.html">11. ジョイスティックの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../12_arduino/arduino.html">12. Arduinoの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../13_opencv/opencv.html">13. OpenCVの使い方</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../14_camera/camera.html">14. ラズパイカメラの使い方</a></li>
 </ul>
 
         </div>
@@ -145,9 +149,6 @@
   <section id="python">
 <h1><span class="section-number">6. </span>Python入門<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h1>
 <p>Pythonの基本的な構文を学習します。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <section id="id1">
 <h2><span class="section-number">6.1. </span>Pythonの実行<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>ターミナルから「python3」と入力するとインタラクティブシェルが起動します。</p>
@@ -171,9 +172,6 @@
 <span class="go">  command &#39;python&#39; from deb python-is-python3</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id2">
 <h2><span class="section-number">6.2. </span>文字列の出力<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
@@ -182,9 +180,6 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello ROS&#39;</span><span class="p">)</span>
 <span class="go">Hello ROS</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id3">
@@ -203,18 +198,12 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <span class="gr">SyntaxError</span>: <span class="n">invalid syntax. Perhaps you forgot a comma?</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id4">
 <h2><span class="section-number">6.4. </span>コメント<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>コード内にはコメントを書くことができます。
 行頭に「#」を書くことで、行末までコメントとみなされます。
 コメントはコードが実行されるときにすべて無視されます。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id5">
 <h2><span class="section-number">6.5. </span>数値<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
@@ -237,9 +226,6 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <span class="go">4</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id6">
 <h2><span class="section-number">6.6. </span>文字列と数値の違い<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
@@ -250,9 +236,6 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;9 + 5&#39;</span><span class="p">)</span>
 <span class="go">9 + 5</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id7">
@@ -272,9 +255,6 @@ printの後ろの()の中に書いた文字が画面に出力されます。</p>
 </div>
 <p>変数名には大文字小文字のアルファベット（A-Z、a-z）、数字（0-9）、アンダースコア（_）が使えます。
 ただし、数字は変数名の1文字目に使うことはできません。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="if">
 <h2><span class="section-number">6.8. </span>if文<a class="headerlink" href="#if" title="Permalink to this headline">¶</a></h2>
@@ -364,9 +344,6 @@ if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <span class="go">退社時刻ではありません。</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id8">
 <h2><span class="section-number">6.9. </span>リスト<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h2>
@@ -412,9 +389,6 @@ if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <span class="go">[&#39;pasta&#39;, &#39;curry&#39;, &#39;sushi&#39;, &#39;pizza&#39;]</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="for">
 <h2><span class="section-number">6.10. </span>for文<a class="headerlink" href="#for" title="Permalink to this headline">¶</a></h2>
@@ -428,9 +402,6 @@ if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <span class="go">好きな食べ物はcurryです</span>
 <span class="go">好きな食べ物はsushiです</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id9">
@@ -452,9 +423,6 @@ if文の条件がFalseのとき、elseの処理が実行されます。</p>
 <span class="go">&gt;&gt;&gt; print(&#39;appleの色は&#39; + fruits[&#39;apple&#39;] + &#39;です&#39;)</span>
 <span class="go">appleの色はredです</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="while">
@@ -480,9 +448,6 @@ while文を用いると、「ある条件に当てはまる間、処理を繰り
 <span class="go">10</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="break">
 <h2><span class="section-number">6.13. </span>break<a class="headerlink" href="#break" title="Permalink to this headline">¶</a></h2>
@@ -499,9 +464,6 @@ while文でも同じように使うことができます。</p>
 <span class="go">2</span>
 <span class="go">3</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="continue">
@@ -520,9 +482,6 @@ while文でも同じように使うことができます。</p>
 <span class="go">5</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id10">
 <h2><span class="section-number">6.15. </span>関数<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h2>
@@ -538,9 +497,6 @@ while文でも同じように使うことができます。</p>
 <span class="go">&gt;&gt;&gt; hello()</span>
 <span class="go">Hello World</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id11">
@@ -561,9 +517,6 @@ while文でも同じように使うことができます。</p>
 <span class="go">Hello ROS</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id12">
 <h2><span class="section-number">6.17. </span>スコープ<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
@@ -580,9 +533,6 @@ while文でも同じように使うことができます。</p>
 <span class="go">NameError: name &#39;name&#39; is not defined</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id13">
 <h2><span class="section-number">6.18. </span>複数の引数を持つ関数<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
@@ -596,9 +546,6 @@ while文でも同じように使うことができます。</p>
 <span class="go">&gt;&gt;&gt; hello(&#39;ヒラテ&#39;, &#39;こんにちは&#39;)</span>
 <span class="go">ヒラテさん、こんにちは</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id14">
@@ -614,9 +561,6 @@ while文でも同じように使うことができます。</p>
 <span class="go">のりさん、こんにちは</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id15">
 <h2><span class="section-number">6.20. </span>戻り値<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
@@ -631,18 +575,18 @@ while文でも同じように使うことができます。</p>
 <span class="go">ヒラテさん、こんにちは</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 </section>
 <section id="id16">
 <h2><span class="section-number">6.21. </span>モジュール<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h2>
 <p>モジュールとは、Pythonのコードが書かれたファイルのことです。
 別ファイルをモジュールとして読み込むことで、そこに書かれたコードを利用することができます。</p>
 <p>「my_module.py」というファイルを作って、 次のコードを書いてください。</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text">my_module.py</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">hello</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;さん、&#39;</span> <span class="o">+</span> <span class="n">message</span>
 </pre></div>
+</div>
 </div>
 <p>このモジュールを使ってみましょう。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; import my_module</span>
@@ -662,9 +606,6 @@ while文でも同じように使うことができます。</p>
 <span class="go">&gt;&gt;&gt; print(my_message)</span>
 <span class="go">ヒラテさん、こんにちは</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id17">
@@ -705,9 +646,6 @@ while文でも同じように使うことができます。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&gt;&gt;&gt; print(menu_item1.name)</span>
 <span class="go">Hamburger</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 </section>
 <section id="id18">
