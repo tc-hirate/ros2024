@@ -735,7 +735,7 @@ Pythonのプログラムは、zm_testパッケージの「serial_led.py」とし
 
 .. code-block:: console
 
-    pi@zumo00:~$ mkdir -p ~/ros2_ws/src
+    pi@zumo01:~$ mkdir -p ~/ros2_ws/src
 
 |
 
@@ -743,13 +743,13 @@ Pythonのプログラムは、zm_testパッケージの「serial_led.py」とし
 
 .. code-block:: console
 
-    pi@zumo00:~$ cd ~/ros2_ws/src/
+    pi@zumo01:~$ cd ~/ros2_ws/src/
 
 パッケージの作成。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws/src$ ros2 pkg create --build-type ament_python zm_test
+    pi@zumo01:~/ros2_ws/src$ ros2 pkg create --build-type ament_python zm_test
     going to create a new package
     package name: zm_test
     destination directory: /home/pi/ros2_ws/src
@@ -790,13 +790,13 @@ Pythonのプログラムは、zm_testパッケージの「serial_led.py」とし
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws/src$ cd ..
+    pi@zumo01:~/ros2_ws/src$ cd ..
 
 serial_led.pyの作成。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/serial_led.py
+    pi@zumo01:~/ros2_ws$ nano src/zm_test/zm_test/serial_led.py
 
 編集。
 
@@ -862,7 +862,7 @@ package.xmlを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ nano src/zm_test/package.xml
+    pi@zumo01:~/ros2_ws$ nano src/zm_test/package.xml
 
 編集。
 
@@ -898,7 +898,7 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
+    pi@zumo01:~/ros2_ws$ nano src/zm_test/setup.py
 
 編集。
 
@@ -921,8 +921,8 @@ setup.pyを開く。
         ],
         install_requires=['setuptools'],
         zip_safe=True,
-        maintainer='ubuntu',
-        maintainer_email='ubuntu@todo.todo',
+        maintainer='pi',
+        maintainer_email='pi@todo.todo',
         description='TODO: Package description',
         license='TODO: License declaration',
         tests_require=['pytest'],
@@ -937,40 +937,37 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ sudo apt install python3-colcon-common-extensions
+    pi@zumo01:~/ros2_ws$ sudo apt install python3-colcon-common-extensions
 
 ビルド。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ colcon build --packages-select zm_test
+    pi@zumo01:~/ros2_ws$ colcon build --packages-select zm_test
     Starting >>> zm_test 
-    --- stderr: zm_test                    
-    /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
-    warnings.warn(
-    ---
-    Finished <<< zm_test [9.60s]
+    Finished <<< zm_test [2.06s]          
 
-    Summary: 1 package finished [11.6s]
-    1 package had stderr output: zm_test
+    Summary: 1 package finished [2.30s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ source install/local_setup.bash
+    pi@zumo01:~/ros2_ws$ source install/local_setup.bash
 
 zm_testパッケージのjoy_ledノードの実行
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_led
+    pi@zumo01:~/ros2_ws$ ros2 run zm_test joy_led
 
 joyパッケージのjoy_nodeの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ros2 run joy joy_node
+    ubuntu@mbc112:~$ ros2 run joy joy_node
+
+|
 
 演習2「ジョイスティックの方向キーでzumoを動かす」
 ============================================================
@@ -987,20 +984,20 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ cd
+    pi@zumo01:~/ros2_ws$ cd
 
 スケッチの作成。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli sketch new Arduino/SerialMotor
+    pi@zumo01:~$ arduino-cli sketch new Arduino/SerialMotor
     Sketch created in: /home/pi/Arduino/SerialMotor
 
 SerialMotor.inoを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~$ nano Arduino/SerialMotor/SerialMotor.ino
+    pi@zumo01:~$ nano Arduino/SerialMotor/SerialMotor.ino
 
 編集。
 
@@ -1018,80 +1015,87 @@ SerialMotor.inoを開く。
     byte val = 0;
             
     void setup() {
-        Serial.begin(9600);
-        pinMode(LED, OUTPUT);
-        digitalWrite(LED, LOW);
+      Serial.begin(9600);
+      pinMode(LED, OUTPUT);
+      digitalWrite(LED, LOW);
     }
             
     void loop() {
-        val = Serial.read();
-        switch(val) {
-            case '0':  // Stop
-                digitalWrite(LED, LOW);
-                analogWrite(PWM_R, 0);
-                analogWrite(PWM_L, 0);
-                break;
-            case '1':  // Forward
-                digitalWrite(LED, HIGH);
-                digitalWrite(DIRECTION_R, LOW);
-                digitalWrite(DIRECTION_L, LOW);
-                analogWrite(PWM_R, 100);
-                analogWrite(PWM_L, 100);
-                break;
-            case '2':  // Backward
-                digitalWrite(LED, HIGH);
-                digitalWrite(DIRECTION_R, HIGH);
-                digitalWrite(DIRECTION_L, HIGH);
-                analogWrite(PWM_R, 100);
-                analogWrite(PWM_L, 100);
-                break;
-            case '3':  // Left
-                digitalWrite(LED, HIGH);
-                digitalWrite(DIRECTION_R, LOW);
-                digitalWrite(DIRECTION_L, LOW);
-                analogWrite(PWM_R, 100);
-                analogWrite(PWM_L, 0);
-                break;
-            case '4':  // Right
-                digitalWrite(LED, HIGH);
-                digitalWrite(DIRECTION_R, LOW);
-                digitalWrite(DIRECTION_L, LOW);
-                analogWrite(PWM_R, 0);
-                analogWrite(PWM_L, 100);
-                break;
-            default:
-                break;
-        }
+      val = Serial.read();
+      switch(val) {
+        case '0':  // Stop
+          digitalWrite(LED, LOW);
+          analogWrite(PWM_R, 0);
+          analogWrite(PWM_L, 0);
+          break;
+        case '1':  // Forward
+          digitalWrite(LED, HIGH);
+          digitalWrite(DIRECTION_R, LOW);
+          digitalWrite(DIRECTION_L, LOW);
+          analogWrite(PWM_R, 100);
+          analogWrite(PWM_L, 100);
+          break;
+        case '2':  // Backward
+          digitalWrite(LED, HIGH);
+          digitalWrite(DIRECTION_R, HIGH);
+          digitalWrite(DIRECTION_L, HIGH);
+          analogWrite(PWM_R, 100);
+          analogWrite(PWM_L, 100);
+          break;
+        case '3':  // Left
+          digitalWrite(LED, HIGH);
+          digitalWrite(DIRECTION_R, LOW);
+          digitalWrite(DIRECTION_L, LOW);
+          analogWrite(PWM_R, 100);
+          analogWrite(PWM_L, 0);
+          break;
+        case '4':  // Right
+          digitalWrite(LED, HIGH);
+          digitalWrite(DIRECTION_R, LOW);
+          digitalWrite(DIRECTION_L, LOW);
+          analogWrite(PWM_R, 0);
+          analogWrite(PWM_L, 100);
+          break;
+        default:
+          break;
+      }
     }
 
 コンパイル。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/SerialMotor/
-    Sketch uses 2094 bytes (6%) of program storage space. Maximum is 32256 bytes.
-    Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.
+    pi@zumo01:~$ arduino-cli compile --fqbn arduino:renesas_uno:unor4wifi Arduino/SerialMotor/
+    Sketch uses 54716 bytes (20%) of program storage space. Maximum is 262144 bytes.
+    Global variables use 6752 bytes (20%) of dynamic memory, leaving 26016 bytes for local variables. Maximum is 32768 bytes.
 
-    Used platform Version Path                                                   
-    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
+    Used platform       Version Path
+    arduino:renesas_uno 1.2.0   /home/pi/.arduino15/packages/arduino/hardware/renesas_uno/1.2.0
 
 アップロード。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/SerialMotor/
+    pi@zumo01:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:renesas_uno:unor4wifi Arduino/SerialMotor/
+    Erase flash
+
+    Done in 0.002 seconds
+    Write 54724 bytes to flash (14 pages)
+    [==============================] 100% (14/14 pages)
+    Done in 3.041 seconds
+    New upload port: /dev/ttyACM0 (serial)
 
 ワークスペースへ移動。
 
 .. code-block:: console
 
-    pi@zumo00:~$ cd ros2_ws/
+    pi@zumo01:~$ cd ros2_ws/
 
 serial_motor.pyの作成。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/serial_motor.py
+    pi@zumo01:~/ros2_ws$ nano src/zm_test/zm_test/serial_motor.py
 
 編集。
 
@@ -1169,16 +1173,13 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
+    pi@zumo01:~/ros2_ws$ nano src/zm_test/setup.py
 
 編集。
 
 .. code-block:: python
-    :emphasize-lines: 28
+    :emphasize-lines: 24
     :caption: setup.py
-
-    import os
-    from glob import glob
 
     from setuptools import find_packages, setup
 
@@ -1192,12 +1193,11 @@ setup.pyを開く。
             ('share/ament_index/resource_index/packages',
                 ['resource/' + package_name]),
             ('share/' + package_name, ['package.xml']),
-            (os.path.join('share', package_name), glob('launch/*_launch.py')),
         ],
         install_requires=['setuptools'],
         zip_safe=True,
-        maintainer='ubuntu',
-        maintainer_email='ubuntu@todo.todo',
+        maintainer='pi',
+        maintainer_email='pi@todo.todo',
         description='TODO: Package description',
         license='TODO: License declaration',
         tests_require=['pytest'],
@@ -1213,34 +1213,29 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ colcon build --packages-select zm_test
+    pi@zumo01:~/ros2_ws$ colcon build --packages-select zm_test
     Starting >>> zm_test 
-    --- stderr: zm_test                    
-    /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
-    warnings.warn(
-    ---
-    Finished <<< zm_test [8.76s]
+    Finished <<< zm_test [2.22s]          
 
-    Summary: 1 package finished [10.3s]
-    1 package had stderr output: zm_test
+    Summary: 1 package finished [2.40s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ source install/local_setup.bash
+    pi@zumo01:~/ros2_ws$ source install/local_setup.bash
 
 zm_testパッケージのjoy_motorノードの実行
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_motor
+    pi@zumo01:~/ros2_ws$ ros2 run zm_test joy_motor
 
 joyパッケージのjoy_nodeの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ros2 run joy joy_node
+    ubuntu@mbc112:~$ ros2 run joy joy_node
 
 |
 
@@ -1259,78 +1254,240 @@ Pythonのプログラムは、zm_testパッケージの「analog_motor.py」と�
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ cd
+    pi@zumo01:~/ros2_ws$ cd
 
 スケッチの作成。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli sketch new Arduino/AnalogMotor
+    pi@zumo01:~$ arduino-cli sketch new Arduino/AnalogMotor
     Sketch created in: /home/pi/Arduino/AnalogMotor
 
 AnalogMotor.inoを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~$ nano Arduino/AnalogMotor/AnalogMotor.ino
+    pi@zumo01:~$ nano Arduino/AnalogMotor/AnalogMotor.ino
 
 編集。
 
 .. code-block:: c
     :caption: AnalogMotor.ino
 
-    T.B.A.
+    const int DIRECTION_R = 7;
+    const int DIRECTION_L = 8;
+    const int PWM_R = 9;
+    const int PWM_L = 10;
+
+    const int LED = 13;
+    const int BUTTON = 12;
+
+    int input = -1;
+    int add = 0;
+    int val0 = 0;
+    int val1 = 0;
+    int sign_flag = 1;
+
+    int pwm_r = 0;
+    int pwm_l = 0;
+
+    void setup() {
+      Serial.begin(9600);
+
+      pinMode(DIRECTION_R, OUTPUT);
+      pinMode(DIRECTION_L, OUTPUT);
+      pinMode(PWM_R, OUTPUT);
+      pinMode(PWM_L, OUTPUT);
+
+      pinMode(LED, OUTPUT);
+      digitalWrite(LED, LOW);
+      pinMode(BUTTON, INPUT_PULLUP);
+    }
+
+    void loop() {
+      input = Serial.read();
+
+      if(input != -1) {
+        switch(input) {
+          case '0':
+            add = 0 + add * 10;
+            break;
+          case '1':
+            add = 1 + add * 10;
+            break;
+          case '2':
+            add = 2 + add * 10;
+            break;
+          case '3':
+            add = 3 + add * 10;
+            break;
+          case '4':
+            add = 4 + add * 10;
+            break;
+          case '5':
+            add = 5 + add * 10;
+            break;
+          case '6':
+            add = 6 + add * 10;
+            break;
+          case '7':
+            add = 7 + add * 10;
+            break;
+          case '8':
+            add = 8 + add * 10;
+            break;
+          case '9':
+            add = 9 + add * 10;
+            break;
+          case '-':
+            sign_flag = -1;
+            break;
+          case ',':
+            val0 = add * sign_flag;
+            add = 0;
+            sign_flag = 1;
+            break;
+          case ';':
+            val1 = add * sign_flag;
+            add = 0;
+            sign_flag = 1;
+            break;
+          default:
+            break;
+        }
+      }
+
+      if (val1 > 0) {
+        pwm_r = (int)((val1 + val0) * 0.5);
+        pwm_l = (int)((val1 - val0) * 0.5);
+      }
+      else {
+        pwm_r = (int)((val1 - val0) * 0.5);
+        pwm_l = (int)((val1 + val0) * 0.5);
+      }
+
+      if (pwm_r > 0) {
+        digitalWrite(DIRECTION_R, LOW);
+      }
+      else {
+        digitalWrite(DIRECTION_R, HIGH);
+        pwm_r = abs(pwm_r);
+      }
+
+      if (pwm_l > 0) {
+        digitalWrite(DIRECTION_L, LOW);
+      }
+      else {
+        digitalWrite(DIRECTION_L, HIGH);
+        pwm_l = abs(pwm_l);
+      }
+
+      analogWrite(PWM_R, pwm_r);
+      analogWrite(PWM_L, pwm_l);
+    }
 
 コンパイル。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/AnalogMotor/AnalogMotor.ino
-    Sketch uses 2094 bytes (6%) of program storage space. Maximum is 32256 bytes.
-    Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.
+    pi@zumo01:~$ arduino-cli compile --fqbn arduino:renesas_uno:unor4wifi Arduino/AnalogMotor/
+    Sketch uses 54940 bytes (20%) of program storage space. Maximum is 262144 bytes.
+    Global variables use 6776 bytes (20%) of dynamic memory, leaving 25992 bytes for local variables. Maximum is 32768 bytes.
 
-    Used platform Version Path                                                   
-    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
+    Used platform       Version Path
+    arduino:renesas_uno 1.2.0   /home/pi/.arduino15/packages/arduino/hardware/renesas_uno/1.2.0
 
 アップロード。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/AnalogMotor/AnalogMotor.ino
+    pi@zumo01:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:renesas_uno:unor4wifi Arduino/AnalogMotor/
+    Erase flash
+
+    Done in 0.002 seconds
+    Write 54948 bytes to flash (14 pages)
+    [==============================] 100% (14/14 pages)
+    Done in 3.042 seconds
+    New upload port: /dev/ttyACM0 (serial)
 
 ワークスペースへ移動。
 
 .. code-block:: console
 
-    pi@zumo00:~$ cd ros2_ws/
+    pi@zumo01:~$ cd ros2_ws/
 
 serial_motor.pyの作成
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/analog_motor.py
+    pi@zumo01:~/ros2_ws$ nano src/zm_test/zm_test/analog_motor.py
 
 編集。
 
 .. code-block:: python
     :caption: analog_motor.py
 
-    T.B.A.
+    import rclpy
+    from rclpy.node import Node
+
+    from std_msgs.msg import String
+    from geometry_msgs.msg import Twist
+    from sensor_msgs.msg import Joy
+
+    import serial
+
+    class JoyLed(Node):
+
+        def __init__(self):
+            super().__init__('joy_led')
+            self.publisher_ = self.create_publisher(Twist, '/turtle1>
+            self.subscription = self.create_subscription(
+                Joy,
+                'joy',
+                self.joy_callback,
+                10)
+            self.subscription
+
+            self.get_logger().info('Open Port')
+            self.ser = serial.Serial()
+            self.ser.port = "/dev/ttyACM0"
+            self.ser.baudrate = 9600
+            self.ser.open()
+
+        def joy_callback(self, joy_msg):
+            val0 = (int)(joy_msg.axes[0] * 100)
+            val1 = (int)(joy_msg.axes[1] * 100)
+            data = str(val0) + ',' + str(val1) + ';'
+            self.get_logger().info(data)
+            self.ser.write(bytes(data, 'utf-8'))
+
+    def main(args=None):
+        rclpy.init(args=args)
+
+        joy_led = JoyLed()
+
+        rclpy.spin(joy_led)
+
+        # Destroy the node explicitly
+        # (optional - otherwise it will be done automatically
+        # when the garbage collector destroys the node object)
+        joy_led.destroy_node()
+        rclpy.shutdown()
+
+    if __name__ == '__main__':
+        main()
 
 setup.pyを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
+    pi@zumo01:~/ros2_ws$ nano src/zm_test/setup.py
 
 編集。
 
 .. code-block:: python
-    :emphasize-lines: 29
+    :emphasize-lines: 25
     :caption: setup.py
-
-    import os
-    from glob import glob
 
     from setuptools import find_packages, setup
 
@@ -1344,12 +1501,11 @@ setup.pyを開く。
             ('share/ament_index/resource_index/packages',
                 ['resource/' + package_name]),
             ('share/' + package_name, ['package.xml']),
-            (os.path.join('share', package_name), glob('launch/*_launch.py')),
         ],
         install_requires=['setuptools'],
         zip_safe=True,
-        maintainer='ubuntu',
-        maintainer_email='ubuntu@todo.todo',
+        maintainer='pi',
+        maintainer_email='pi@todo.todo',
         description='TODO: Package description',
         license='TODO: License declaration',
         tests_require=['pytest'],
@@ -1366,31 +1522,26 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ colcon build --packages-select zm_test
+    pi@zumo01:~/ros2_ws$ colcon build --packages-select zm_test
     Starting >>> zm_test 
-    --- stderr: zm_test                    
-    /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
-    warnings.warn(
-    ---
-    Finished <<< zm_test [8.60s]
+    Finished <<< zm_test [1.73s]          
 
-    Summary: 1 package finished [10.1s]
-    1 package had stderr output: zm_test
+    Summary: 1 package finished [1.91s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ source install/local_setup.bash
+    pi@zumo01:~/ros2_ws$ source install/local_setup.bash
 
 zm_testパッケージのjoy_motorノードの実行
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_analog_motor
+    pi@zumo01:~/ros2_ws$ ros2 run zm_test joy_analog_motor
 
 joyパッケージのjoy_nodeの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ ros2 run joy joy_node
+    ubuntu@mbc112:~$ ros2 run joy joy_node
