@@ -137,7 +137,7 @@ shellのstartup scriptの追加。
 
 .. code-block:: console
 
-    pi@zumo00:~$ echo "source /opt/ros/iron/setup.bash" >> ~/.bashrc
+    pi@zumo00:~$ echo "source /opt/ros/jazzy/setup.bash" >> ~/.bashrc
 
 .. code-block:: console
 

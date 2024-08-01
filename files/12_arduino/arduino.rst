@@ -13,34 +13,30 @@ Arduinoのプログラムはスケッチと呼ばれ、C/C++がベースとな�
 開発環境をインストールする
 ============================================================
 
-arduino-cliをインストールします。
+arduino-cliをインストール。
 
 .. code-block:: console
 
-    pi@zumo00:~$  curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
+    pi@zumo01:~$ curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
     Installing in /home/pi/bin
     ARCH=ARM64
     OS=Linux
     Using curl as download tool
-    Downloading https://downloads.arduino.cc/arduino-cli/arduino-cli_0.33.1_Linux_ARM64.tar.gz
-    arduino-cli not found. You might want to add "/home/pi/bin" to your $PATH
-    arduino-cli  Version: 0.33.1 Commit: 347bfeb0 Date: 2023-06-30T16:14:12Z installed successfully in /home/pi/bin
+    Downloading https://downloads.arduino.cc/arduino-cli/arduino-cli_1.0.3_Linux_ARM64.tar.gz
+    install.sh: arduino-cli not found. You might want to add "/home/pi/bin" to your $PATH
+    arduino-cli  Version: 1.0.3 Commit: 8b6ad258 Date: 2024-07-23T08:45:21Z installed successfully in /home/pi/bin
 
-|
-
-arduino-cliのパスを通します。
+arduino-cliのパスを通す。
 
 .. code-block:: console
 
-    pi@zumo00:~$ export PATH=$PATH:$HOME/bin
+    pi@zumo01:~$ export PATH=$PATH:$HOME/bin
 
-|
-
-arduino-cliのヘルプを表示します。 （パスが通っていることを確認）
+arduino-cliのヘルプを表示して、パスが通っていることを確認。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli help core
+    pi@zumo01:~$ arduino-cli help core
     Arduino core operations.
 
     Usage:
@@ -64,33 +60,27 @@ arduino-cliのヘルプを表示します。 （パスが通っていること�
     Global Flags:
           --additional-urls strings   Comma-separated list of additional URLs for the Boards Manager.
           --config-file string        The custom config file (if not specified the default will be used).
-          --format string             The output format for the logs, can be: text, json, jsonmini, yaml (default "text")
+          --json                      Print the output in JSON format.
+          --log                       Print the logs on the standard output.
           --log-file string           Path to the file where logs will be written.
-          --log-format string         The output format for the logs, can be: text, json
-          --log-level string          Messages with this level and above will be logged. Valid levels are: trace, debug, info, warn, error, fatal, panic
+          --log-format string         The output format for the logs, can be: text, json (default "text")
+          --log-level string          Messages with this level and above will be logged. Valid levels are: trace, debug, info, warn, error, fatal, panic (default "info")
           --no-color                  Disable colored output.
-      -v, --verbose                   Print the logs on the standard output.
 
     Use "arduino-cli core [command] --help" for more information about a command.
 
-|
-
-パスを通すためのコマンドを shellのstartup scriptに書いておきます。
+パスを通すためのコマンドを shellのstartup scriptに追加。
 
 .. code-block:: console
 
-    pi@zumo00:~$ echo "export PATH=$PATH:$HOME/bin" >> ~/.bashrc
+    pi@zumo01:~$ echo "export PATH=$PATH:$HOME/bin" >> ~/.bashrc
 
-|
-
-configuration fileを作成します。
+configuration fileを作成。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli config init
+    pi@zumo01:~$ arduino-cli config init
     Config file written to: /home/pi/.arduino15/arduino-cli.yaml
-
-|
 
 LEDを点滅させる
 ============================================================
@@ -104,34 +94,31 @@ Arduinoとは次のように接続されています。
     "ピン番号", "Zumo Shieldの機能"
     "13", "LED（LOW：消灯、HIGH：点灯）"
 
-|
-
 詳しくは「User's Guide」を確認してください。
 
 この「user LED」を点滅させるスケッチを作ります。
 
 スケッチの名前は「Led」とします。
 
-次のコマンドを実行して、新しいスケッチを作成してください。
+|
+
+次のコマンドを実行して、新しいスケッチを作成。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli sketch new Arduino/Led
+    pi@zumo01:~$ arduino-cli sketch new Arduino/Led
     Sketch created in: /home/pi/Arduino/Led
 
-|
-
-ソースファイルを開いてください。
+Led.inoを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~$ nano Arduino/Led/Led.ino 
-
-|
+    pi@zumo01:~$ nano Arduino/Led/Led.ino
 
 編集前。
 
 .. code-block:: c
+    :caption: Led.ino
 
     void setup() {
     }
@@ -139,11 +126,10 @@ Arduinoとは次のように接続されています。
     void loop() {
     }
 
-|
-
-編集後。
+編集。
 
 .. code-block:: c
+    :caption: Led.ino
 
     void setup() {
       pinMode(13, OUTPUT);
@@ -156,8 +142,6 @@ Arduinoとは次のように接続されています。
       delay(1000);
     }
 
-|
-
 setup()には、ピンをどのように設定するかを書きます。
 
 LEDがデジタルピン13に接続されているので、ピン13を出力に設定します。
@@ -167,8 +151,6 @@ LEDがデジタルピン13に接続されているので、ピン13を出力に�
     void setup() {
       pinMode(13, OUTPUT);
     }
-
-|
 
 loop()には、Arduinoの動作を書きます。
 
@@ -187,148 +169,111 @@ delay(1000)は、1秒間（1000ms）何もしないという命令です。
       delay(1000);
     }
 
-|
-
-利用できるプラットフォームとライブラリを更新します。
+利用できるプラットフォームとライブラリを更新。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli core update-index
-    Downloading index: library_index.tar.bz2 1.06 MiB / 2.44 MiB   4Downloading index: library_index.tar.bz2 downloaded             
-    Downloading index: package_index.tar.bz2 0 B / 48.25 KiB    0.00Downloading index: package_index.tar.bz2 downloaded             
-    Downloading index: package_index.tar.bz2 0 B / 48.25 KiB    0.00Downloading index: package_index.tar.bz2 downloaded  
-
-|
-
-ArduinoとRaspberry Piを接続してください。
-
-接続したら、次のコマンドを実行して、正しく認識されているか確認します。
-
-.. code-block:: console
-
-    pi@zumo00:~$ arduino-cli board list
+    pi@zumo01:~$ arduino-cli core update-index
+    Downloading index: library_index.tar.bz2 downloaded              
+    Downloading index: package_index.tar.bz2 downloaded              
     Downloading missing tool builtin:ctags@5.8-arduino11...
-    builtin:ctags@5.8-arduino11 downloaded                          
+    builtin:ctags@5.8-arduino11 downloaded                           
     Installing builtin:ctags@5.8-arduino11...
     Skipping tool configuration....
     builtin:ctags@5.8-arduino11 installed
-    Downloading missing tool builtin:serial-discovery@1.4.0...
-    builtin:serial-discovery@1.4.0 downloaded                       
-    Installing builtin:serial-discovery@1.4.0...
-    Skipping tool configuration....
-    builtin:serial-discovery@1.4.0 installed
-    Downloading missing tool builtin:mdns-discovery@1.0.9...
-    builtin:mdns-discovery@1.0.9 61.70 KiB / 2.19 MiB    2.75% 00m07builtin:mdns-discovery@1.0.9 189.70 KiB / 2.19 MiB    8.47% 00m0builtin:mdns-discovery@1.0.9 421.70 KiB / 2.19 MiB   18.83% 00m0builtin:mdns-discovery@1.0.9 901.70 KiB / 2.19 MiB   40.26% 00m0builtin:mdns-discovery@1.0.9 downloaded                         
-    Installing builtin:mdns-discovery@1.0.9...
-    Skipping tool configuration....
-    builtin:mdns-discovery@1.0.9 installed
-    Downloading missing tool builtin:serial-monitor@0.13.0...
-    builtin:serial-monitor@0.13.0 109.69 KiB / 1.78 MiB    6.02% 00mbuiltin:serial-monitor@0.13.0 237.69 KiB / 1.78 MiB   13.05% 00mbuiltin:serial-monitor@0.13.0 525.69 KiB / 1.78 MiB   28.86% 00mbuiltin:serial-monitor@0.13.0 downloaded                        
-    Installing builtin:serial-monitor@0.13.0...
-    Skipping tool configuration....
-    builtin:serial-monitor@0.13.0 installed
     Downloading missing tool builtin:dfu-discovery@0.1.2...
-    builtin:dfu-discovery@0.1.2 downloaded                          
+    builtin:dfu-discovery@0.1.2 downloaded                           
     Installing builtin:dfu-discovery@0.1.2...
     Skipping tool configuration....
     builtin:dfu-discovery@0.1.2 installed
-    Port         Protocol Type              Board Name  FQBN            Core       
-    /dev/ttyACM0 serial   Serial Port (USB) Arduino Uno arduino:avr:uno arduino:avr
-    /dev/ttyAMA0 serial   Serial Port       Unknown     
+    Downloading missing tool builtin:mdns-discovery@1.0.9...
+    builtin:mdns-discovery@1.0.9 365.64 KiB / 2.19 MiB   16.33% 00m01builtin:mdns-discovery@1.0.9 downloaded                          
+    Installing builtin:mdns-discovery@1.0.9...
+    Skipping tool configuration....
+    builtin:mdns-discovery@1.0.9 installed
+    Downloading missing tool builtin:serial-discovery@1.4.1...
+    builtin:serial-discovery@1.4.1 downloaded                        
+    Installing builtin:serial-discovery@1.4.1...
+    Skipping tool configuration....
+    builtin:serial-discovery@1.4.1 installed
+    Downloading missing tool builtin:serial-monitor@0.14.1...
+    builtin:serial-monitor@0.14.1 109.64 KiB / 1.93 MiB    5.54% 00m0builtin:serial-monitor@0.14.1 269.64 KiB / 1.93 MiB   13.63% 00m0builtin:serial-monitor@0.14.1 573.64 KiB / 1.93 MiB   29.00% 00m0builtin:serial-monitor@0.14.1 downloaded                         
+    Installing builtin:serial-monitor@0.14.1...
+    Skipping tool configuration....
+    builtin:serial-monitor@0.14.1 installed
+    Downloading index: package_index.tar.bz2 downloaded 
 
-|
-
-arduino:avrのplatform coreをインストールします。
+ArduinoとRaspberry Piを接続し、正しく認識されているか確認。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli core install arduino:avr
+    pi@zumo01:~$ arduino-cli board list
+    Port          Protocol Type              Board Name          FQBN                          Core
+    /dev/ttyACM0  serial   Serial Port (USB) Arduino UNO R4 WiFi arduino:renesas_uno:unor4wifi arduino:renesas_uno
+    /dev/ttyAMA10 serial   Serial Port       Unknown
+
+arduino:renesas_unoのplatform coreをインストール。
+
+.. code-block:: console
+
+    pi@zumo01:~$ arduino-cli core install arduino:renesas_uno
+    Tool builtin:dfu-discovery@0.1.2 already installed
     Downloading packages...
-    arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 0 B / 36.28 MiB    0.0arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 61.80 KiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 237.80 KiB / 36.28 MiBarduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 477.80 KiB / 36.28 MiBarduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 999.95 KiB / 36.28 MiBarduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 1.99 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 1.99 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 3.19 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 4.39 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 5.60 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 6.97 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 6.97 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 8.20 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 9.56 MiB / 36.28 MiB  arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 10.90 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 12.08 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 12.08 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 13.42 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 14.74 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 16.06 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 17.35 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 17.35 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 18.73 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 19.59 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 20.70 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 22.04 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 22.04 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 23.22 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 24.50 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 25.48 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 26.96 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 26.96 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 28.31 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 29.52 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 30.69 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 31.74 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 31.74 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 33.06 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 34.31 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 35.67 MiB / 36.28 MiB arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 downloaded            
-    arduino:avrdude@6.3.0-arduino17 downloaded                      
-    arduino:arduinoOTA@1.3.0 downloaded                             
-    arduino:avr@1.8.6 downloaded                                    
-    Installing arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7...
+    arduino:arm-none-eabi-gcc@7-2017q4 4.85 MiB / 94.95 MiB    5.10% arduino:arm-none-eabi-gcc@7-2017q4 4.85 MiB / 94.95 MiB    5.10% arduino:arm-none-eabi-gcc@7-2017q4 9.96 MiB / 94.95 MiB   10.49% arduino:arm-none-eabi-gcc@7-2017q4 13.30 MiB / 94.95 MiB   14.01%arduino:arm-none-eabi-gcc@7-2017q4 16.43 MiB / 94.95 MiB   17.31%arduino:arm-none-eabi-gcc@7-2017q4 16.43 MiB / 94.95 MiB   17.31%arduino:arm-none-eabi-gcc@7-2017q4 19.11 MiB / 94.95 MiB   20.12%arduino:arm-none-eabi-gcc@7-2017q4 22.10 MiB / 94.95 MiB   23.27%arduino:arm-none-eabi-gcc@7-2017q4 26.19 MiB / 94.95 MiB   27.58%arduino:arm-none-eabi-gcc@7-2017q4 29.62 MiB / 94.95 MiB   31.20%arduino:arm-none-eabi-gcc@7-2017q4 29.62 MiB / 94.95 MiB   31.20%arduino:arm-none-eabi-gcc@7-2017q4 34.39 MiB / 94.95 MiB   36.22%arduino:arm-none-eabi-gcc@7-2017q4 38.17 MiB / 94.95 MiB   40.20%arduino:arm-none-eabi-gcc@7-2017q4 40.91 MiB / 94.95 MiB   43.09%arduino:arm-none-eabi-gcc@7-2017q4 45.48 MiB / 94.95 MiB   47.90%arduino:arm-none-eabi-gcc@7-2017q4 45.48 MiB / 94.95 MiB   47.90%arduino:arm-none-eabi-gcc@7-2017q4 47.63 MiB / 94.95 MiB   50.17%arduino:arm-none-eabi-gcc@7-2017q4 52.67 MiB / 94.95 MiB   55.47%arduino:arm-none-eabi-gcc@7-2017q4 56.30 MiB / 94.95 MiB   59.30%arduino:arm-none-eabi-gcc@7-2017q4 59.87 MiB / 94.95 MiB   63.05%arduino:arm-none-eabi-gcc@7-2017q4 59.87 MiB / 94.95 MiB   63.05%arduino:arm-none-eabi-gcc@7-2017q4 63.18 MiB / 94.95 MiB   66.54%arduino:arm-none-eabi-gcc@7-2017q4 67.49 MiB / 94.95 MiB   71.08%arduino:arm-none-eabi-gcc@7-2017q4 70.29 MiB / 94.95 MiB   74.03%arduino:arm-none-eabi-gcc@7-2017q4 73.35 MiB / 94.95 MiB   77.25%arduino:arm-none-eabi-gcc@7-2017q4 73.35 MiB / 94.95 MiB   77.25%arduino:arm-none-eabi-gcc@7-2017q4 78.44 MiB / 94.95 MiB   82.61%arduino:arm-none-eabi-gcc@7-2017q4 downloaded                    
+    arduino:bossac@1.9.1-arduino5 downloaded                         
+    arduino:dfu-util@0.11.0-arduino5 downloaded                      
+    arduino:openocd@0.11.0-arduino2 downloaded                       
+    arduino:renesas_uno@1.2.0 downloaded                             
+    Installing arduino:arm-none-eabi-gcc@7-2017q4...
     Configuring tool....
-    arduino:avr-gcc@7.3.0-atmel3.6.1-arduino7 installed
-    Installing arduino:avrdude@6.3.0-arduino17...
+    arduino:arm-none-eabi-gcc@7-2017q4 installed
+    Installing arduino:bossac@1.9.1-arduino5...
     Configuring tool....
-    arduino:avrdude@6.3.0-arduino17 installed
-    Installing arduino:arduinoOTA@1.3.0...
+    arduino:bossac@1.9.1-arduino5 installed
+    Installing arduino:dfu-util@0.11.0-arduino5...
     Configuring tool....
-    arduino:arduinoOTA@1.3.0 installed
-    Installing platform arduino:avr@1.8.6...
+    arduino:dfu-util@0.11.0-arduino5 installed
+    Installing arduino:openocd@0.11.0-arduino2...
+    Configuring tool....
+    arduino:openocd@0.11.0-arduino2 installed
+    Installing platform arduino:renesas_uno@1.2.0...
     Configuring platform....
-    Platform arduino:avr@1.8.6 installed
+    Please run as root
 
-|
+    Platform arduino:renesas_uno@1.2.0 installed
 
-正しくインストールされたか確認します。
-
-.. code-block:: console
-
-    pi@zumo00:~$ arduino-cli core list
-    ID          Installed Latest Name              
-    arduino:avr 1.8.6     1.8.6  Arduino AVR Boards
-
-|
-
-スケッチをコンパイルします。
+正しくインストールされたか確認。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/Led
-    Sketch uses 924 bytes (2%) of program storage space. Maximum is 32256 bytes.
-    Global variables use 9 bytes (0%) of dynamic memory, leaving 2039 bytes for local variables. Maximum is 2048 bytes.
+    pi@zumo01:~$ arduino-cli core list
+    ID                  Installed Latest Name
+    arduino:renesas_uno 1.2.0     1.2.0  Arduino UNO R4 Boards
+    arduino:renesas_uno:unor4wifi
 
-    Used platform Version Path                                                   
-    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
-
-|
-
-アップロードします。
+コンパイル。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/Led
-    avrdude: ser_open(): can't open device "/dev/ttyACM0": Permission denied
-    Failed uploading: uploading error: exit status 1
+    pi@zumo01:~$ arduino-cli compile --fqbn arduino:renesas_uno:unor4wifi Arduino/Led
+    Sketch uses 52168 bytes (19%) of program storage space. Maximum is 262144 bytes.
+    Global variables use 6744 bytes (20%) of dynamic memory, leaving 26024 bytes for local variables. Maximum is 32768 bytes.
 
-|
+    Used platform       Version Path
+    arduino:renesas_uno 1.2.0   /home/pi/.arduino15/packages/arduino/hardware/renesas_uno/1.2.0
 
-/dev/ttyACM0の権限でエラーが出ました。
-
-次のコマンドを実行して、piをdialoutグループに追加します。
-
-.. code-block:: console
-
-    pi@zumo00:~$ sudo usermod -a -G dialout pi
-    [sudo] password for pi: 
-
-|
-
-ここで、再起動してください。
+アップロード。
 
 .. code-block:: console
 
-    pi@zumo00:~$ sudo shutdown -r now
+    pi@zumo01:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:renesas_uno:unor4wifi Arduino/Led
+    Erase flash
 
-|
-
-改めて、アップロードします。
-
-.. code-block:: console
-
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/Led
-    Compiled sketch not found in /tmp/arduino/sketches/6041595C4279387C991DB6762B1AD02E
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/Led
-    Sketch uses 924 bytes (2%) of program storage space. Maximum is 32256 bytes.
-    Global variables use 9 bytes (0%) of dynamic memory, leaving 2039 bytes for local variables. Maximum is 2048 bytes.
-
-    Used platform Version Path                                                   
-    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
-
-|
+    Done in 0.002 seconds
+    Write 52176 bytes to flash (13 pages)
+    [==============================] 100% (13/13 pages)
+    Done in 2.824 seconds
+    New upload port: /dev/ttyACM0 (serial)
 
 2秒周期でLEDが点滅（1秒点灯、1秒消灯）していることを確認してください。
 
@@ -346,8 +291,6 @@ Arduinoとは次のように接続されています。
     "ピン番号", "Zumo Shieldの機能"
     "12", "押しボタンスイッチ（LOW：押されている、HIGH：押されていない）"
 
-|
-
 詳しくは「User's Guide」を確認してください。
 
 この「user pushbutton」が押されているときに「user LED」を点灯し、押されていないときに消灯するスケッチを作ります。
@@ -360,22 +303,19 @@ Arduinoとは次のように接続されています。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli sketch new Arduino/Button
+    pi@zumo01:~$ arduino-cli sketch new Arduino/Button
     Sketch created in: /home/pi/Arduino/Button
 
-|
-
-ソースファイルを開く。
+Button.inoを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~$ nano Arduino/Button/Button.ino 
-
-|
+    pi@zumo01:~$ nano Arduino/Button/Button.ino
 
 編集。
 
 .. code-block:: c
+    :caption: Button.ino
 
     int val = 0;
 
@@ -394,15 +334,11 @@ Arduinoとは次のように接続されています。
       }
     }
 
-|
-
 pushbuttonが押されているかどうかを記憶しておくための変数を定義しています。
 
 .. code-block:: c
 
     int val = 0;
-
-|
 
 pushbuttonがデジタルピン12に接続されているので、ピン12を入力、プルアップ抵抗を有効に設定しています。
 
@@ -410,36 +346,35 @@ pushbuttonがデジタルピン12に接続されているので、ピン12を入
 
     pinMode(12, INPUT_PULLUP);
 
-|
-
 pushbuttonが押されているかどうかを読み込んでいます。
 
 .. code-block:: c
 
     val = digitalRead(12);
 
-|
-
 コンパイル。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/Button/
-    Sketch uses 892 bytes (2%) of program storage space. Maximum is 32256 bytes.
-    Global variables use 9 bytes (0%) of dynamic memory, leaving 2039 bytes for local variables. Maximum is 2048 bytes.
+    pi@zumo01:~$ arduino-cli compile --fqbn arduino:renesas_uno:unor4wifi Arduino/Button/
+    Sketch uses 52248 bytes (19%) of program storage space. Maximum is 262144 bytes.
+    Global variables use 6748 bytes (20%) of dynamic memory, leaving 26020 bytes for local variables. Maximum is 32768 bytes.
 
-    Used platform Version Path                                                   
-    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
-
-|
+    Used platform       Version Path
+    arduino:renesas_uno 1.2.0   /home/pi/.arduino15/packages/arduino/hardware/renesas_uno/1.2.0
 
 アップロード。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/Button/
+    pi@zumo01:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:renesas_uno:unor4wifi Arduino/Button/
+    Erase flash
 
-|
+    Done in 0.002 seconds
+    Write 52256 bytes to flash (13 pages)
+    [==============================] 100% (13/13 pages)
+    Done in 2.823 seconds
+    New upload port: /dev/ttyACM0 (serial)
 
 「user pushbutton」を押したときに「user LED」を点灯することを確認してください。
 
@@ -460,9 +395,6 @@ Arduinoとは次のように接続されています。
     "9", "右モータのPWM（0〜100）"
     "10", "左モータのPWM（0〜100）"
 
-|
-
-
 詳しくは「User's Guide」を確認してください。
 
 「user pushbutton」が押されているときに前進し、押されていないときに停止するスケッチを作ります。
@@ -475,22 +407,19 @@ Arduinoとは次のように接続されています。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli sketch new Arduino/Motor
+    pi@zumo01:~$ arduino-cli sketch new Arduino/Motor
     Sketch created in: /home/pi/Arduino/Motor
 
-|
-
-ソースファイルを開く。
+Motor.inoを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~$ nano Arduino/Motor/Motor.ino 
-
-|
+    pi@zumo01:~$ nano Arduino/Motor/Motor.ino
 
 編集。
 
 .. code-block:: c
+    :caption: Motor.ino
 
     const int DIRECTION_R = 7;
     const int DIRECTION_L = 8;
@@ -531,8 +460,6 @@ Arduinoとは次のように接続されています。
       }
     }
 
-|
-
 ピン番号を数字で入力していると間違えることがあるので、それぞれのピンに名前をつけます。
 
 .. code-block:: c
@@ -559,16 +486,12 @@ Arduinoとは次のように接続されています。
     pinMode(LED, OUTPUT);
     pinMode(BUTTON, INPUT_PULLUP);
 
-|
-
 前進するときは各モータの方向制御にLOWを入力します。
 
 .. code-block:: c
 
     digitalWrite(DIRECTION_R, LOW);
     digitalWrite(DIRECTION_L, LOW);
-
-|
 
 PWM出力するときはanalogWrite(ピン番号, PWM値)を使います。PWM値には0〜100を設定します。
 
@@ -577,28 +500,29 @@ PWM出力するときはanalogWrite(ピン番号, PWM値)を使います。PWM�
     analogWrite(PWM_R, 30);
     analogWrite(PWM_L, 30);
 
-|
-
 コンパイル。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/Motor/
-    Sketch uses 1178 bytes (3%) of program storage space. Maximum is 32256 bytes.
-    Global variables use 11 bytes (0%) of dynamic memory, leaving 2037 bytes for local variables. Maximum is 2048 bytes.
+    pi@zumo01:~$ arduino-cli compile --fqbn arduino:renesas_uno:unor4wifi Arduino/Motor/
+    Sketch uses 54668 bytes (20%) of program storage space. Maximum is 262144 bytes.
+    Global variables use 6752 bytes (20%) of dynamic memory, leaving 26016 bytes for local variables. Maximum is 32768 bytes.
 
-    Used platform Version Path                                                   
-    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
-
-|
+    Used platform       Version Path
+    arduino:renesas_uno 1.2.0   /home/pi/.arduino15/packages/arduino/hardware/renesas_uno/1.2.0
 
 アップロード。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/Motor/
+    pi@zumo01:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:renesas_uno:unor4wifi Arduino/Motor/
+    Erase flash
 
-|
+    Done in 0.002 seconds
+    Write 54676 bytes to flash (14 pages)
+    [==============================] 100% (14/14 pages)
+    Done in 3.041 seconds
+    New upload port: /dev/ttyACM0 (serial)
 
 「user pushbutton」を押したときにモーターが動くことを確認してください。
 
@@ -611,72 +535,109 @@ ROS1では、rosserialというツールを使ってtopicを送受信するこ�
 
 ROS2にもros2arduinoというツールがあるのですが、Auduino UNOには対応していないようです。
 
+.. note::
+
+    ESP32だとmicro-rosが使える。
+    Arduinoでも使えるようにならないか。
+   
+|
+
 ここでは、Pythonでシリアル通信をするためのモジュールpyserialを使います。
 
 pyserialはpipを使ってインストールします。pipはPythonのパッケージを管理するためのツールです。
 
 .. code-block:: console
 
-    pi@zumo00:~$ sudo apt install python3-pip
-    pi@zumo00:~$ python3 -m pip install pyserial
+    pi@zumo01:~$ sudo apt install python3-pip
+
+pipでpyserialをインストールしようとするとエラーが発生。
+
+.. code-block:: console
+
+    pi@zumo01:~$ python3 -m pip install pyserial
+    error: externally-managed-environment
+
+    × This environment is externally managed
+    ╰─> To install Python packages system-wide, try apt install
+        python3-xyz, where xyz is the package you are trying to
+        install.
+        
+        If you wish to install a non-Debian-packaged Python package,
+        create a virtual environment using python3 -m venv path/to/venv.
+        Then use path/to/venv/bin/python and path/to/venv/bin/pip. Make
+        sure you have python3-full installed.
+        
+        If you wish to install a non-Debian packaged Python application,
+        it may be easiest to use pipx install xyz, which will manage a
+        virtual environment for you. Make sure you have pipx installed.
+        
+        See /usr/share/doc/python3.12/README.venv for more information.
+
+    note: If you believe this is a mistake, please contact your Python installation or OS distribution provider. You can override this, at the risk of breaking your Python installation or OS, by passing --break-system-packages.
+    hint: See PEP 668 for the detailed specification.
+
+エラーを回避するために「--break-system-packages」というオプションをつけてインストール。
+
+.. code-block:: console
+
+    pi@zumo01:~$ python3 -m pip install --break-system-packages pyserial
+    Defaulting to user installation because normal site-packages is not writeable
+    WARNING: Skipping /usr/lib/python3.12/dist-packages/argcomplete-3.1.4.dist-info due to invalid metadata entry 'name'
+    Requirement already satisfied: pyserial in /usr/lib/python3/dist-packages (3.5)
+    WARNING: Skipping /usr/lib/python3.12/dist-packages/argcomplete-3.1.4.dist-info due to invalid metadata entry 'name'
 
 |
 
 ターミナルから0または1を入力して、0ならばLEDを消灯、1ならばLEDを点灯するプログラムを作ります。
 
-Pythonのプログラムを保存するために、ホームディレクトリにPythonという名前の ディレクトリを作ります。
+Pythonのプログラムを保存するために、ホームディレクトリにPythonという名前の ディレクトリを作成。
 
 .. code-block:: console
 
-    pi@zumo00:~$ mkdir Python
+    pi@zumo01:~$ mkdir Python
 
-|
-
-ここにserial_test.pyという名前でファイルを作ります。
+ここにserial_test.pyという名前でファイルを作成。
 
 .. code-block:: console
 
-    pi@zumo00:~$ nano Python/serial_test.py
-
-|
+    pi@zumo01:~$ nano Python/serial_test.py
 
 編集。
 
 .. code-block:: python
+    :caption: serial_test.py
 
     import serial
 
     def main():
-      print("Open Port")
+        print("Open Port")
 
-      ser = serial.Serial()
-      ser.port = "/dev/ttyACM0"
-      ser.baudrate = 9600
-      ser.open()
+        ser = serial.Serial()
+        ser.port = "/dev/ttyACM0"
+        ser.baudrate = 9600
+        ser.open()
 
-      while True:
-        try:
-          cmd = input("type 0 or 1: ")
-          if cmd == "1":
-            ser.write(b"1")
-          else:
-            ser.write(b"0")
-        except KeyboardInterrupt:
-          break
+        while True:
+            try:
+                cmd = input("type 0 or 1: ")
+            if cmd == "1":
+                ser.write(b"1")
+            else:
+                ser.write(b"0")
+            except KeyboardInterrupt:
+                break
 
-      print("Close Port")
-      ser.close()
+        print("Close Port")
+        ser.close()
 
     if __name__ == '__main__':
-      main()
+        main()
 
-|
-
-試しに実行してみましょう。
+試しに実行。
 
 .. code-block:: console
 
-    pi@zumo00:~$ python3 Python/serial_test.py
+    pi@zumo01:~$ python3 Python/serial_test.py
     Open Port
     type 0 or 1: 1
     type 0 or 1: 0
@@ -694,76 +655,73 @@ Pythonのプログラムを保存するために、ホームディレクトリ�
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli sketch new Arduino/SerialTest
+    pi@zumo01:~$ arduino-cli sketch new Arduino/SerialTest
     Sketch created in: /home/pi/Arduino/SerialTest
 
-|
-
-ソースファイルを開く。
+SerialTest.inoを開く。
 
 .. code-block:: console
 
-    pi@zumo00:~$ nano Arduino/SerialTest/SerialTest.ino 
-
-|
+    pi@zumo01:~$ nano Arduino/SerialTest/SerialTest.ino
 
 編集。
 
 .. code-block:: c
+    :caption: SerialTest.ino
+
+    const int LED = 13;
 
     void setup() {
-        Serial.begin(9600);
-        pinMode(LED_BUILTIN, OUTPUT);
-        digitalWrite(LED_BUILTIN, LOW);
+      Serial.begin(9600);
+      pinMode(LED, OUTPUT);
+      digitalWrite(LED, LOW);
     }
 
     void loop() {
-        byte var;
-        var = Serial.read();
-        switch(var) {
-            case '0':
-                digitalWrite(LED_BUILTIN, LOW);
-                break;
-            case '1':
-                digitalWrite(LED_BUILTIN, HIGH);
-                break;
-            default:
-                break;
-        }
+      byte var;
+      var = Serial.read();
+      switch(var) {
+        case '0':
+          digitalWrite(LED, LOW);
+          break;
+        case '1':
+          digitalWrite(LED, HIGH);
+          break;
+        default:
+          break;
+      }
     }
-
-|
 
 コンパイル。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli compile --fqbn arduino:avr:uno Arduino/SerialTest/
-    Sketch uses 1754 bytes (5%) of program storage space. Maximum is 32256 bytes.
-    Global variables use 184 bytes (8%) of dynamic memory, leaving 1864 bytes for local variables. Maximum is 2048 bytes.
+    pi@zumo01:~$ arduino-cli compile --fqbn arduino:renesas_uno:unor4wifi Arduino/SerialTest/
+    Sketch uses 52200 bytes (19%) of program storage space. Maximum is 262144 bytes.
+    Global variables use 6744 bytes (20%) of dynamic memory, leaving 26024 bytes for local variables. Maximum is 32768 bytes.
 
-    Used platform Version Path                                                   
-    arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
-
-|
+    Used platform       Version Path
+    arduino:renesas_uno 1.2.0   /home/pi/.arduino15/packages/arduino/hardware/renesas_uno/1.2.0
 
 アップロード。
 
 .. code-block:: console
 
-    pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/SerialTest/
+    pi@zumo01:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:renesas_uno:unor4wifi Arduino/SerialTest/
+    Erase flash
 
-|
+    Done in 0.002 seconds
+    Write 52208 bytes to flash (13 pages)
+    [==============================] 100% (13/13 pages)
+    Done in 2.825 seconds
+    New upload port: /dev/ttyACM0 (serial)
 
 ターミナルから入力した数値に応じてLEDが点灯／消灯するか確認してください。
 
 |
 
-演習2「ジョイスティックを使ってZumoを動かす」
+演習1「ジョイスティックのAボタンを使ってLEDを点灯させる」
 ============================================================
-
-（１）LEDの点灯
-------------------------------------------------------------
 
 ジョイスティックのAボタンを押すとLEDが点灯するプログラムを作ってください。
 
@@ -773,7 +731,7 @@ Pythonのプログラムは、zm_testパッケージの「serial_led.py」とし
 
 |
 
-ワークスペースの作成
+ワークスペースの作成。
 
 .. code-block:: console
 
@@ -781,11 +739,16 @@ Pythonのプログラムは、zm_testパッケージの「serial_led.py」とし
 
 |
 
-パッケージの作成
+ワークスペースのsrcディレクトリへ移動。
 
 .. code-block:: console
 
     pi@zumo00:~$ cd ~/ros2_ws/src/
+
+パッケージの作成。
+
+.. code-block:: console
+
     pi@zumo00:~/ros2_ws/src$ ros2 pkg create --build-type ament_python zm_test
     going to create a new package
     package name: zm_test
@@ -823,15 +786,11 @@ Pythonのプログラムは、zm_testパッケージの「serial_led.py」とし
     MIT
     MIT-0
 
-|
-
-ワークスペースに移動
+ワークスペースへ移動。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws/src$ cd ~/ros2_ws/
-
-|
+    pi@zumo00:~/ros2_ws/src$ cd ..
 
 serial_led.pyの作成。
 
@@ -839,11 +798,10 @@ serial_led.pyの作成。
 
     pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/serial_led.py
 
-|
-
 編集。
 
 .. code-block:: python
+    :caption: serial_led.py
 
     import rclpy
     from rclpy.node import Node
@@ -900,20 +858,17 @@ serial_led.pyの作成。
     if __name__ == '__main__':
         main()
 
-|
-
 package.xmlを開く。
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ nano src/zm_test/package.xml
 
-|
-
 編集。
 
 .. code-block:: none
     :emphasize-lines: 10-13
+    :caption: package.xml
 
     <?xml version="1.0"?>
     <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematyp>
@@ -939,23 +894,17 @@ package.xmlを開く。
     </export>
     </package>
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
 
-|
-
 編集。
 
 .. code-block:: python
-    :emphasize-lines: 1, 2, 16, 27
-
-    import os
-    from glob import glob
+    :emphasize-lines: 23
+    :caption: setup.py
 
     from setuptools import find_packages, setup
 
@@ -969,7 +918,6 @@ setup.pyを開く。
             ('share/ament_index/resource_index/packages',
                 ['resource/' + package_name]),
             ('share/' + package_name, ['package.xml']),
-            (os.path.join('share', package_name), glob('launch/*_launch.py')),
         ],
         install_requires=['setuptools'],
         zip_safe=True,
@@ -985,13 +933,16 @@ setup.pyを開く。
         },
     )
 
-|
+コルコンのインストール。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ sudo apt install python3-colcon-common-extensions
 
 ビルド。
 
 .. code-block:: console
 
-    pi@zumo00:~/ros2_ws$ sudo apt install python3-colcon-common-extensions
     pi@zumo00:~/ros2_ws$ colcon build --packages-select zm_test
     Starting >>> zm_test 
     --- stderr: zm_test                    
@@ -1003,15 +954,11 @@ setup.pyを開く。
     Summary: 1 package finished [11.6s]
     1 package had stderr output: zm_test
 
-|
-
 セットアップファイルの反映。
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ source install/local_setup.bash
-
-|
 
 zm_testパッケージのjoy_ledノードの実行
 
@@ -1019,18 +966,14 @@ zm_testパッケージのjoy_ledノードの実行
 
     pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_led
 
-|
-
 joyパッケージのjoy_nodeの実行
 
 .. code-block:: console
 
     ubuntu@mbc084:~$ ros2 run joy joy_node
 
-|
-
-（２）ジョイスティックの方向キーでzumoを動かす
-------------------------------------------------------------
+演習2「ジョイスティックの方向キーでzumoを動かす」
+============================================================
 
 ジョイスティックの方向キーでZumoを操縦するプログラムを作ってください。
 
@@ -1040,27 +983,29 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
 
 |
 
-スケッチの作成。
+ホームディレクトリへ移動。
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ cd
+
+スケッチの作成。
+
+.. code-block:: console
+
     pi@zumo00:~$ arduino-cli sketch new Arduino/SerialMotor
     Sketch created in: /home/pi/Arduino/SerialMotor
 
-|
-
-ソースファイルを開く。
+SerialMotor.inoを開く。
 
 .. code-block:: console
 
     pi@zumo00:~$ nano Arduino/SerialMotor/SerialMotor.ino
 
-|
-
 編集。
 
 .. code-block:: c
+    :caption: SerialMotor.ino
 
     const int DIRECTION_R = 7;
     const int DIRECTION_L = 8;
@@ -1119,8 +1064,6 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
         }
     }
 
-|
-
 コンパイル。
 
 .. code-block:: console
@@ -1132,28 +1075,28 @@ Pythonのプログラムは、zm_testパッケージの「serial_motor.py」と�
     Used platform Version Path                                                   
     arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
 
-|
-
 アップロード。
 
 .. code-block:: console
 
     pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/SerialMotor/
 
-|
-
-serial_motor.pyの作成
+ワークスペースへ移動。
 
 .. code-block:: console
 
     pi@zumo00:~$ cd ros2_ws/
-    pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/serial_motor.py
 
-|
+serial_motor.pyの作成。
+
+.. code-block:: console
+
+    pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/serial_motor.py
 
 編集。
 
 .. code-block:: python
+    :caption: serial_motor.py
 
     import rclpy
     from rclpy.node import Node
@@ -1222,20 +1165,17 @@ serial_motor.pyの作成
     if __name__ == '__main__':
         main()
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
 
-|
-
 編集。
 
 .. code-block:: python
     :emphasize-lines: 28
+    :caption: setup.py
 
     import os
     from glob import glob
@@ -1269,8 +1209,6 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
@@ -1286,23 +1224,17 @@ setup.pyを開く。
     Summary: 1 package finished [10.3s]
     1 package had stderr output: zm_test
 
-|
-
 セットアップファイルの反映。
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ source install/local_setup.bash
 
-|
-
 zm_testパッケージのjoy_motorノードの実行
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_motor
-
-|
 
 joyパッケージのjoy_nodeの実行
 
@@ -1312,8 +1244,8 @@ joyパッケージのjoy_nodeの実行
 
 |
 
-（３）ジョイスティックのアナログスイッチでzumoを動かす
-------------------------------------------------------------
+演習3「ジョイスティックのアナログスイッチでzumoを動かす」
+============================================================
 
 ジョイスティックの左アナログスイッチでZumoを操縦するプログラムを作ってください。 
 
@@ -1323,31 +1255,31 @@ Pythonのプログラムは、zm_testパッケージの「analog_motor.py」と�
 
 |
 
-スケッチの作成。
+ホームディレクトリへ移動。
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ cd
+
+スケッチの作成。
+
+.. code-block:: console
+
     pi@zumo00:~$ arduino-cli sketch new Arduino/AnalogMotor
     Sketch created in: /home/pi/Arduino/AnalogMotor
 
-|
-
-ソースファイルを開く。
+AnalogMotor.inoを開く。
 
 .. code-block:: console
 
     pi@zumo00:~$ nano Arduino/AnalogMotor/AnalogMotor.ino
 
-|
-
 編集。
 
 .. code-block:: c
+    :caption: AnalogMotor.ino
 
     T.B.A.
-
-|
 
 コンパイル。
 
@@ -1360,32 +1292,30 @@ Pythonのプログラムは、zm_testパッケージの「analog_motor.py」と�
     Used platform Version Path                                                   
     arduino:avr   1.8.6   /home/pi/.arduino15/packages/arduino/hardware/avr/1.8.6
 
-|
-
 アップロード。
 
 .. code-block:: console
 
     pi@zumo00:~$ arduino-cli upload -p /dev/ttyACM0 --fqbn arduino:avr:uno Arduino/AnalogMotor/AnalogMotor.ino
 
-|
+ワークスペースへ移動。
+
+.. code-block:: console
+
+    pi@zumo00:~$ cd ros2_ws/
 
 serial_motor.pyの作成
 
 .. code-block:: console
 
-    pi@zumo00:~$ cd ros2_ws/
     pi@zumo00:~/ros2_ws$ nano src/zm_test/zm_test/analog_motor.py
-
-|
 
 編集。
 
 .. code-block:: python
+    :caption: analog_motor.py
 
     T.B.A.
-
-|
 
 setup.pyを開く。
 
@@ -1393,12 +1323,11 @@ setup.pyを開く。
 
     pi@zumo00:~/ros2_ws$ nano src/zm_test/setup.py
 
-|
-
 編集。
 
 .. code-block:: python
     :emphasize-lines: 29
+    :caption: setup.py
 
     import os
     from glob import glob
@@ -1433,8 +1362,6 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
@@ -1450,23 +1377,17 @@ setup.pyを開く。
     Summary: 1 package finished [10.1s]
     1 package had stderr output: zm_test
 
-|
-
 セットアップファイルの反映。
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ source install/local_setup.bash
 
-|
-
 zm_testパッケージのjoy_motorノードの実行
 
 .. code-block:: console
 
     pi@zumo00:~/ros2_ws$ ros2 run zm_test joy_analog_motor
-
-|
 
 joyパッケージのjoy_nodeの実行
 
