@@ -155,8 +155,8 @@
 </div>
 <section id="id1">
 <h2><span class="section-number">13.1. </span>OpenCVのインストール<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>OpenCVをインストールします。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>sudo apt install python3-opencv
+<p>OpenCVのインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt install python3-opencv
 </pre></div>
 </div>
 <div class="line-block">
@@ -165,9 +165,47 @@
 </section>
 <section id="id2">
 <h2><span class="section-number">13.2. </span>パッケージの作成<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>cv_testという名前のパッケージを作ります。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">cd</span> ~/ros2_ws/src/
-<span class="gp">ubuntu@mbc084:~/ros2_ws/src$ </span>ros2 pkg create --build-type ament_python cv_test
+<p>ワークスペースのsrcディレクトリへ移動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> ~/ros2_ws/src/
+</pre></div>
+</div>
+<p>cv_testという名前のパッケージを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src$ </span>ros2 pkg create --build-type ament_python cv_test
+<span class="go">going to create a new package</span>
+<span class="go">package name: cv_test</span>
+<span class="go">destination directory: /home/ubuntu/ros2_ws/src</span>
+<span class="go">package format: 3</span>
+<span class="go">version: 0.0.0</span>
+<span class="go">description: TODO: Package description</span>
+<span class="go">maintainer: [&#39;ubuntu &lt;ubuntu@todo.todo&gt;&#39;]</span>
+<span class="go">licenses: [&#39;TODO: License declaration&#39;]</span>
+<span class="go">build type: ament_python</span>
+<span class="go">dependencies: []</span>
+<span class="go">creating folder ./cv_test</span>
+<span class="go">creating ./cv_test/package.xml</span>
+<span class="go">creating source folder</span>
+<span class="go">creating folder ./cv_test/cv_test</span>
+<span class="go">creating ./cv_test/setup.py</span>
+<span class="go">creating ./cv_test/setup.cfg</span>
+<span class="go">creating folder ./cv_test/resource</span>
+<span class="go">creating ./cv_test/resource/cv_test</span>
+<span class="go">creating ./cv_test/cv_test/__init__.py</span>
+<span class="go">creating folder ./cv_test/test</span>
+<span class="go">creating ./cv_test/test/test_copyright.py</span>
+<span class="go">creating ./cv_test/test/test_flake8.py</span>
+<span class="go">creating ./cv_test/test/test_pep257.py</span>
+
+<span class="go">[WARNING]: Unknown license &#39;TODO: License declaration&#39;.  This has been set in the package.xml, but no LICENSE file has been created.</span>
+<span class="go">It is recommended to use one of the ament license identifiers:</span>
+<span class="go">Apache-2.0</span>
+<span class="go">BSL-1.0</span>
+<span class="go">BSD-2.0</span>
+<span class="go">BSD-2-Clause</span>
+<span class="go">BSD-3-Clause</span>
+<span class="go">GPL-3.0-only</span>
+<span class="go">LGPL-3.0-only</span>
+<span class="go">MIT</span>
+<span class="go">MIT-0</span>
 </pre></div>
 </div>
 <div class="line-block">
@@ -176,15 +214,30 @@
 </section>
 <section id="id3">
 <h2><span class="section-number">13.3. </span>画像の準備<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>画像データをGitHubからダウンロードします。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws/src$ </span><span class="nb">cd</span>
-<span class="gp">ubuntu@mbc084:~$ </span>sudo apt install git
-<span class="gp">ubuntu@mbc084:~$ </span>git clone https://github.com/tc-hirate/zumo_ros.git
+<p>ホームディレクトリへ移動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws/src$ </span><span class="nb">cd</span>
 </pre></div>
 </div>
-<p>ダウンロードした画像データ（/zumo_ros/imgの下にあります）を/ros_ws/src/cv_test/cv_testディレクトリに移動してください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>cp zumo_ros/img/*.png ros2_ws/src/cv_test/cv_test/
-<span class="gp">ubuntu@mbc084:~$ </span>ls ros2_ws/src/cv_test/cv_test/
+<p>gitをインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt install git
+</pre></div>
+</div>
+<p>画像データをGitHubからダウンロード。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>git clone https://github.com/tc-hirate/zumo_ros.git
+<span class="go">Cloning into &#39;zumo_ros&#39;...</span>
+<span class="go">remote: Enumerating objects: 12, done.</span>
+<span class="go">remote: Counting objects: 100% (12/12), done.</span>
+<span class="go">remote: Compressing objects: 100% (10/10), done.</span>
+<span class="go">remote: Total 12 (delta 0), reused 0 (delta 0), pack-reused 0</span>
+<span class="go">Receiving objects: 100% (12/12), 1.51 MiB | 3.88 MiB/s, done.</span>
+</pre></div>
+</div>
+<p>ダウンロードした画像データ（/zumo_ros/imgの下にある）を/ros_ws/src/cv_test/cv_testディレクトリへ移動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>cp zumo_ros/img/*.png ros2_ws/src/cv_test/cv_test/
+</pre></div>
+</div>
+<p>ファイルの確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ls ros2_ws/src/cv_test/cv_test/
 <span class="go">__init__.py  gradient.png  img2.png  sagaairport.png</span>
 <span class="go">base.png     img1.png      lena.png</span>
 </pre></div>
@@ -204,15 +257,20 @@
 </ul>
 <p>このプログラムでは、cv_bridgeというライブラリをインポートしています。</p>
 <p>cv_bridgeは、OpenCVの標準データ形式であるCV::MatをROSのメッセージであるsensor_msgs/Imageに変換します。</p>
-<p>image_view.pyの作成</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">cd</span> ros2_ws/
-<span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/image_view.py
-</pre></div>
-</div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>編集</p>
+<p>ワークスペースへ移動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> ros2_ws/
+</pre></div>
+</div>
+<p>image_view.pyを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/image_view.py
+</pre></div>
+</div>
+<p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">image_view.py</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -233,7 +291,6 @@
         <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="s1">&#39;bgr8&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
 
-
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
 
@@ -249,50 +306,47 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>package.xmlを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/package.xml
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/package.xml
 </pre></div>
 </div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">package.xml</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;?xml-model href=&quot;http://download.ros.org/schema/package_format3.xsd&quot; schematyp&gt;
 &lt;package format=&quot;3&quot;&gt;
-  &lt;name&gt;cv_test&lt;/name&gt;
-  &lt;version&gt;0.0.0&lt;/version&gt;
-  &lt;description&gt;TODO: Package description&lt;/description&gt;
-  &lt;maintainer email=&quot;ubuntu@todo.todo&quot;&gt;ubuntu&lt;/maintainer&gt;
-  &lt;license&gt;TODO: License declaration&lt;/license&gt;
+&lt;name&gt;cv_test&lt;/name&gt;
+&lt;version&gt;0.0.0&lt;/version&gt;
+&lt;description&gt;TODO: Package description&lt;/description&gt;
+&lt;maintainer email=&quot;ubuntu@todo.todo&quot;&gt;ubuntu&lt;/maintainer&gt;
+&lt;license&gt;TODO: License declaration&lt;/license&gt;
 
-<span class="hll">  &lt;exec_depend&gt;rclpy&lt;/exec_depend&gt;
-</span><span class="hll">  &lt;exec_depend&gt;sensor_msgs&lt;/exec_depend&gt;
-</span><span class="hll">  &lt;exec_depend&gt;cv_bridge&lt;/exec_depend&gt;
-</span><span class="hll">  &lt;exec_depend&gt;opencv2&lt;/exec_depend&gt;
+<span class="hll">&lt;exec_depend&gt;rclpy&lt;/exec_depend&gt;
+</span><span class="hll">&lt;exec_depend&gt;sensor_msgs&lt;/exec_depend&gt;
+</span><span class="hll">&lt;exec_depend&gt;cv_bridge&lt;/exec_depend&gt;
+</span><span class="hll">&lt;exec_depend&gt;opencv2&lt;/exec_depend&gt;
 </span>
-  &lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
-  &lt;test_depend&gt;ament_flake8&lt;/test_depend&gt;
-  &lt;test_depend&gt;ament_pep257&lt;/test_depend&gt;
-  &lt;test_depend&gt;python3-pytest&lt;/test_depend&gt;
+&lt;test_depend&gt;ament_copyright&lt;/test_depend&gt;
+&lt;test_depend&gt;ament_flake8&lt;/test_depend&gt;
+&lt;test_depend&gt;ament_pep257&lt;/test_depend&gt;
+&lt;test_depend&gt;python3-pytest&lt;/test_depend&gt;
 
-  &lt;export&gt;
+&lt;export&gt;
     &lt;build_type&gt;ament_python&lt;/build_type&gt;
-  &lt;/export&gt;
+&lt;/export&gt;
 &lt;/package&gt;
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id12" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
@@ -321,50 +375,40 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.27s]</span>
+
+<span class="go">Summary: 1 package finished [2.56s]</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>cv_testパッケージのimg_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test img_publisher
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test img_publisher
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>トピックで/image_dataが出力されているか確認しましょう。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 topic list
+<p>/image_dataが出力されているか確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 topic list
 <span class="go">/image_data</span>
 <span class="go">/parameter_events</span>
 <span class="go">/rosout</span>
 </pre></div>
 </div>
-<p>画像を見るためにrqt_image_viewというツールを使います。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
+<p>rqt_image_viewというツールを使って画像を確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<img alt="13_opencv/img/opencv_img_01.png" class="align-center" src="13_opencv/img/opencv_img_01.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>/image_dataを選択すると、画像が表示されます。</p>
-<img alt="13_opencv/img/opencv_img_02.png" class="align-center" src="13_opencv/img/opencv_img_02.png" />
+<img alt="../_images/opencv_img_01.png" src="../_images/opencv_img_01.png" />
+<p>/image_dataを選択すると、画像が表示される。</p>
+<img alt="../_images/opencv_img_02.png" src="../_images/opencv_img_02.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -372,21 +416,20 @@
 <section id="id5">
 <h2><span class="section-number">13.5. </span>画像をグレースケールに変換する<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>OpenCVライブラリを使ってカラー画像を グレースケール画像に変換します。</p>
-<p>image_view.pyをコピーしてgray.pyを作ってください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/gray.py
-</pre></div>
-</div>
 <div class="line-block">
 <div class="line"><br /></div>
+</div>
+<p>image_view.pyをコピーしてgray.pyを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/gray.py
+</pre></div>
 </div>
 <p>gray.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/gray.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/gray.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text">gray.py</span><a class="headerlink" href="#id13" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -408,7 +451,6 @@
 </span><span class="hll">        <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_gray_image</span><span class="p">,</span> <span class="s1">&#39;mono8&#39;</span><span class="p">)</span>
 </span>        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
 
-
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
 
@@ -424,17 +466,14 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id14" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
@@ -464,38 +503,31 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.11s]</span>
+
+<span class="go">Summary: 1 package finished [2.34s]</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>cv_testパッケージのgray_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test gray_publisher
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test gray_publisher
+</pre></div>
+</div>
+<p>画像を確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="13_opencv/img/opencv_img_03.png" class="align-center" src="13_opencv/img/opencv_img_03.png" />
+<img alt="../_images/opencv_img_03.png" src="../_images/opencv_img_03.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -503,21 +535,20 @@
 <section id="id6">
 <h2><span class="section-number">13.6. </span>円を描く<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>OpenCVライブラリを使って図形を描きます。</p>
-<p>image_view.pyをコピーしてcircle.pyを作ってください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/circle.py
-</pre></div>
-</div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>gray.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/circle.py
+<p>image_view.pyをコピーしてcircle.pyを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/circle.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<p>circle.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/circle.py
+</pre></div>
 </div>
-<p>編集</p>
+<p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id15">
+<div class="code-block-caption"><span class="caption-text">circle.py</span><a class="headerlink" href="#id15" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -539,7 +570,6 @@
 </span><span class="hll">        <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_circle_image</span><span class="p">,</span> <span class="s1">&#39;bgr8&#39;</span><span class="p">)</span>
 </span>        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
 
-
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
 
@@ -555,17 +585,14 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id16">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id16" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
@@ -596,41 +623,31 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.17s]</span>
+
+<span class="go">Summary: 1 package finished [2.39s]</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>cv_testパッケージのcircle_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test circle_publisher
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test circle_publisher
+</pre></div>
+</div>
+<p>画像を確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="13_opencv/img/opencv_img_04.png" class="align-center" src="13_opencv/img/opencv_img_04.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+<img alt="../_images/opencv_img_04.png" src="../_images/opencv_img_04.png" />
 <p>500ピクセル×500ピクセルの黒色の画像に円を描いています。</p>
 <p>円は、中心座標が(250,250)、半径が100、色が緑、線の太さが3です。</p>
 <p>OpenCVライブラリを使って線分（cv2.line()）、長方形（cv2.rectangle()）、文字列（cv2.putText）なども描いてみましょう。</p>
@@ -650,21 +667,20 @@
 <section id="id7">
 <h2><span class="section-number">13.7. </span>画像を2値化する<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
 <p>OpenCVライブラリを使って画像を2値化します。</p>
-<p>image_view.pyをコピーしてbinary.pyを作ってください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/binary.py
-</pre></div>
-</div>
 <div class="line-block">
 <div class="line"><br /></div>
+</div>
+<p>image_view.pyをコピーしてbinary.pyを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/binary.py
+</pre></div>
 </div>
 <p>binary.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/binary.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/binary.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集</p>
+<div class="literal-block-wrapper docutils container" id="id17">
+<div class="code-block-caption"><span class="caption-text">binary.py</span><a class="headerlink" href="#id17" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -687,7 +703,6 @@
 </span><span class="hll">        <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_binary_image</span><span class="p">,</span> <span class="s1">&#39;mono8&#39;</span><span class="p">)</span>
 </span>        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
 
-
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
 
@@ -703,17 +718,14 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id18">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id18" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
@@ -745,41 +757,31 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.16s]</span>
+
+<span class="go">Summary: 1 package finished [2.38s]</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>cv_testパッケージのbinary_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test binary_publisher
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test binary_publisher
+</pre></div>
+</div>
+<p>画像を確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="13_opencv/img/opencv_img_05.png" class="align-center" src="13_opencv/img/opencv_img_05.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+<img alt="../_images/opencv_img_05.png" src="../_images/opencv_img_05.png" />
 <p>しきい値を変更するとどうなるか確認しましょう。</p>
 <p>（例）80</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ret</span><span class="p">,</span> <span class="n">cv_binary_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">threshold</span><span class="p">(</span><span class="n">cv_gray_image</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">THRESH_BINARY</span><span class="p">)</span>
@@ -798,21 +800,20 @@
 <p>OpenCVライブラリを使ってエッジの検出をします。</p>
 <p>エッジ検出フィルタには、ラプラシアン、Sobel、Canny法などがあります。</p>
 <p>ここでは、Canny法を使います。</p>
-<p>image_view.pyをコピーしてedge.pyを作ってください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/edge.py
-</pre></div>
-</div>
 <div class="line-block">
 <div class="line"><br /></div>
+</div>
+<p>image_view.pyをコピーしてedge.pyを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/edge.py
+</pre></div>
 </div>
 <p>edge.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/edge.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/edge.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>編集</p>
+<p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id19">
+<div class="code-block-caption"><span class="caption-text">edge.py</span><a class="headerlink" href="#id19" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -835,7 +836,6 @@
 </span><span class="hll">        <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_canny_image</span><span class="p">,</span> <span class="s1">&#39;mono8&#39;</span><span class="p">)</span>
 </span>        <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
 
-
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="n">args</span><span class="p">)</span>
 
@@ -851,17 +851,14 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id20">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id20" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
@@ -894,41 +891,31 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.08s]</span>
+
+<span class="go">Summary: 1 package finished [2.31s]</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>cv_testパッケージのedge_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test edge_publisher
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test edge_publisher
+</pre></div>
+</div>
+<p>画像を確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="13_opencv/img/opencv_img_06.png" class="align-center" src="13_opencv/img/opencv_img_06.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+<img alt="../_images/opencv_img_06.png" src="../_images/opencv_img_06.png" />
 <p>threshold1とthreshold2の値を変えるとどうなるか試してください。</p>
 <p>（例）threshold1=50, threshold2=100</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cv_canny_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">Canny</span><span class="p">(</span><span class="n">cv_gray_image</span><span class="p">,</span> <span class="n">threshold1</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">threshold2</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -938,14 +925,9 @@
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="id9">
-<h2><span class="section-number">13.9. </span>演習3「OpenCVライブラリを使った顔検出」<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
-<p>この演習では、img1.pngとimg2.pngを使います。</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <section id="img1-png">
-<h3><span class="section-number">13.9.1. </span>（１）img1.pngを読み込んで、顔を検出するプログラムを作ってください。<a class="headerlink" href="#img1-png" title="Permalink to this headline">¶</a></h3>
+<h2><span class="section-number">13.9. </span>演習1「img1.pngを読み込んで、顔を検出するプログラムを作ってください」<a class="headerlink" href="#img1-png" title="Permalink to this headline">¶</a></h2>
+<p>この演習では、img1.pngとimg2.pngを使います。</p>
 <p>ファイル名はface_detect.pyとします。</p>
 <p>OpenCVでオブジェクトを検出するためには、CascadeClassifier関数で特徴量を学習したXMLファイルを読み込みます。</p>
 <p>そして、取得したCascadeClassifierオブジェクトのdetectMultiScale関数を呼び出します。</p>
@@ -957,10 +939,9 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/face_detect.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集</p>
+<div class="literal-block-wrapper docutils container" id="id21">
+<div class="code-block-caption"><span class="caption-text">face_detect.py</span><a class="headerlink" href="#id21" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -1010,17 +991,14 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id22">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id22" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
@@ -1054,73 +1032,51 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>セットアップファイルの反映。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>cv_testパッケージのface_publisherノードの実行</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test face_publisher
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>確認。</p>
+<p>画像を確認。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>少しずれてしまいました。</p>
-<img alt="13_opencv/img/opencv_img_07.png" class="align-center" src="13_opencv/img/opencv_img_07.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</section>
-<section id="face-detect-py-img2-png">
-<h3><span class="section-number">13.9.2. </span>（２）face_detect.pyで読み込む画像を img2.pngに変更して、顔を検出してください。<a class="headerlink" href="#face-detect-py-img2-png" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/opencv_img_07.png" src="../_images/opencv_img_07.png" />
+<p>img1.pngをimg2.pngに変えるとどうなるか試してください。</p>
+<img alt="../_images/opencv_img_08.png" src="../_images/opencv_img_08.png" />
 <p>正しく検出できました。</p>
-<img alt="13_opencv/img/opencv_img_08.png" class="align-center" src="13_opencv/img/opencv_img_08.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="id10">
-<h3><span class="section-number">13.9.3. </span>（３）img1.pngを読み込んで、目を検出するプログラムを作ってください。<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<section id="id9">
+<h2><span class="section-number">13.10. </span>演習2「img1.pngを読み込んで、目を検出するプログラムを作ってください」<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<p>この演習でも、img1.pngとimg2.pngを使います。</p>
 <p>ファイル名はeye_detect.pyとします。</p>
 <p>XMLファイルはhaarcascade_eye.xmlを使います。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>face_detect.pyをコピーしてeye_detect.pyを作ってください。</p>
+<p>face_detect.pyをコピーしてeye_detect.pyを作成。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/eye_detect.py
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>eye_detect.pyを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/eye_detect.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>編集</p>
+<p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id23">
+<div class="code-block-caption"><span class="caption-text">eye_detect.py</span><a class="headerlink" href="#id23" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -1170,17 +1126,14 @@
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id24">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id24" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
@@ -1215,51 +1168,28 @@
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>セットアップファイルの反映。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>cv_testパッケージのface_publisherノードの実行</p>
+<p>cv_testパッケージのeye_publisherノードの実行</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test eye_publisher
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>確認。</p>
+<p>画像を確認。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>正しく検出できました。</p>
-<img alt="13_opencv/img/opencv_img_09.png" class="align-center" src="13_opencv/img/opencv_img_09.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</section>
-<section id="eye-detect-py-img2-png">
-<h3><span class="section-number">13.9.4. </span>（４）eye_detect.pyで読み込む画像を img2.pngに変更して、顔を検出してください。<a class="headerlink" href="#eye-detect-py-img2-png" title="Permalink to this headline">¶</a></h3>
+<img alt="../_images/opencv_img_09.png" src="../_images/opencv_img_09.png" />
+<p>img1.pngをimg2.pngに変えるとどうなるか試してください。</p>
+<img alt="../_images/opencv_img_10.png" src="../_images/opencv_img_10.png" />
 <p>口も検出してしまいました。</p>
-<img alt="13_opencv/img/opencv_img_10.png" class="align-center" src="13_opencv/img/opencv_img_10.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</section>
 </section>
 </section>
 
@@ -1286,13 +1216,8 @@
 <li><a class="reference internal" href="#id6">13.6. 円を描く</a></li>
 <li><a class="reference internal" href="#id7">13.7. 画像を2値化する</a></li>
 <li><a class="reference internal" href="#id8">13.8. エッジ検出フィルタを使う</a></li>
-<li><a class="reference internal" href="#id9">13.9. 演習3「OpenCVライブラリを使った顔検出」</a><ul>
-<li><a class="reference internal" href="#img1-png">13.9.1. （１）img1.pngを読み込んで、顔を検出するプログラムを作ってください。</a></li>
-<li><a class="reference internal" href="#face-detect-py-img2-png">13.9.2. （２）face_detect.pyで読み込む画像を img2.pngに変更して、顔を検出してください。</a></li>
-<li><a class="reference internal" href="#id10">13.9.3. （３）img1.pngを読み込んで、目を検出するプログラムを作ってください。</a></li>
-<li><a class="reference internal" href="#eye-detect-py-img2-png">13.9.4. （４）eye_detect.pyで読み込む画像を img2.pngに変更して、顔を検出してください。</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#img1-png">13.9. 演習1「img1.pngを読み込んで、顔を検出するプログラムを作ってください」</a></li>
+<li><a class="reference internal" href="#id9">13.10. 演習2「img1.pngを読み込んで、目を検出するプログラムを作ってください」</a></li>
 </ul>
 </li>
 </ul>

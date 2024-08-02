@@ -11,43 +11,104 @@ ROS2でOpenCVライブラリを使う方法を説明します。
 OpenCVのインストール
 ============================================================
 
-OpenCVをインストールします。
+OpenCVのインストール。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ sudo apt install python3-opencv
+    ubuntu@mbc112:~$ sudo apt install python3-opencv
 
 |
 
 パッケージの作成
 ============================================================
 
-cv_testという名前のパッケージを作ります。
+ワークスペースのsrcディレクトリへ移動。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cd ~/ros2_ws/src/
-    ubuntu@mbc084:~/ros2_ws/src$ ros2 pkg create --build-type ament_python cv_test
+    ubuntu@mbc112:~$ cd ~/ros2_ws/src/
+
+cv_testという名前のパッケージを作成。
+
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws/src$ ros2 pkg create --build-type ament_python cv_test
+    going to create a new package
+    package name: cv_test
+    destination directory: /home/ubuntu/ros2_ws/src
+    package format: 3
+    version: 0.0.0
+    description: TODO: Package description
+    maintainer: ['ubuntu <ubuntu@todo.todo>']
+    licenses: ['TODO: License declaration']
+    build type: ament_python
+    dependencies: []
+    creating folder ./cv_test
+    creating ./cv_test/package.xml
+    creating source folder
+    creating folder ./cv_test/cv_test
+    creating ./cv_test/setup.py
+    creating ./cv_test/setup.cfg
+    creating folder ./cv_test/resource
+    creating ./cv_test/resource/cv_test
+    creating ./cv_test/cv_test/__init__.py
+    creating folder ./cv_test/test
+    creating ./cv_test/test/test_copyright.py
+    creating ./cv_test/test/test_flake8.py
+    creating ./cv_test/test/test_pep257.py
+
+    [WARNING]: Unknown license 'TODO: License declaration'.  This has been set in the package.xml, but no LICENSE file has been created.
+    It is recommended to use one of the ament license identifiers:
+    Apache-2.0
+    BSL-1.0
+    BSD-2.0
+    BSD-2-Clause
+    BSD-3-Clause
+    GPL-3.0-only
+    LGPL-3.0-only
+    MIT
+    MIT-0
 
 |
 
 画像の準備
 ============================================================
 
-画像データをGitHubからダウンロードします。
+ホームディレクトリへ移動。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws/src$ cd
-    ubuntu@mbc084:~$ sudo apt install git
-    ubuntu@mbc084:~$ git clone https://github.com/tc-hirate/zumo_ros.git
+    ubuntu@mbc112:~/ros2_ws/src$ cd
 
-ダウンロードした画像データ（/zumo_ros/imgの下にあります）を/ros_ws/src/cv_test/cv_testディレクトリに移動してください。
+gitをインストール。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cp zumo_ros/img/*.png ros2_ws/src/cv_test/cv_test/
-    ubuntu@mbc084:~$ ls ros2_ws/src/cv_test/cv_test/
+    ubuntu@mbc112:~$ sudo apt install git
+
+画像データをGitHubからダウンロード。
+
+.. code-block:: console
+
+    ubuntu@mbc112:~$ git clone https://github.com/tc-hirate/zumo_ros.git
+    Cloning into 'zumo_ros'...
+    remote: Enumerating objects: 12, done.
+    remote: Counting objects: 100% (12/12), done.
+    remote: Compressing objects: 100% (10/10), done.
+    remote: Total 12 (delta 0), reused 0 (delta 0), pack-reused 0
+    Receiving objects: 100% (12/12), 1.51 MiB | 3.88 MiB/s, done.
+
+ダウンロードした画像データ（/zumo_ros/imgの下にある）を/ros_ws/src/cv_test/cv_testディレクトリへ移動。
+
+.. code-block:: console
+
+    ubuntu@mbc112:~$ cp zumo_ros/img/*.png ros2_ws/src/cv_test/cv_test/
+
+ファイルの確認。
+
+.. code-block:: console
+
+    ubuntu@mbc112:~$ ls ros2_ws/src/cv_test/cv_test/
     __init__.py  gradient.png  img2.png  sagaairport.png
     base.png     img1.png      lena.png
 
@@ -69,18 +130,24 @@ OpenCVライブラリを使って画像を読み込み、表示する方法に�
 
 cv_bridgeは、OpenCVの標準データ形式であるCV::MatをROSのメッセージであるsensor_msgs/Imageに変換します。
 
-image_view.pyの作成
+|
+
+ワークスペースへ移動。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~$ cd ros2_ws/
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/image_view.py
+    ubuntu@mbc112:~$ cd ros2_ws/
 
-|
+image_view.pyを作成。
 
-編集
+.. code-block:: console
+
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/cv_test/image_view.py
+
+編集。
 
 .. code-block:: python
+    :caption: image_view.py
 
     import rclpy
     from rclpy.node import Node
@@ -102,7 +169,6 @@ image_view.pyの作成
             ros_image = self.bridge.cv2_to_imgmsg(cv_image, 'bgr8')
             self.publisher_.publish(ros_image)
 
-
     def main(args=None):
         rclpy.init(args=args)
 
@@ -117,57 +183,53 @@ image_view.pyの作成
     if __name__ == '__main__':
         main()
 
-|
-
 package.xmlを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/package.xml
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/package.xml
 
 編集。
 
 .. code-block:: none
     :emphasize-lines: 10-13
+    :caption: package.xml
 
     <?xml version="1.0"?>
     <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematyp>
     <package format="3">
-      <name>cv_test</name>
-      <version>0.0.0</version>
-      <description>TODO: Package description</description>
-      <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
-      <license>TODO: License declaration</license>
+    <name>cv_test</name>
+    <version>0.0.0</version>
+    <description>TODO: Package description</description>
+    <maintainer email="ubuntu@todo.todo">ubuntu</maintainer>
+    <license>TODO: License declaration</license>
 
-      <exec_depend>rclpy</exec_depend>
-      <exec_depend>sensor_msgs</exec_depend>
-      <exec_depend>cv_bridge</exec_depend>
-      <exec_depend>opencv2</exec_depend>
+    <exec_depend>rclpy</exec_depend>
+    <exec_depend>sensor_msgs</exec_depend>
+    <exec_depend>cv_bridge</exec_depend>
+    <exec_depend>opencv2</exec_depend>
 
-      <test_depend>ament_copyright</test_depend>
-      <test_depend>ament_flake8</test_depend>
-      <test_depend>ament_pep257</test_depend>
-      <test_depend>python3-pytest</test_depend>
+    <test_depend>ament_copyright</test_depend>
+    <test_depend>ament_flake8</test_depend>
+    <test_depend>ament_pep257</test_depend>
+    <test_depend>python3-pytest</test_depend>
 
-      <export>
+    <export>
         <build_type>ament_python</build_type>
-      </export>
+    </export>
     </package>
-
-|
 
 setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/setup.py
 
 編集。
 
 .. code-block:: python
     :emphasize-lines: 23
+    :caption: setup.py
 
     from setuptools import find_packages, setup
 
@@ -196,58 +258,50 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select cv_test
+    Starting >>> cv_test 
+    Finished <<< cv_test [2.27s]          
 
-|
+    Summary: 1 package finished [2.56s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
-
-|
+    ubuntu@mbc112:~/ros2_ws$ source install/local_setup.bash
 
 cv_testパッケージのimg_publisherノードの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test img_publisher
+    ubuntu@mbc112:~/ros2_ws$ ros2 run cv_test img_publisher
 
-|
-
-トピックで/image_dataが出力されているか確認しましょう。
+/image_dataが出力されているか確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 topic list
+    ubuntu@mbc112:~/ros2_ws$ ros2 topic list
     /image_data
     /parameter_events
     /rosout
 
-画像を見るためにrqt_image_viewというツールを使います。
+rqt_image_viewというツールを使って画像を確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
+    ubuntu@mbc112:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
 |
 
-.. image:: ./img/opencv_img_01.png
-   :align: center
+.. image:: ./images/opencv_img_01.png
 
-|
+/image_dataを選択すると、画像が表示される。
 
-/image_dataを選択すると、画像が表示されます。
-
-.. image:: ./img/opencv_img_02.png
-   :align: center
+.. image:: ./images/opencv_img_02.png
 
 |
 
@@ -256,26 +310,25 @@ cv_testパッケージのimg_publisherノードの実行
 
 OpenCVライブラリを使ってカラー画像を グレースケール画像に変換します。
 
-image_view.pyをコピーしてgray.pyを作ってください。
+|
+
+image_view.pyをコピーしてgray.pyを作成。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/gray.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/gray.py
 
 gray.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/gray.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/cv_test/gray.py
 
 編集。
 
 .. code-block:: python
     :emphasize-lines: 18, 19
+    :caption: gray.py
 
     import rclpy
     from rclpy.node import Node
@@ -298,7 +351,6 @@ gray.pyを開く。
             ros_image = self.bridge.cv2_to_imgmsg(cv_gray_image, 'mono8')
             self.publisher_.publish(ros_image)
 
-
     def main(args=None):
         rclpy.init(args=args)
 
@@ -313,20 +365,17 @@ gray.pyを開く。
     if __name__ == '__main__':
         main()
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/setup.py
 
 編集。
 
 .. code-block:: python
     :emphasize-lines: 24
+    :caption: setup.py
 
     from setuptools import find_packages, setup
 
@@ -356,42 +405,37 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select cv_test
+    Starting >>> cv_test 
+    Finished <<< cv_test [2.11s]          
 
-|
+    Summary: 1 package finished [2.34s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
-
-|
+    ubuntu@mbc112:~/ros2_ws$ source install/local_setup.bash
 
 cv_testパッケージのgray_publisherノードの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test gray_publisher
+    ubuntu@mbc112:~/ros2_ws$ ros2 run cv_test gray_publisher
 
-|
-
-確認。
+画像を確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
+    ubuntu@mbc112:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
 |
 
-.. image:: ./img/opencv_img_03.png
-   :align: center
+.. image:: ./images/opencv_img_03.png
 
 |
 
@@ -400,26 +444,25 @@ cv_testパッケージのgray_publisherノードの実行
 
 OpenCVライブラリを使って図形を描きます。
 
-image_view.pyをコピーしてcircle.pyを作ってください。
+|
+
+image_view.pyをコピーしてcircle.pyを作成。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/circle.py
+    ubuntu@mbc112:~/ros2_ws$ cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/circle.py
 
-|
-
-gray.pyを開く。
+circle.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/circle.py
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/cv_test/circle.py
 
-|
-
-編集
+編集。
 
 .. code-block:: python
     :emphasize-lines: 17-19
+    :caption: circle.py
 
     import rclpy
     from rclpy.node import Node
@@ -442,7 +485,6 @@ gray.pyを開く。
             ros_image = self.bridge.cv2_to_imgmsg(cv_circle_image, 'bgr8')
             self.publisher_.publish(ros_image)
 
-
     def main(args=None):
         rclpy.init(args=args)
 
@@ -457,20 +499,17 @@ gray.pyを開く。
     if __name__ == '__main__':
         main()
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/setup.py
 
 編集。
 
 .. code-block:: python
     :emphasize-lines: 25
+    :caption: setup.py
 
     from setuptools import find_packages, setup
 
@@ -501,44 +540,37 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select cv_test
+    Starting >>> cv_test 
+    Finished <<< cv_test [2.17s]          
 
-|
+    Summary: 1 package finished [2.39s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
-
-|
+    ubuntu@mbc112:~/ros2_ws$ source install/local_setup.bash
 
 cv_testパッケージのcircle_publisherノードの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test circle_publisher
+    ubuntu@mbc112:~/ros2_ws$ ros2 run cv_test circle_publisher
 
-|
-
-確認。
+画像を確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
+    ubuntu@mbc112:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
 |
 
-.. image:: ./img/opencv_img_04.png
-   :align: center
-
-|
+.. image:: ./images/opencv_img_04.png
 
 500ピクセル×500ピクセルの黒色の画像に円を描いています。
 
@@ -565,26 +597,25 @@ OpenCVライブラリを使って線分（cv2.line()）、長方形（cv2.rectan
 
 OpenCVライブラリを使って画像を2値化します。
 
-image_view.pyをコピーしてbinary.pyを作ってください。
+|
+
+image_view.pyをコピーしてbinary.pyを作成。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/binary.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/binary.py
 
 binary.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/binary.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/cv_test/binary.py
 
 編集
 
 .. code-block:: python
     :emphasize-lines: 17-20
+    :caption: binary.py
 
     import rclpy
     from rclpy.node import Node
@@ -608,7 +639,6 @@ binary.pyを開く。
             ros_image = self.bridge.cv2_to_imgmsg(cv_binary_image, 'mono8')
             self.publisher_.publish(ros_image)
 
-
     def main(args=None):
         rclpy.init(args=args)
 
@@ -623,20 +653,17 @@ binary.pyを開く。
     if __name__ == '__main__':
         main()
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/setup.py
 
 編集。
 
 .. code-block:: python
     :emphasize-lines: 26
+    :caption: setup.py
 
     from setuptools import find_packages, setup
 
@@ -668,44 +695,37 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select cv_test
+    Starting >>> cv_test 
+    Finished <<< cv_test [2.16s]          
 
-|
+    Summary: 1 package finished [2.38s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
-
-|
+    ubuntu@mbc112:~/ros2_ws$ source install/local_setup.bash
 
 cv_testパッケージのbinary_publisherノードの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test binary_publisher
+    ubuntu@mbc112:~/ros2_ws$ ros2 run cv_test binary_publisher
 
-|
-
-確認。
+画像を確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
+    ubuntu@mbc112:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
 |
 
-.. image:: ./img/opencv_img_05.png
-   :align: center
-
-|
+.. image:: ./images/opencv_img_05.png
 
 しきい値を変更するとどうなるか確認しましょう。
 
@@ -732,26 +752,25 @@ OpenCVライブラリを使ってエッジの検出をします。
 
 ここでは、Canny法を使います。
 
-image_view.pyをコピーしてedge.pyを作ってください。
+|
+
+image_view.pyをコピーしてedge.pyを作成。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/edge.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ cp src/cv_test/cv_test/image_view.py src/cv_test/cv_test/edge.py
 
 edge.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/edge.py
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/cv_test/edge.py
 
-|
-
-編集
+編集。
 
 .. code-block:: python
     :emphasize-lines: 18-20
+    :caption: edge.py
 
     import rclpy
     from rclpy.node import Node
@@ -775,7 +794,6 @@ edge.pyを開く。
             ros_image = self.bridge.cv2_to_imgmsg(cv_canny_image, 'mono8')
             self.publisher_.publish(ros_image)
 
-
     def main(args=None):
         rclpy.init(args=args)
 
@@ -790,20 +808,17 @@ edge.pyを開く。
     if __name__ == '__main__':
         main()
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
-
-|
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/setup.py
 
 編集。
 
 .. code-block:: python
     :emphasize-lines: 27
+    :caption: setup.py
 
     from setuptools import find_packages, setup
 
@@ -836,44 +851,37 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select cv_test
+    Starting >>> cv_test 
+    Finished <<< cv_test [2.08s]          
 
-|
+    Summary: 1 package finished [2.31s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
-
-|
+    ubuntu@mbc112:~/ros2_ws$ source install/local_setup.bash
 
 cv_testパッケージのedge_publisherノードの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test edge_publisher
+    ubuntu@mbc112:~/ros2_ws$ ros2 run cv_test edge_publisher
 
-|
-
-確認。
+画像を確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
+    ubuntu@mbc112:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
 |
 
-.. image:: ./img/opencv_img_06.png
-   :align: center
-
-|
+.. image:: ./images/opencv_img_06.png
 
 threshold1とthreshold2の値を変えるとどうなるか試してください。
 
@@ -885,15 +893,10 @@ threshold1とthreshold2の値を変えるとどうなるか試してください
 
 |
 
-演習3「OpenCVライブラリを使った顔検出」
-============================================================
+演習1「img1.pngを読み込んで、顔を検出するプログラムを作ってください」
+=====================================================================
 
 この演習では、img1.pngとimg2.pngを使います。
-
-|
-
-（１）img1.pngを読み込んで、顔を検出するプログラムを作ってください。
---------------------------------------------------------------------
 
 ファイル名はface_detect.pyとします。
 
@@ -911,11 +914,10 @@ face_detect.pyの作成。
 
     ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/face_detect.py
 
-|
-
 編集
 
 .. code-block:: python
+    :caption: face_detect.py
 
     import rclpy
     from rclpy.node import Node
@@ -965,20 +967,17 @@ face_detect.pyの作成。
     if __name__ == '__main__':
         main()
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
 
-|
-
 編集。
 
 .. code-block:: python
     :emphasize-lines: 28
+    :caption: setup.py
 
     from setuptools import find_packages, setup
 
@@ -1012,15 +1011,11 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
-
-|
 
 セットアップファイルの反映。
 
@@ -1028,43 +1023,34 @@ setup.pyを開く。
 
     ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
 
-|
-
 cv_testパッケージのface_publisherノードの実行
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test face_publisher
 
-|
-
-確認。
+画像を確認。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
-|
-
 少しずれてしまいました。
 
-.. image:: ./img/opencv_img_07.png
-   :align: center
+.. image:: ./images/opencv_img_07.png
 
-|
+img1.pngをimg2.pngに変えるとどうなるか試してください。
 
-（２）face_detect.pyで読み込む画像を img2.pngに変更して、顔を検出してください。
--------------------------------------------------------------------------------
+.. image:: ./images/opencv_img_08.png
 
 正しく検出できました。
 
-.. image:: ./img/opencv_img_08.png
-   :align: center
-
 |
 
-（３）img1.pngを読み込んで、目を検出するプログラムを作ってください。
---------------------------------------------------------------------
+演習2「img1.pngを読み込んで、目を検出するプログラムを作ってください」
+=====================================================================
+
+この演習でも、img1.pngとimg2.pngを使います。
 
 ファイル名はeye_detect.pyとします。
 
@@ -1072,13 +1058,11 @@ XMLファイルはhaarcascade_eye.xmlを使います。
 
 |
 
-face_detect.pyをコピーしてeye_detect.pyを作ってください。
+face_detect.pyをコピーしてeye_detect.pyを作成。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/eye_detect.py
-
-|
 
 eye_detect.pyを開く。
 
@@ -1086,12 +1070,11 @@ eye_detect.pyを開く。
 
     ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/eye_detect.py
 
-|
-
-編集
+編集。
 
 .. code-block:: python
     :emphasize-lines: 17, 19, 29
+    :caption: eye_detect.py
 
     import rclpy
     from rclpy.node import Node
@@ -1141,20 +1124,17 @@ eye_detect.pyを開く。
     if __name__ == '__main__':
         main()
 
-|
-
 setup.pyを開く。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
 
-|
-
 編集。
 
 .. code-block:: python
     :emphasize-lines: 29
+    :caption: setup.py
 
     from setuptools import find_packages, setup
 
@@ -1189,15 +1169,11 @@ setup.pyを開く。
         },
     )
 
-|
-
 ビルド。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
-
-|
 
 セットアップファイルの反映。
 
@@ -1205,38 +1181,24 @@ setup.pyを開く。
 
     ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
 
-|
-
-cv_testパッケージのface_publisherノードの実行
+cv_testパッケージのeye_publisherノードの実行
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test eye_publisher
 
-|
-
-確認。
+画像を確認。
 
 .. code-block:: console
 
     ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
-|
-
 正しく検出できました。
 
-.. image:: ./img/opencv_img_09.png
-   :align: center
+.. image:: ./images/opencv_img_09.png
 
-|
+img1.pngをimg2.pngに変えるとどうなるか試してください。
 
-
-（４）eye_detect.pyで読み込む画像を img2.pngに変更して、顔を検出してください。
--------------------------------------------------------------------------------
+.. image:: ./images/opencv_img_10.png
 
 口も検出してしまいました。
-
-.. image:: ./img/opencv_img_10.png
-   :align: center
-
-|
