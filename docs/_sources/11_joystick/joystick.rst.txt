@@ -327,6 +327,8 @@ rqt_graphでノードの確認。
 
     ubuntu@mbc112:~/ros2_ws$ rqt_graph
 
+|
+
 .. image:: ./images/joystick_img_01.png
 
 |

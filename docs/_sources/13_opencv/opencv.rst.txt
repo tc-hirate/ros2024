@@ -912,7 +912,7 @@ face_detect.pyの作成。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/face_detect.py
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/cv_test/face_detect.py
 
 編集
 
@@ -971,7 +971,7 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/setup.py
 
 編集。
 
@@ -1015,25 +1015,29 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select cv_test
+    Starting >>> cv_test 
+    Finished <<< cv_test [2.22s]          
+
+    Summary: 1 package finished [2.44s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
+    ubuntu@mbc112:~/ros2_ws$ source install/local_setup.bash
 
 cv_testパッケージのface_publisherノードの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test face_publisher
+    ubuntu@mbc112:~/ros2_ws$ ros2 run cv_test face_publisher
 
 画像を確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
+    ubuntu@mbc112:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
 少しずれてしまいました。
 
@@ -1062,13 +1066,13 @@ face_detect.pyをコピーしてeye_detect.pyを作成。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/eye_detect.py
+    ubuntu@mbc112:~/ros2_ws$ cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/eye_detect.py
 
 eye_detect.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/cv_test/eye_detect.py
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/cv_test/eye_detect.py
 
 編集。
 
@@ -1128,7 +1132,7 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ nano src/cv_test/setup.py
+    ubuntu@mbc112:~/ros2_ws$ nano src/cv_test/setup.py
 
 編集。
 
@@ -1173,25 +1177,29 @@ setup.pyを開く。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ colcon build --packages-select cv_test
+    ubuntu@mbc112:~/ros2_ws$ colcon build --packages-select cv_test
+    Starting >>> cv_test 
+    Finished <<< cv_test [2.13s]          
+
+    Summary: 1 package finished [2.35s]
 
 セットアップファイルの反映。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ source install/local_setup.bash
+    ubuntu@mbc112:~/ros2_ws$ source install/local_setup.bash
 
 cv_testパッケージのeye_publisherノードの実行
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run cv_test eye_publisher
+    ubuntu@mbc112:~/ros2_ws$ ros2 run cv_test eye_publisher
 
 画像を確認。
 
 .. code-block:: console
 
-    ubuntu@mbc084:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
+    ubuntu@mbc112:~/ros2_ws$ ros2 run rqt_image_view  rqt_image_view
 
 正しく検出できました。
 

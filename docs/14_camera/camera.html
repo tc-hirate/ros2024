@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>14. ラズパイカメラの使い方 &#8212; ros2024 1.0 documentation</title>
+    <title>14. カメラの使い方 &#8212; ros2024 1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/basic_mod.css" />
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
@@ -133,7 +133,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../11_joystick/joystick.html">11. ジョイスティックの使い方</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../12_arduino/arduino.html">12. Arduinoの使い方</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../13_opencv/opencv.html">13. OpenCVの使い方</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">14. ラズパイカメラの使い方</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">14. カメラの使い方</a></li>
 </ul>
 
         </div>
@@ -146,59 +146,15 @@
           <div class="body" role="main">
             
   <section id="id1">
-<h1><span class="section-number">14. </span>ラズパイカメラの使い方<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p>カメラを使って、画像処理をする説明をします。</p>
+<h1><span class="section-number">14. </span>カメラの使い方<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>ノートPCでは内蔵のカメラを、Raspberry PiではWebカメラを使用できるようにします。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 <section id="id2">
-<h2><span class="section-number">14.1. </span>カメラの有効化<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>raspi-configをインストール。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt-get update
-<span class="gp">pi@zumo00:~$ </span>sudo apt-get install raspi-config
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>raspi-configの起動。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo raspi-config
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="14_camera/img/picam_img_01.png" class="align-center" src="14_camera/img/picam_img_01.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>[3 Interface Options]を選択。</p>
-<img alt="14_camera/img/picam_img_02.png" class="align-center" src="14_camera/img/picam_img_02.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>[I1 Legacy Camera]を選択。</p>
-<img alt="14_camera/img/picam_img_03.png" class="align-center" src="14_camera/img/picam_img_03.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>Enableに設定。</p>
-<img alt="14_camera/img/picam_img_04.png" class="align-center" src="14_camera/img/picam_img_04.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>OK。</p>
-<img alt="14_camera/img/picam_img_05.png" class="align-center" src="14_camera/img/picam_img_05.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>終了。</p>
-<img alt="14_camera/img/picam_img_06.png" class="align-center" src="14_camera/img/picam_img_06.png" />
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>再起動。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo shutdown -r now
+<h2><span class="section-number">14.1. </span>必要なパッケージのインストール<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>v4l2-cameraをインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>sudo apt-get install ros-jazzy-v4l2-camera
 </pre></div>
 </div>
 <div class="line-block">
@@ -206,256 +162,66 @@
 </div>
 </section>
 <section id="id3">
-<h2><span class="section-number">14.2. </span>必要なパッケージのインストール<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<p>ユーティリティのインストール。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt install v4l-utils
+<h2><span class="section-number">14.2. </span>カメラの動作確認<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>カメラが認識されているか確認。/dev/video0が表示されていていればOK。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ls /dev/video*
+<span class="go">/dev/video0  /dev/video1</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>カメラが認識されているか確認。エラーが出る。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl --list-devices
-<span class="go">Failed to open /dev/video0: Permission denied</span>
+<p>v4l2_camera_nodeの実行。ERRORやWARNが出るが気にしない。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 run v4l2_camera v4l2_camera_node
+<span class="go">[INFO] [1722820950.278395914] [v4l2_camera]: Driver: uvcvideo</span>
+<span class="go">[INFO] [1722820950.279295594] [v4l2_camera]: Version: 395272</span>
+<span class="go">[INFO] [1722820950.279446354] [v4l2_camera]: Device: Laptop_Integrated_Webcam_E4HD:</span>
+<span class="go">[INFO] [1722820950.279564235] [v4l2_camera]: Location: usb-0000:00:1a.0-1.5</span>
+<span class="go">[INFO] [1722820950.279660733] [v4l2_camera]: Capabilities:</span>
+<span class="go">[INFO] [1722820950.279741726] [v4l2_camera]:   Read/write: NO</span>
+<span class="go">[INFO] [1722820950.279822749] [v4l2_camera]:   Streaming: YES</span>
+<span class="go">[INFO] [1722820950.279968998] [v4l2_camera]: Current pixel format: YUYV @ 640x480</span>
+<span class="go">[INFO] [1722820950.280239623] [v4l2_camera]: Available pixel formats:</span>
+<span class="go">[INFO] [1722820950.280300356] [v4l2_camera]:   YUYV - YUYV 4:2:2</span>
+<span class="go">[INFO] [1722820950.280340087] [v4l2_camera]:   MJPG - Motion-JPEG</span>
+<span class="go">[INFO] [1722820950.280378382] [v4l2_camera]: Available controls:</span>
+<span class="go">[INFO] [1722820950.280430428] [v4l2_camera]:   Brightness (1) = 0</span>
+<span class="go">[INFO] [1722820950.280484977] [v4l2_camera]:   Contrast (1) = 0</span>
+<span class="go">[INFO] [1722820950.280537938] [v4l2_camera]:   Saturation (1) = 64</span>
+<span class="go">[INFO] [1722820950.281556245] [v4l2_camera]:   Hue (1) = 0</span>
+<span class="go">[INFO] [1722820950.282664554] [v4l2_camera]:   White Balance, Automatic (2) = 1</span>
+<span class="go">[INFO] [1722820950.282751183] [v4l2_camera]:   Gamma (1) = 100</span>
+<span class="go">[INFO] [1722820950.282807379] [v4l2_camera]:   Power Line Frequency (3) = 2</span>
+<span class="go">[INFO] [1722820950.284035461] [v4l2_camera]:   White Balance Temperature (1) = 4600 [inactive]</span>
+<span class="go">[INFO] [1722820950.284116277] [v4l2_camera]:   Sharpness (1) = 2</span>
+<span class="go">[INFO] [1722820950.284178199] [v4l2_camera]:   Backlight Compensation (1) = 3</span>
+<span class="go">[INFO] [1722820950.289363242] [v4l2_camera]: Starting camera</span>
+<span class="go">[WARN] [1722820950.898062774] [v4l2_camera]: Image encoding not the same as requested output, performing possibly slow conversion: yuv422_yuy2 =&gt; rgb8</span>
+<span class="go">[INFO] [1722820950.905956512] [v4l2_camera]: using default calibration URL</span>
+<span class="go">[INFO] [1722820950.906033505] [v4l2_camera]: camera calibration URL: file:///home/ubuntu/.ros/camera_info/laptop_integrated_webcam_e4hd:_.yaml</span>
+<span class="go">[ERROR] [1722820950.906127106] [camera_calibration_parsers]: Unable to open camera calibration file [/home/ubuntu/.ros/camera_info/laptop_integrated_webcam_e4hd:_.yaml]</span>
+<span class="go">[WARN] [1722820950.906194530] [v4l2_camera]: Camera calibration file /home/ubuntu/.ros/camera_info/laptop_integrated_webcam_e4hd:_.yaml not found</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>カメラの権限を確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ls /dev/video0 -l
-<span class="go">crw-rw---- 1 root video 81, 12 Mar 20 14:32 /dev/video0</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>カメラの権限を変更。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo chmod <span class="m">777</span> /dev/video0
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>カメラの権限が変更されているか確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ls /dev/video0 -l
-<span class="go">crwxrwxrwx 1 root video 81, 12 Mar 20 14:32 /dev/video0</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>再度、カメラが認識されているか確認。
-/dev/video0が表示されていて、mmal serviceと出ていればOK。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl --list-devices
-<span class="go">mmal service 16.1 (platform:bcm2835-v4l2-0):</span>
-<span class="go">    /dev/video0</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>カメラパッケージのインストール。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>sudo apt-get install ros-iron-v4l2-camera
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>カメラパッケージの実行。
-ERRORやWARNが出るが気にしない。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ros2 run v4l2_camera v4l2_camera_node
-<span class="go">[INFO] [1690932868.971591124] [v4l2_camera]: Driver: bm2835 mmal</span>
-<span class="go">[INFO] [1690932868.972720620] [v4l2_camera]: Version: 331619</span>
-<span class="go">[INFO] [1690932868.972842439] [v4l2_camera]: Device: mmal service 16.1</span>
-<span class="go">[INFO] [1690932868.972927488] [v4l2_camera]: Location: platform:bcm2835-v4l2-0</span>
-<span class="go">[INFO] [1690932868.973019777] [v4l2_camera]: Capabilities:</span>
-<span class="go">[INFO] [1690932868.973087327] [v4l2_camera]:   Read/write: YES</span>
-<span class="go">[INFO] [1690932868.973155658] [v4l2_camera]:   Streaming: YES</span>
-<span class="go">[INFO] [1690932868.973260134] [v4l2_camera]: Current pixel format: JPEG @ 1024x768</span>
-<span class="go">[INFO] [1690932868.975125961] [v4l2_camera]: Available pixel formats:</span>
-<span class="go">[INFO] [1690932868.975221479] [v4l2_camera]:   YU12 - Planar YUV 4:2:0</span>
-<span class="go">[INFO] [1690932868.975325538] [v4l2_camera]:   YUYV - YUYV 4:2:2</span>
-<span class="go">[INFO] [1690932868.975395328] [v4l2_camera]:   RGB3 - 24-bit RGB 8-8-8</span>
-<span class="go">[INFO] [1690932868.975464961] [v4l2_camera]:   JPEG - JFIF JPEG</span>
-<span class="go">[INFO] [1690932868.975548031] [v4l2_camera]:   H264 - H.264</span>
-<span class="go">[INFO] [1690932868.975616831] [v4l2_camera]:   MJPG - Motion-JPEG</span>
-<span class="go">[INFO] [1690932868.975685527] [v4l2_camera]:   YVYU - YVYU 4:2:2</span>
-<span class="go">[INFO] [1690932868.975765108] [v4l2_camera]:   VYUY - VYUY 4:2:2</span>
-<span class="go">[INFO] [1690932868.975846824] [v4l2_camera]:   UYVY - UYVY 4:2:2</span>
-<span class="go">[INFO] [1690932868.975937446] [v4l2_camera]:   NV12 - Y/CbCr 4:2:0</span>
-<span class="go">[INFO] [1690932868.976006767] [v4l2_camera]:   BGR3 - 24-bit BGR 8-8-8</span>
-<span class="go">[INFO] [1690932868.976085306] [v4l2_camera]:   YV12 - Planar YVU 4:2:0</span>
-<span class="go">[INFO] [1690932868.976159731] [v4l2_camera]:   NV21 - Y/CrCb 4:2:0</span>
-<span class="go">[INFO] [1690932868.976227958] [v4l2_camera]:   RX24 - 32-bit XBGR 8-8-8-8</span>
-<span class="go">[INFO] [1690932868.976298164] [v4l2_camera]: Available controls:</span>
-<span class="go">[INFO] [1690932868.976417692] [v4l2_camera]:   Brightness (1) = 50</span>
-<span class="go">[INFO] [1690932868.976505658] [v4l2_camera]:   Contrast (1) = 0</span>
-<span class="go">[INFO] [1690932868.976600498] [v4l2_camera]:   Saturation (1) = 0</span>
-<span class="go">[INFO] [1690932868.976686121] [v4l2_camera]:   Red Balance (1) = 1000</span>
-<span class="go">[INFO] [1690932868.977006892] [v4l2_camera]:   Blue Balance (1) = 1000</span>
-<span class="go">[INFO] [1690932868.977110743] [v4l2_camera]:   Horizontal Flip (2) = 0</span>
-<span class="go">[INFO] [1690932868.977196469] [v4l2_camera]:   Vertical Flip (2) = 0</span>
-<span class="go">[INFO] [1690932868.977279540] [v4l2_camera]:   Power Line Frequency (3) = 1</span>
-<span class="go">[INFO] [1690932868.977362610] [v4l2_camera]:   Sharpness (1) = 0</span>
-<span class="go">[INFO] [1690932868.977454118] [v4l2_camera]:   Color Effects (3) = 0</span>
-<span class="go">[INFO] [1690932868.977536719] [v4l2_camera]:   Rotate (1) = 0</span>
-<span class="go">[INFO] [1690932868.977618592] [v4l2_camera]:   Color Effects, CbCr (1) = 32896</span>
-<span class="go">[ERROR] [1690932868.977764108] [v4l2_camera]: Failed getting value for control 10027009: Permission denied (13); returning 0!</span>
-<span class="go">[INFO] [1690932868.978126076] [v4l2_camera]:   Codec Controls (6) = 0</span>
-<span class="go">[INFO] [1690932868.978245864] [v4l2_camera]:   Video Bitrate Mode (3) = 0</span>
-<span class="go">[INFO] [1690932868.978334923] [v4l2_camera]:   Video Bitrate (1) = 10000000</span>
-<span class="go">[INFO] [1690932868.978429504] [v4l2_camera]:   Repeat Sequence Header (2) = 0</span>
-<span class="go">[ERROR] [1690932868.978520855] [v4l2_camera]: Failed getting value for control 10029541: Permission denied (13); returning 0!</span>
-<span class="go">[INFO] [1690932868.978646320] [v4l2_camera]:   Force Key Frame (4) = 0</span>
-<span class="go">[INFO] [1690932868.978732203] [v4l2_camera]:   H264 Minimum QP Value (1) = 0</span>
-<span class="go">[INFO] [1690932868.978815585] [v4l2_camera]:   H264 Maximum QP Value (1) = 0</span>
-<span class="go">[INFO] [1690932868.978905062] [v4l2_camera]:   H264 I-Frame Period (1) = 60</span>
-<span class="go">[INFO] [1690932868.978989486] [v4l2_camera]:   H264 Level (3) = 11</span>
-<span class="go">[INFO] [1690932868.979071515] [v4l2_camera]:   H264 Profile (3) = 4</span>
-<span class="go">[ERROR] [1690932868.979155887] [v4l2_camera]: Failed getting value for control 10092545: Permission denied (13); returning 0!</span>
-<span class="go">[INFO] [1690932868.979263123] [v4l2_camera]:   Camera Controls (6) = 0</span>
-<span class="go">[INFO] [1690932868.979350308] [v4l2_camera]:   Auto Exposure (3) = 0</span>
-<span class="go">[INFO] [1690932868.979441139] [v4l2_camera]:   Exposure Time, Absolute (1) = 1000</span>
-<span class="go">[INFO] [1690932868.979524938] [v4l2_camera]:   Exposure, Dynamic Framerate (2) = 0</span>
-<span class="go">[INFO] [1690932868.979607800] [v4l2_camera]:   Auto Exposure, Bias (9) = 12</span>
-<span class="go">[INFO] [1690932868.979690662] [v4l2_camera]:   White Balance, Auto &amp; Preset (3) = 1</span>
-<span class="go">[INFO] [1690932868.979773160] [v4l2_camera]:   Image Stabilization (2) = 0</span>
-<span class="go">[INFO] [1690932868.979856386] [v4l2_camera]:   ISO Sensitivity (9) = 0</span>
-<span class="go">[INFO] [1690932868.979946019] [v4l2_camera]:   ISO Sensitivity, Auto (3) = 1</span>
-<span class="go">[INFO] [1690932868.980028308] [v4l2_camera]:   Exposure, Metering Mode (3) = 0</span>
-<span class="go">[INFO] [1690932868.980110701] [v4l2_camera]:   Scene Mode (3) = 0</span>
-<span class="go">[ERROR] [1690932868.980264134] [v4l2_camera]: Failed getting value for control 10289153: Permission denied (13); returning 0!</span>
-<span class="go">[INFO] [1690932868.980448243] [v4l2_camera]:   JPEG Compression Controls (6) = 0</span>
-<span class="go">[INFO] [1690932868.980540583] [v4l2_camera]:   Compression Quality (1) = 30</span>
-<span class="go">[INFO] [1690932868.984375515] [v4l2_camera]: Requesting format: 1024x768 YUYV</span>
-<span class="go">[INFO] [1690932868.989716286] [v4l2_camera]: Success</span>
-<span class="go">[INFO] [1690932868.990578498] [v4l2_camera]: Requesting format: 640x480 YUYV</span>
-<span class="go">[INFO] [1690932868.991413472] [v4l2_camera]: Success</span>
-<span class="go">[WARN] [1690932868.993148522] [v4l2_camera]: Control type not currently supported: 6, for control: Codec Controls</span>
-<span class="go">[WARN] [1690932868.993662256] [v4l2_camera]: Control type not currently supported: 4, for control: Force Key Frame</span>
-<span class="go">[WARN] [1690932868.994705036] [v4l2_camera]: Control type not currently supported: 6, for control: Camera Controls</span>
-<span class="go">[WARN] [1690932868.995408034] [v4l2_camera]: Control type not currently supported: 9, for control: Auto Exposure, Bias</span>
-<span class="go">[WARN] [1690932868.995902446] [v4l2_camera]: Control type not currently supported: 9, for control: ISO Sensitivity</span>
-<span class="go">[WARN] [1690932868.996506125] [v4l2_camera]: Control type not currently supported: 6, for control: JPEG Compression Controls</span>
-<span class="go">[INFO] [1690932868.996804657] [v4l2_camera]: Starting camera</span>
-<span class="go">[WARN] [1690932869.777105331] [v4l2_camera]: Image encoding not the same as requested output, performing possibly slow conversion: yuv422_yuy2 =&gt; rgb8</span>
-<span class="go">[INFO] [1690932869.817848274] [v4l2_camera]: using default calibration URL</span>
-<span class="go">[INFO] [1690932869.818274458] [v4l2_camera]: camera calibration URL: file:///home/pi/.ros/camera_info/mmal_service_16.1.yaml</span>
-<span class="go">[ERROR] [1690932869.818839493] [camera_calibration_parsers]: Unable to open camera calibration file [/home/pi/.ros/camera_info/mmal_service_16.1.yaml]</span>
-<span class="go">[WARN] [1690932869.819140525] [v4l2_camera]: Camera calibration file /home/pi/.ros/camera_info/mmal_service_16.1.yaml not found</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>トピックの確認。/image_rawがカメラからのデータ。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>ros2 topic list
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 topic list
 <span class="go">/camera_info</span>
 <span class="go">/image_raw</span>
 <span class="go">/parameter_events</span>
 <span class="go">/rosout</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>次に、PCでカメラのデータが受信できるか確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 topic list
-<span class="go">/camera_info</span>
-<span class="go">/image_raw</span>
-<span class="go">/parameter_events</span>
-<span class="go">/rosout</span>
+<p>rqt_image_viewで画像を表示。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 run rqt_image_view rqt_image_view
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>rqt_image_viewで表示。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span>ros2 run rqt_image_view rqt_image_view
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<img alt="14_camera/img/picam_img_07.png" class="align-center" src="14_camera/img/picam_img_07.png" />
+<img alt="../_images/camera_img_01.png" src="../_images/camera_img_01.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
 <section id="id4">
-<h2><span class="section-number">14.3. </span>フレームレートを確認・変更する方法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>カメラのフォーマットを確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl --list-formats-ext
-<span class="go">ioctl: VIDIOC_ENUM_FMT</span>
-<span class="go">    Type: Video Capture</span>
-
-<span class="go">    [0]: &#39;YU12&#39; (Planar YUV 4:2:0)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [1]: &#39;YUYV&#39; (YUYV 4:2:2)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [2]: &#39;RGB3&#39; (24-bit RGB 8-8-8)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [3]: &#39;JPEG&#39; (JFIF JPEG, compressed)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [4]: &#39;H264&#39; (H.264, compressed)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [5]: &#39;MJPG&#39; (Motion-JPEG, compressed)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [6]: &#39;YVYU&#39; (YVYU 4:2:2)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [7]: &#39;VYUY&#39; (VYUY 4:2:2)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [8]: &#39;UYVY&#39; (UYVY 4:2:2)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [9]: &#39;NV12&#39; (Y/CbCr 4:2:0)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [10]: &#39;BGR3&#39; (24-bit BGR 8-8-8)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [11]: &#39;YV12&#39; (Planar YVU 4:2:0)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [12]: &#39;NV21&#39; (Y/CrCb 4:2:0)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-<span class="go">    [13]: &#39;RX24&#39; (32-bit XBGR 8-8-8-8)</span>
-<span class="go">        Size: Stepwise 32x32 - 3280x2464 with step 2/2</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>カメラのフレームレートを確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl -P
-<span class="go">Streaming Parameters Video Capture:</span>
-<span class="go">    Capabilities     : timeperframe</span>
-<span class="go">    Frames per second: 30.000 (30000/1000)</span>
-<span class="go">    Read buffers     : 1</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>カメラのフレームレートを変更。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl -p <span class="m">5</span>
-<span class="go">Frame rate set to 5.000 fps</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>変更したカメラのフレームレートを確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo00:~$ </span>v4l2-ctl -P
-<span class="go">Streaming Parameters Video Capture:</span>
-<span class="go">    Capabilities     : timeperframe</span>
-<span class="go">    Frames per second: 5.000 (5000/1000)</span>
-<span class="go">    Read buffers     : 1</span>
-</pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</section>
-<section id="id5">
-<h2><span class="section-number">14.4. </span>画像処理をするプログラムを作る<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">14.3. </span>画像処理をするプログラムを作る<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>カメラで取得した画像をグレースケールに変換して表示してみましょう。</p>
 <p>パケージはcv_test、ファイル名はcam_gray.pyとします。</p>
 <p>画像処理は次の手順で行っています。ラズパイカメラから取得した画像はROSのImage型であることに注意してください。</p>
@@ -468,22 +234,21 @@ ERRORやWARNが出るが気にしない。</p>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>gray.pyをコピーしてcam_gray.pyを作ってください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~$ </span><span class="nb">cd</span> ~/ros2_ws/
-<span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/gray.py src/cv_test/cv_test/cam_gray.py
+<p>ワークスペースへ移動。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span><span class="nb">cd</span> ~/ros2_ws/
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<p>gray.pyをコピーしてcam_gray.pyを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>cp src/cv_test/cv_test/gray.py src/cv_test/cv_test/cam_gray.py
+</pre></div>
 </div>
 <p>cam_gray.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/cam_gray.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/cam_gray.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">cam_gray.py</span><a class="headerlink" href="#id6" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -503,9 +268,9 @@ ERRORやWARNが出るが気にしない。</p>
 </span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span>
 </span>        <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span> <span class="o">=</span> <span class="n">CvBridge</span><span class="p">()</span>
 
-<span class="hll">    <span class="k">def</span> <span class="nf">camera_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-</span>        <span class="n">cv_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">imgmsg_to_cv2</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-        <span class="n">cv_gray_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
+<span class="hll"><span class="k">def</span> <span class="nf">camera_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class="hll">        <span class="n">cv_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">imgmsg_to_cv2</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span>        <span class="n">cv_gray_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
         <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_gray_image</span><span class="p">,</span> <span class="s1">&#39;mono8&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
 
@@ -525,25 +290,22 @@ ERRORやWARNが出るが気にしない。</p>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id7" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
 
 <span class="n">setup</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
-    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="n">package_name</span><span class="p">],</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]),</span>
     <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
             <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
@@ -571,58 +333,56 @@ ERRORやWARNが出るが気にしない。</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.26s]</span>
+
+<span class="go">Summary: 1 package finished [2.54s]</span>
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>cv_testパッケージのcam_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test cam_publisher
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test cam_publisher
+</pre></div>
+</div>
+<p>v4l2_camera_nodeの実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run v4l2_camera v4l2_camera_node
+</pre></div>
+</div>
+<p>rqt_image_viewで画像を表示。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view rqt_image_view
 </pre></div>
 </div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
-</pre></div>
-</div>
+<img alt="../_images/camera_img_02.png" src="../_images/camera_img_02.png" />
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
 </section>
-<section id="id6">
-<h2><span class="section-number">14.5. </span>演習4「カメラで取得した画像から顔を検出する」<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
-<section id="id7">
-<h3><span class="section-number">14.5.1. </span>（１）カメラの画像を使って、顔認識するプログラムを作ってください。<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<section id="id5">
+<h2><span class="section-number">14.4. </span>演習1「カメラの画像を使って、顔認識するプログラムを作ってください」<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <p>ファイル名は「cam_face_detect.py」とします。</p>
-<p>face_detect.pyをコピーしてcam_face_detect.pyを作ってください。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/cam_face_detect.py
-</pre></div>
-</div>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>cam_gray.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/cam_face_detect.py
+<p>face_detect.pyをコピーしてcam_face_detect.pyを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/cam_face_detect.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<p>cam_face_detect.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/cam_face_detect.py
+</pre></div>
 </div>
 <p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">cam_face_detect.py</span><a class="headerlink" href="#id8" title="Permalink to this code">¶</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">rclpy</span>
 <span class="kn">from</span> <span class="nn">rclpy.node</span> <span class="kn">import</span> <span class="n">Node</span>
 <span class="kn">from</span> <span class="nn">sensor_msgs.msg</span> <span class="kn">import</span> <span class="n">Image</span>
@@ -642,23 +402,23 @@ ERRORやWARNが出るが気にしない。</p>
 </span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">subscription</span>
 </span>        <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span> <span class="o">=</span> <span class="n">CvBridge</span><span class="p">()</span>
 
-<span class="hll">    <span class="k">def</span> <span class="nf">camera_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
-</span><span class="hll">        <span class="n">cv_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">imgmsg_to_cv2</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-</span><span class="hll">        <span class="n">cv_rotate_image</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">ROTATE_180</span><span class="p">)</span>
+<span class="hll">
+</span><span class="hll"><span class="k">def</span> <span class="nf">camera_callback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+</span><span class="hll">        <span class="n">cv_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">imgmsg_to_cv2</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s1">&#39;bgr8&#39;</span><span class="p">)</span>
 </span>
-        <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;/usr/share/opencv4/haarcascades/haarcascade_frontalface_default.xml&#39;</span>
+        <span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;/usr/share/opencv4/haarcascades/haarcascade_frontalface_def&gt;</span>
         <span class="n">cascade</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">CascadeClassifier</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
-        <span class="n">face</span> <span class="o">=</span> <span class="n">cascade</span><span class="o">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">cv_rotate_image</span><span class="p">)</span>
+        <span class="n">face</span> <span class="o">=</span> <span class="n">cascade</span><span class="o">.</span><span class="n">detectMultiScale</span><span class="p">(</span><span class="n">cv_image</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">face</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">face</span><span class="p">:</span>
                 <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
                 <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">r</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-                <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">cv_rotate_image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">),</span> <span class="n">thickness</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">cv2</span><span class="o">.</span><span class="n">rectangle</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="o">&gt;</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s1">&#39;not detect face&#39;</span><span class="p">)</span>
 
-        <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_rotate_image</span><span class="p">,</span> <span class="s1">&#39;bgr8&#39;</span><span class="p">)</span>
+        <span class="n">ros_image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bridge</span><span class="o">.</span><span class="n">cv2_to_imgmsg</span><span class="p">(</span><span class="n">cv_image</span><span class="p">,</span> <span class="s1">&#39;bgr8&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">publisher_</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">ros_image</span><span class="p">)</span>
 
 
@@ -677,25 +437,22 @@ ERRORやWARNが出るが気にしない。</p>
     <span class="n">main</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
 <p>編集。</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id9" title="Permalink to this code">¶</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">find_packages</span><span class="p">,</span> <span class="n">setup</span>
 
 <span class="n">package_name</span> <span class="o">=</span> <span class="s1">&#39;cv_test&#39;</span>
 
 <span class="n">setup</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="n">package_name</span><span class="p">,</span>
     <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0.0.0&#39;</span><span class="p">,</span>
-    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="n">package_name</span><span class="p">],</span>
+    <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;test&#39;</span><span class="p">]),</span>
     <span class="n">data_files</span><span class="o">=</span><span class="p">[</span>
         <span class="p">(</span><span class="s1">&#39;share/ament_index/resource_index/packages&#39;</span><span class="p">,</span>
             <span class="p">[</span><span class="s1">&#39;resource/&#39;</span> <span class="o">+</span> <span class="n">package_name</span><span class="p">]),</span>
@@ -724,29 +481,29 @@ ERRORやWARNが出るが気にしない。</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
-</pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<p>ビルド。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.14s]</span>
+
+<span class="go">Summary: 1 package finished [2.37s]</span>
+</pre></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>cv_testパッケージのgray_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test cam_face_publisher
+<p>cv_testパッケージのcam_face_publisherノードの実行</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test cam_face_publisher
 </pre></div>
 </div>
-<div class="line-block">
-<div class="line"><br /></div>
+<p>v4l2_camera_nodeの実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run v4l2_camera v4l2_camera_node
+</pre></div>
 </div>
-<p>確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
+<p>rqt_image_viewで画像を表示。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view rqt_image_view
 </pre></div>
 </div>
 <div class="line-block">
@@ -754,10 +511,117 @@ ERRORやWARNが出るが気にしない。</p>
 </div>
 </section>
 <section id="cam-face-detect-pylaunch">
-<h3><span class="section-number">14.5.2. </span>（２）cam_face_detect.pyを実行するlaunchファイルを作ってください。<a class="headerlink" href="#cam-face-detect-pylaunch" title="Permalink to this headline">¶</a></h3>
+<h2><span class="section-number">14.5. </span>演習2「cam_face_detect.pyを実行するlaunchファイルを作ってください」<a class="headerlink" href="#cam-face-detect-pylaunch" title="Permalink to this headline">¶</a></h2>
 <p>ファイル名はcam_face_detect_launch_pyとします。</p>
-<p>PCからRaspberry Piのカメラを起動できる？</p>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>launchディレクトリを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>mkdir src/cv_test/launch
+</pre></div>
+</div>
+<p>cam_face_detect_launch.pyを作成。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/launch/cam_face_detect_launch.py
+</pre></div>
+</div>
+<p>編集。</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">cam_face_detect_launch.py</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">from launch import LaunchDescription</span>
+<span class="go">from launch_ros.actions import Node</span>
+
+<span class="go">def generate_launch_description():</span>
+<span class="go">    return LaunchDescription([</span>
+<span class="go">        Node(</span>
+<span class="go">            name=&quot;camera&quot;,</span>
+<span class="go">            package=&quot;v4l2_camera&quot;,</span>
+<span class="go">            executable=&quot;v4l2_camera_node&quot;,</span>
+<span class="go">        ),</span>
+<span class="go">        Node(</span>
+<span class="go">            name=&quot;view&quot;,</span>
+<span class="go">            package=&quot;rqt_image_view&quot;,</span>
+<span class="go">            executable=&quot;rqt_image_view&quot;,</span>
+<span class="go">        ),</span>
+<span class="go">        Node(</span>
+<span class="go">            name=&quot;cam_face&quot;,</span>
+<span class="go">            package=&quot;cv_test&quot;,</span>
+<span class="go">            executable=&quot;cam_face_publisher&quot;,</span>
+<span class="go">        ),</span>
+<span class="go">    ])</span>
+</pre></div>
+</div>
+</div>
+<p>setup.pyを開く。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
+</pre></div>
+</div>
+<p>編集。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">:emphasize-lines: 1-2, 16</span>
+<span class="go">:caption: setup.py</span>
+
+<span class="go">import os</span>
+<span class="go">from glob import glob</span>
+
+<span class="go">from setuptools import find_packages, setup</span>
+
+<span class="go">package_name = &#39;cv_test&#39;</span>
+
+<span class="go">setup(</span>
+<span class="go">    name=package_name,</span>
+<span class="go">    version=&#39;0.0.0&#39;,</span>
+<span class="go">    packages=find_packages(exclude=[&#39;test&#39;]),</span>
+<span class="go">    data_files=[</span>
+<span class="go">        (&#39;share/ament_index/resource_index/packages&#39;,</span>
+<span class="go">            [&#39;resource/&#39; + package_name]),</span>
+<span class="go">        (&#39;share/&#39; + package_name, [&#39;package.xml&#39;]),</span>
+<span class="go">        (os.path.join(&#39;share&#39;, package_name), glob(&#39;launch/*_launch.py&#39;)),</span>
+<span class="go">    ],</span>
+<span class="go">    install_requires=[&#39;setuptools&#39;],</span>
+<span class="go">    zip_safe=True,</span>
+<span class="go">    maintainer=&#39;ubuntu&#39;,</span>
+<span class="go">    maintainer_email=&#39;ubuntu@todo.todo&#39;,</span>
+<span class="go">    description=&#39;TODO: Package description&#39;,</span>
+<span class="go">    license=&#39;TODO: License declaration&#39;,</span>
+<span class="go">    tests_require=[&#39;pytest&#39;],</span>
+<span class="go">    entry_points={</span>
+<span class="go">        &#39;console_scripts&#39;: [</span>
+<span class="go">            &#39;img_publisher = cv_test.image_view:main&#39;,</span>
+<span class="go">            &#39;gray_publisher = cv_test.gray:main&#39;,</span>
+<span class="go">            &#39;circle_publisher = cv_test.circle:main&#39;,</span>
+<span class="go">            &#39;binary_publisher = cv_test.binary:main&#39;,</span>
+<span class="go">            &#39;edge_publisher = cv_test.edge:main&#39;,</span>
+<span class="go">            &#39;face_publisher = cv_test.face_detect:main&#39;,</span>
+<span class="go">            &#39;eye_publisher = cv_test.eye_detect:main&#39;,</span>
+<span class="go">            &#39;cam_publisher = cv_test.cam_gray:main&#39;,</span>
+<span class="go">            &#39;cam_face_publisher = cv_test.cam_face_detect:main&#39;,</span>
+<span class="go">        ],</span>
+<span class="go">    },</span>
+<span class="go">)</span>
+</pre></div>
+</div>
+<p>ビルド。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.03s]</span>
+
+<span class="go">Summary: 1 package finished [2.25s]</span>
+</pre></div>
+</div>
+<p>セットアップファイルの反映。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/setup.bash
+</pre></div>
+</div>
+<p>launchファイルの実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 launch cv_test cam_face_detect_launch.py
+</pre></div>
+</div>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 </section>
+<section id="raspberry-piwebpc">
+<h2><span class="section-number">14.6. </span>演習3「Raspberry Piに接続したWebカメラの画像をPCに表示してください」<a class="headerlink" href="#raspberry-piwebpc" title="Permalink to this headline">¶</a></h2>
+<p>PCからRaspberry Piのカメラを起動できる？</p>
 </section>
 </section>
 
@@ -775,16 +639,13 @@ ERRORやWARNが出るが気にしない。</p>
             <p><a class="toggle_right_sidebar" href="#"><span class="icon">&gt;</span><span>Page contents:</span></a></p>
             <div class="page_toc">
                 <ul>
-<li><a class="reference internal" href="#">14. ラズパイカメラの使い方</a><ul>
-<li><a class="reference internal" href="#id2">14.1. カメラの有効化</a></li>
-<li><a class="reference internal" href="#id3">14.2. 必要なパッケージのインストール</a></li>
-<li><a class="reference internal" href="#id4">14.3. フレームレートを確認・変更する方法</a></li>
-<li><a class="reference internal" href="#id5">14.4. 画像処理をするプログラムを作る</a></li>
-<li><a class="reference internal" href="#id6">14.5. 演習4「カメラで取得した画像から顔を検出する」</a><ul>
-<li><a class="reference internal" href="#id7">14.5.1. （１）カメラの画像を使って、顔認識するプログラムを作ってください。</a></li>
-<li><a class="reference internal" href="#cam-face-detect-pylaunch">14.5.2. （２）cam_face_detect.pyを実行するlaunchファイルを作ってください。</a></li>
-</ul>
-</li>
+<li><a class="reference internal" href="#">14. カメラの使い方</a><ul>
+<li><a class="reference internal" href="#id2">14.1. 必要なパッケージのインストール</a></li>
+<li><a class="reference internal" href="#id3">14.2. カメラの動作確認</a></li>
+<li><a class="reference internal" href="#id4">14.3. 画像処理をするプログラムを作る</a></li>
+<li><a class="reference internal" href="#id5">14.4. 演習1「カメラの画像を使って、顔認識するプログラムを作ってください」</a></li>
+<li><a class="reference internal" href="#cam-face-detect-pylaunch">14.5. 演習2「cam_face_detect.pyを実行するlaunchファイルを作ってください」</a></li>
+<li><a class="reference internal" href="#raspberry-piwebpc">14.6. 演習3「Raspberry Piに接続したWebカメラの画像をPCに表示してください」</a></li>
 </ul>
 </li>
 </ul>

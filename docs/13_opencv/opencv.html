@@ -936,7 +936,7 @@
 <div class="line"><br /></div>
 </div>
 <p>face_detect.pyの作成。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/face_detect.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/face_detect.py
 </pre></div>
 </div>
 <p>編集</p>
@@ -993,7 +993,7 @@
 </div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
 <p>編集。</p>
@@ -1034,19 +1034,23 @@
 </div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.22s]</span>
+
+<span class="go">Summary: 1 package finished [2.44s]</span>
 </pre></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
 </div>
 <p>cv_testパッケージのface_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test face_publisher
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test face_publisher
 </pre></div>
 </div>
 <p>画像を確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
 <p>少しずれてしまいました。</p>
@@ -1067,11 +1071,11 @@
 <div class="line"><br /></div>
 </div>
 <p>face_detect.pyをコピーしてeye_detect.pyを作成。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/eye_detect.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>cp src/cv_test/cv_test/face_detect.py src/cv_test/cv_test/eye_detect.py
 </pre></div>
 </div>
 <p>eye_detect.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/cv_test/eye_detect.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/cv_test/eye_detect.py
 </pre></div>
 </div>
 <p>編集。</p>
@@ -1128,7 +1132,7 @@
 </div>
 </div>
 <p>setup.pyを開く。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>nano src/cv_test/setup.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>nano src/cv_test/setup.py
 </pre></div>
 </div>
 <p>編集。</p>
@@ -1170,19 +1174,23 @@
 </div>
 </div>
 <p>ビルド。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test
+<span class="go">Starting &gt;&gt;&gt; cv_test</span>
+<span class="go">Finished &lt;&lt;&lt; cv_test [2.13s]</span>
+
+<span class="go">Summary: 1 package finished [2.35s]</span>
 </pre></div>
 </div>
 <p>セットアップファイルの反映。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span><span class="nb">source</span> install/local_setup.bash
 </pre></div>
 </div>
 <p>cv_testパッケージのeye_publisherノードの実行</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run cv_test eye_publisher
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run cv_test eye_publisher
 </pre></div>
 </div>
 <p>画像を確認。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc084:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>ros2 run rqt_image_view  rqt_image_view
 </pre></div>
 </div>
 <p>正しく検出できました。</p>
