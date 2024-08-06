@@ -621,7 +621,48 @@
 </section>
 <section id="raspberry-piwebpc">
 <h2><span class="section-number">14.6. </span>演習3「Raspberry Piに接続したWebカメラの画像をPCに表示してください」<a class="headerlink" href="#raspberry-piwebpc" title="Permalink to this headline">¶</a></h2>
+<p>パッケージのアップデート。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo apt-get update
+</pre></div>
+</div>
+<p>v4l2-cameraをインストール。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>sudo apt-get install ros-jazzy-v4l2-camera
+</pre></div>
+</div>
+<p>カメラが認識されているか確認。/dev/video0が表示されていていればOK。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>ls /dev/video*
+<span class="go">/dev/video0   /dev/video23  /dev/video29  /dev/video35</span>
+<span class="go">/dev/video1   /dev/video24  /dev/video30  /dev/video36</span>
+<span class="go">/dev/video19  /dev/video25  /dev/video31  /dev/video37</span>
+<span class="go">/dev/video20  /dev/video26  /dev/video32</span>
+<span class="go">/dev/video21  /dev/video27  /dev/video33</span>
+<span class="go">/dev/video22  /dev/video28  /dev/video34</span>
+</pre></div>
+</div>
+<p>v4l2_camera_nodeの実行。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">pi@zumo01:~$ </span>ros2 run v4l2_camera v4l2_camera_node
+</pre></div>
+</div>
+<p>トピックの確認。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 topic list
+<span class="go">/camera_info</span>
+<span class="go">/image_raw</span>
+<span class="go">/parameter_events</span>
+<span class="go">/rosout</span>
+</pre></div>
+</div>
+<p>rqt_image_viewで画像を表示。</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~$ </span>ros2 run rqt_image_view rqt_image_view
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>rqt_image_viewが正常に動作しない？</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>PCからRaspberry Piのカメラを起動できる？</p>
+</div>
 </section>
 </section>
 

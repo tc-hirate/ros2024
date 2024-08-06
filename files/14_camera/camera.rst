@@ -535,4 +535,57 @@ launchファイルの実行。
 演習3「Raspberry Piに接続したWebカメラの画像をPCに表示してください」
 ====================================================================
 
-PCからRaspberry Piのカメラを起動できる？
+パッケージのアップデート。
+
+.. code-block:: console
+
+    pi@zumo01:~$ sudo apt-get update
+
+v4l2-cameraをインストール。
+
+.. code-block:: console
+
+    pi@zumo01:~$ sudo apt-get install ros-jazzy-v4l2-camera
+
+
+カメラが認識されているか確認。/dev/video0が表示されていていればOK。
+
+.. code-block:: console
+
+    pi@zumo01:~$ ls /dev/video*
+    /dev/video0   /dev/video23  /dev/video29  /dev/video35
+    /dev/video1   /dev/video24  /dev/video30  /dev/video36
+    /dev/video19  /dev/video25  /dev/video31  /dev/video37
+    /dev/video20  /dev/video26  /dev/video32
+    /dev/video21  /dev/video27  /dev/video33
+    /dev/video22  /dev/video28  /dev/video34
+
+v4l2_camera_nodeの実行。
+
+.. code-block:: console
+
+    pi@zumo01:~$ ros2 run v4l2_camera v4l2_camera_node
+
+トピックの確認。
+
+.. code-block:: console
+
+    ubuntu@mbc112:~$ ros2 topic list
+    /camera_info
+    /image_raw
+    /parameter_events
+    /rosout
+
+rqt_image_viewで画像を表示。
+
+.. code-block:: console
+
+    ubuntu@mbc112:~$ ros2 run rqt_image_view rqt_image_view
+
+.. note::
+
+    rqt_image_viewが正常に動作しない？
+
+.. note::
+
+    PCからRaspberry Piのカメラを起動できる？
