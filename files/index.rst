@@ -19,3 +19,5 @@ ROSロボットプログラミング
    ./12_arduino/arduino
    ./13_opencv/opencv
    ./14_camera/camera
+   ./15_vscode/vscode
+   ./16_rosbridge/rosbridge
