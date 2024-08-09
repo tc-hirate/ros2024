@@ -44,7 +44,7 @@ Raspberry Pi Imagerを起動。
 
 .. image:: ./images/linux_install_pi_img_05.png
 
-［Ubuntu Server 24.04.2 LTS (64bit)］を選択。
+［Ubuntu Server 24.04 LTS (64bit)］を選択。
 
 .. image:: ./images/linux_install_pi_img_06.png
 
