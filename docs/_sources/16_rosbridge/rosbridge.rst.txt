@@ -101,10 +101,14 @@ v4l2_camera_nodeを実行。
 
     pi@zumo01:~/ros2_ws$ ros2 run v4l2_camera v4l2_camera_node
 
-左上のバーガーメニューから「image-raw」を選択。
+左上のバーガーメニューをクリック。
 
 .. image:: ./images/rosbridge_img_02.png
 
-カメラの映像が表示される。
+「image-raw」を選択。
 
 .. image:: ./images/rosbridge_img_03.png
+
+カメラの映像が表示される。
+
+.. image:: ./images/rosbridge_img_04.png
