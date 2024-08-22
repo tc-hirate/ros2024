@@ -131,7 +131,7 @@ Raspberry Piを終了。
 
 .. code-block:: console
 
-    pi@zumo01:~$ sudo shutdown -h now
+    pi@zumo01:~$ sudo poweroff
 
 wifiでネットワークに接続されているか確認します。
 LANケーブルを抜いてからRaspberry Piの電源を入れてください。
