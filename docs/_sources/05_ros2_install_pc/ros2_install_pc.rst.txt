@@ -89,7 +89,7 @@ ROS2のインストール。
 
 .. code-block:: console
 
-    ubuntu@mbc112:~$ source /opt/ros/iron/setup.bash
+    ubuntu@mbc112:~$ source /opt/ros/jazzy/setup.bash
 
 .. code-block:: console
 
@@ -110,7 +110,7 @@ ROS2のインストール。
 
 .. code-block:: console
 
-    ubuntu@mbc112:~$ source /opt/ros/iron/setup.bash
+    ubuntu@mbc112:~$ source /opt/ros/jazzy/setup.bash
 
 .. code-block:: console
 
