@@ -366,50 +366,6 @@ turtle_joy.pyを開く。
 
 編集。
 
-.. code-block:: python
-    :caption: turtle_joy.py
-
-    import rclpy
-    from rclpy.node import Node
-
-    from std_msgs.msg import String
-    from geometry_msgs.msg import Twist
-    from sensor_msgs.msg import Joy
-
-    class JoyTwist(Node):
-
-        def __init__(self):
-            super().__init__('joy_twist')
-            self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
-            self.subscription = self.create_subscription(
-                Joy,
-                'joy',
-                self.joy_callback,
-                10)
-            self.subscription
-
-        def joy_callback(self, joy_msg):
-            # your code
-            
-            self.publisher_.publish(twist)
-
-    def main(args=None):
-        rclpy.init(args=args)
-
-        joy_twist = JoyTwist()
-
-        rclpy.spin(joy_twist)
-
-        # Destroy the node explicitly
-        # (optional - otherwise it will be done automatically
-        # when the garbage collector destroys the node object)
-        joy_twist.destroy_node()
-        rclpy.shutdown()
-
-
-    if __name__ == '__main__':
-        main()
-
 .. .. code-block:: python
 ..     :caption: turtle_joy.py
 
@@ -433,17 +389,8 @@ turtle_joy.pyを開く。
 ..             self.subscription
 
 ..         def joy_callback(self, joy_msg):
-..             twist = Twist()
-..             if joy_msg.axes[7] == 1:
-..                 twist.linear.x = 2.0
-..             elif joy_msg.axes[7] == -1:
-..                 twist.linear.x = -2.0
-..             elif joy_msg.axes[6] == 1:
-..                 twist.angular.z = 2.0
-..             elif joy_msg.axes[6] == -1:
-..                 twist.angular.z = -2.0
-..             else:
-..                 twist.linear.x = 0.0
+..             # your code
+            
 ..             self.publisher_.publish(twist)
 
 ..     def main(args=None):
@@ -462,6 +409,59 @@ turtle_joy.pyを開く。
 
 ..     if __name__ == '__main__':
 ..         main()
+
+.. code-block:: python
+    :caption: turtle_joy.py
+
+    import rclpy
+    from rclpy.node import Node
+
+    from std_msgs.msg import String
+    from geometry_msgs.msg import Twist
+    from sensor_msgs.msg import Joy
+
+    class JoyTwist(Node):
+
+        def __init__(self):
+            super().__init__('joy_twist')
+            self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
+            self.subscription = self.create_subscription(
+                Joy,
+                'joy',
+                self.joy_callback,
+                10)
+            self.subscription
+
+        def joy_callback(self, joy_msg):
+            twist = Twist()
+            if joy_msg.axes[7] == 1:
+                twist.linear.x = 2.0
+            elif joy_msg.axes[7] == -1:
+                twist.linear.x = -2.0
+            elif joy_msg.axes[6] == 1:
+                twist.angular.z = 2.0
+            elif joy_msg.axes[6] == -1:
+                twist.angular.z = -2.0
+            else:
+                twist.linear.x = 0.0
+            self.publisher_.publish(twist)
+
+    def main(args=None):
+        rclpy.init(args=args)
+
+        joy_twist = JoyTwist()
+
+        rclpy.spin(joy_twist)
+
+        # Destroy the node explicitly
+        # (optional - otherwise it will be done automatically
+        # when the garbage collector destroys the node object)
+        joy_twist.destroy_node()
+        rclpy.shutdown()
+
+
+    if __name__ == '__main__':
+        main()
 
 package.xmlを開く。
 
