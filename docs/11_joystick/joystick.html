@@ -328,8 +328,24 @@
 
 <span class="k">def</span> <span class="nf">generate_launch_description</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">LaunchDescription</span><span class="p">([</span>
-        <span class="c1"># your code</span>
-
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sim&quot;</span><span class="p">,</span>
+            <span class="n">package</span><span class="o">=</span><span class="s2">&quot;turtlesim&quot;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;turtlesim_node&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;joy&quot;</span><span class="p">,</span>
+            <span class="n">package</span><span class="o">=</span><span class="s2">&quot;joy&quot;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;joy_node&quot;</span><span class="p">,</span>
+        <span class="p">),</span>
+        <span class="n">Node</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;teleop&quot;</span><span class="p">,</span>
+            <span class="n">package</span><span class="o">=</span><span class="s2">&quot;teleop_twist_joy&quot;</span><span class="p">,</span>
+            <span class="n">executable</span><span class="o">=</span><span class="s2">&quot;teleop_node&quot;</span><span class="p">,</span>
+            <span class="n">remappings</span><span class="o">=</span><span class="p">[</span>
+                <span class="p">(</span><span class="s1">&#39;/cmd_vel&#39;</span><span class="p">,</span> <span class="s1">&#39;/turtle1/cmd_vel&#39;</span><span class="p">),</span>
+            <span class="p">],</span>
+        <span class="p">),</span>
     <span class="p">])</span>
 </pre></div>
 </div>

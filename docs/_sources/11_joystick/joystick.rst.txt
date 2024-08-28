@@ -212,18 +212,6 @@ turtle_teleop_joy_launch.pyを開く。
 
 編集。
 
-.. code-block:: python
-    :caption: turtle_teleop_joy_launch.py
-
-    from launch import LaunchDescription
-    from launch_ros.actions import Node
-
-    def generate_launch_description():
-        return LaunchDescription([
-            # your code
-
-        ])
-
 .. .. code-block:: python
 ..     :caption: turtle_teleop_joy_launch.py
 
@@ -232,25 +220,37 @@ turtle_teleop_joy_launch.pyを開く。
 
 ..     def generate_launch_description():
 ..         return LaunchDescription([
-..             Node(
-..                 name="sim",
-..                 package="turtlesim",
-..                 executable="turtlesim_node",
-..             ),
-..             Node(
-..                 name="joy",
-..                 package="joy",
-..                 executable="joy_node",
-..             ),
-..             Node(
-..                 name="teleop",
-..                 package="teleop_twist_joy",
-..                 executable="teleop_node",
-..                 remappings=[
-..                     ('/cmd_vel', '/turtle1/cmd_vel'),
-..                 ],
-..             ),
+..             # your code
+
 ..         ])
+
+.. code-block:: python
+    :caption: turtle_teleop_joy_launch.py
+
+    from launch import LaunchDescription
+    from launch_ros.actions import Node
+
+    def generate_launch_description():
+        return LaunchDescription([
+            Node(
+                name="sim",
+                package="turtlesim",
+                executable="turtlesim_node",
+            ),
+            Node(
+                name="joy",
+                package="joy",
+                executable="joy_node",
+            ),
+            Node(
+                name="teleop",
+                package="teleop_twist_joy",
+                executable="teleop_node",
+                remappings=[
+                    ('/cmd_vel', '/turtle1/cmd_vel'),
+                ],
+            ),
+        ])
 
 joy_testディレクトリ（1つ上のディレクトリ）へ移動。
 
