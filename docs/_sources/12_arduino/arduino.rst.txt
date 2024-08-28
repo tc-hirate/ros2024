@@ -620,10 +620,10 @@ Pythonのプログラムを保存するために、ホームディレクトリ�
         while True:
             try:
                 cmd = input("type 0 or 1: ")
-            if cmd == "1":
-                ser.write(b"1")
-            else:
-                ser.write(b"0")
+                if cmd == "1":
+                    ser.write(b"1")
+                else:
+                    ser.write(b"0")
             except KeyboardInterrupt:
                 break
 
