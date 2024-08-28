@@ -727,7 +727,7 @@ SerialTest.inoを開く。
 
 Pythonのプログラムは、zm_testパッケージの「serial_led.py」とします。
 
-また、スケッチの名前は「SerialLed」とします。
+また、スケッチは「12.5. Arduinoと通信する」で作った「SerialTest」を使用します。
 
 |
 
