@@ -104,7 +104,7 @@ PCで次のコマンドを実行。
 
 .. code-block:: console
 
-    ubuntu@mbc112:~$ ros2 run demo_nodes_py listener
+    ubuntu@mbc112:~$ ros2 run demo_nodes_cpp talker
 
 Raspberry Piで次のコマンドを実行。
 
