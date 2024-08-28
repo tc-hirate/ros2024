@@ -1155,63 +1155,6 @@ serial_motor.pyの作成。
 
 編集。
 
-.. code-block:: python
-    :caption: serial_motor.py
-
-    import rclpy
-    from rclpy.node import Node
-
-    from std_msgs.msg import String
-    from geometry_msgs.msg import Twist
-    from sensor_msgs.msg import Joy
-
-    import serial
-
-    class JoyMotor(Node):
-
-        def __init__(self):
-            super().__init__('joy_motor')
-            self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
-            self.subscription = self.create_subscription(
-                Joy,
-                'joy',
-                self.joy_callback,
-                10)
-            self.subscription
-
-            self.get_logger().info('Open Port')
-            self.ser = serial.Serial()
-            self.ser.port = "/dev/ttyACM0"
-            self.ser.baudrate = 9600
-            self.ser.open()
-
-        def __del__(self):
-            self.get_logger().info('Close Port')
-
-        def joy_callback(self, joy_msg):
-            twist = Twist()
-            # your code
-
-            self.publisher_.publish(twist)
-
-    def main(args=None):
-        rclpy.init(args=args)
-
-        joy_motor = JoyMotor()
-
-        rclpy.spin(joy_motor)
-
-        # Destroy the node explicitly
-        # (optional - otherwise it will be done automatically
-        # when the garbage collector destroys the node object)
-        self.get_logger().info('Close Port')
-        joy_motor.destroy_node()
-        rclpy.shutdown()
-
-
-    if __name__ == '__main__':
-        main()
-
 .. .. code-block:: python
 ..     :caption: serial_motor.py
 
@@ -1247,21 +1190,8 @@ serial_motor.pyの作成。
 
 ..         def joy_callback(self, joy_msg):
 ..             twist = Twist()
-..             if joy_msg.axes[7] == 1:  # 上が押されたら前進
-..                 self.get_logger().info('Forward')
-..                 self.ser.write(b"1")
-..             elif joy_msg.axes[7] == -1:  # 下が押されたら後進
-..                 self.get_logger().info('Backward')
-..                 self.ser.write(b"2")
-..             elif joy_msg.axes[6] == 1:  # 左が押されたら左に曲がる
-..                 self.get_logger().info('Left')
-..                 self.ser.write(b"3")
-..             elif joy_msg.axes[6] == -1:  # 右が押されたら右に曲がる
-..                 self.get_logger().info('Right')
-..                 self.ser.write(b"4")
-..             else:  # それ以外のときは停止
-..                 self.get_logger().info('Stop')
-..                 self.ser.write(b"0")
+..             # your code
+
 ..             self.publisher_.publish(twist)
 
 ..     def main(args=None):
@@ -1281,6 +1211,76 @@ serial_motor.pyの作成。
 
 ..     if __name__ == '__main__':
 ..         main()
+
+.. code-block:: python
+    :caption: serial_motor.py
+
+    import rclpy
+    from rclpy.node import Node
+
+    from std_msgs.msg import String
+    from geometry_msgs.msg import Twist
+    from sensor_msgs.msg import Joy
+
+    import serial
+
+    class JoyMotor(Node):
+
+        def __init__(self):
+            super().__init__('joy_motor')
+            self.publisher_ = self.create_publisher(Twist, '/turtle1/cmd_vel', 10)
+            self.subscription = self.create_subscription(
+                Joy,
+                'joy',
+                self.joy_callback,
+                10)
+            self.subscription
+
+            self.get_logger().info('Open Port')
+            self.ser = serial.Serial()
+            self.ser.port = "/dev/ttyACM0"
+            self.ser.baudrate = 9600
+            self.ser.open()
+
+        def __del__(self):
+            self.get_logger().info('Close Port')
+
+        def joy_callback(self, joy_msg):
+            twist = Twist()
+            if joy_msg.axes[7] == 1:  # 上が押されたら前進
+                self.get_logger().info('Forward')
+                self.ser.write(b"1")
+            elif joy_msg.axes[7] == -1:  # 下が押されたら後進
+                self.get_logger().info('Backward')
+                self.ser.write(b"2")
+            elif joy_msg.axes[6] == 1:  # 左が押されたら左に曲がる
+                self.get_logger().info('Left')
+                self.ser.write(b"3")
+            elif joy_msg.axes[6] == -1:  # 右が押されたら右に曲がる
+                self.get_logger().info('Right')
+                self.ser.write(b"4")
+            else:  # それ以外のときは停止
+                self.get_logger().info('Stop')
+                self.ser.write(b"0")
+            self.publisher_.publish(twist)
+
+    def main(args=None):
+        rclpy.init(args=args)
+
+        joy_motor = JoyMotor()
+
+        rclpy.spin(joy_motor)
+
+        # Destroy the node explicitly
+        # (optional - otherwise it will be done automatically
+        # when the garbage collector destroys the node object)
+        self.get_logger().info('Close Port')
+        joy_motor.destroy_node()
+        rclpy.shutdown()
+
+
+    if __name__ == '__main__':
+        main()
 
 setup.pyを開く。
 
