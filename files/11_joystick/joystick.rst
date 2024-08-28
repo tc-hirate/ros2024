@@ -591,18 +591,6 @@ turtle_joy_launch.pyを開く。
 
 編集。
 
-.. code-block:: python
-    :caption: turtle_joy_launch.py
-
-    from launch import LaunchDescription
-    from launch_ros.actions import Node
-
-    def generate_launch_description():
-        return LaunchDescription([
-            # your code
-
-        ])
-
 .. .. code-block:: python
 ..     :caption: turtle_joy_launch.py
 
@@ -611,22 +599,34 @@ turtle_joy_launch.pyを開く。
 
 ..     def generate_launch_description():
 ..         return LaunchDescription([
-..             Node(
-..                 name='sim',
-..                 package='turtlesim',
-..                 executable='turtlesim_node',
-..             ),
-..             Node(
-..                 name='joy',
-..                 package='joy',
-..                 executable='joy_node',
-..             ),
-..             Node(
-..                 name='test',
-..                 package='joy_test',
-..                 executable='joy_twist',
-..             ),
-..     ])
+..             # your code
+
+..         ])
+
+.. code-block:: python
+    :caption: turtle_joy_launch.py
+
+    from launch import LaunchDescription
+    from launch_ros.actions import Node
+
+    def generate_launch_description():
+        return LaunchDescription([
+            Node(
+                name='sim',
+                package='turtlesim',
+                executable='turtlesim_node',
+            ),
+            Node(
+                name='joy',
+                package='joy',
+                executable='joy_node',
+            ),
+            Node(
+                name='test',
+                package='joy_test',
+                executable='joy_twist',
+            ),
+    ])
 
 ビルド。
 
