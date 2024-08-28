@@ -1068,6 +1068,10 @@ SerialMotor.inoを開く。
             
     void setup() {
       Serial.begin(9600);
+      pinMode(DIRECTION_R, OUTPUT);
+      pinMode(DIRECTION_L, OUTPUT);
+      pinMode(PWM_R, OUTPUT);
+      pinMode(PWM_L, OUTPUT);
       pinMode(LED, OUTPUT);
       digitalWrite(LED, LOW);
     }
