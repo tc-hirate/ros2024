@@ -559,12 +559,11 @@
 </pre></div>
 </div>
 <p>編集。</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">:emphasize-lines: 1-2, 16</span>
-<span class="go">:caption: setup.py</span>
-
-<span class="go">import os</span>
-<span class="go">from glob import glob</span>
-
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text">setup.py</span><a class="headerlink" href="#id11" title="Permalink to this code">¶</a></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="go">import os</span>
+</span><span class="hll"><span class="go">from glob import glob</span>
+</span>
 <span class="go">from setuptools import find_packages, setup</span>
 
 <span class="go">package_name = &#39;cv_test&#39;</span>
@@ -577,8 +576,8 @@
 <span class="go">        (&#39;share/ament_index/resource_index/packages&#39;,</span>
 <span class="go">            [&#39;resource/&#39; + package_name]),</span>
 <span class="go">        (&#39;share/&#39; + package_name, [&#39;package.xml&#39;]),</span>
-<span class="go">        (os.path.join(&#39;share&#39;, package_name), glob(&#39;launch/*_launch.py&#39;)),</span>
-<span class="go">    ],</span>
+<span class="hll"><span class="go">        (os.path.join(&#39;share&#39;, package_name), glob(&#39;launch/*_launch.py&#39;)),</span>
+</span><span class="go">    ],</span>
 <span class="go">    install_requires=[&#39;setuptools&#39;],</span>
 <span class="go">    zip_safe=True,</span>
 <span class="go">    maintainer=&#39;ubuntu&#39;,</span>
@@ -601,6 +600,7 @@
 <span class="go">    },</span>
 <span class="go">)</span>
 </pre></div>
+</div>
 </div>
 <p>ビルド。</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">ubuntu@mbc112:~/ros2_ws$ </span>colcon build --packages-select cv_test

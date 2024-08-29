@@ -465,7 +465,6 @@ setup.pyを開く。
 編集。
 
 .. code-block:: console
-
     :emphasize-lines: 1-2, 16
     :caption: setup.py
 
