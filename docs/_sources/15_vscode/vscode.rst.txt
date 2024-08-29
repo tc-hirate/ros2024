@@ -13,7 +13,7 @@ VSCodeで開発できるよう環境を構築します。
 VSCodeのインストール
 ============================================================
 
-`公式HP <https://code.visualstudio.com/>`_ の手順に従ってインストールします。
+`公式HP <https://code.visualstudio.com/>`_ からVSCodeをダウンロードします。
 
 [.deb Debian, Ubuntu...]と書かれたリンクをクリック。 ファイルはDownloadsディレクトリに保存される。
 
