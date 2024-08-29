@@ -142,7 +142,7 @@ cam_gray.pyを開く。
             self.subscription
             self.bridge = CvBridge()
 
-    def camera_callback(self, data):
+        def camera_callback(self, data):
             cv_image = self.bridge.imgmsg_to_cv2(data)
             cv_gray_image = cv2.cvtColor(cv_image, cv2.COLOR_BGR2GRAY)
             ros_image = self.bridge.cv2_to_imgmsg(cv_gray_image, 'mono8')
@@ -294,7 +294,7 @@ cam_face_detect.pyを開く。
             self.bridge = CvBridge()
 
 
-    def camera_callback(self, data):
+        def camera_callback(self, data):
             cv_image = self.bridge.imgmsg_to_cv2(data, 'bgr8')
 
             filename = '/usr/share/opencv4/haarcascades/haarcascade_frontalface_def>
