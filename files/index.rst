@@ -21,3 +21,4 @@ ROSロボットプログラミング
    ./14_camera/camera
    ./15_vscode/vscode
    ./16_rosbridge/rosbridge
+   ./17_v4l2-utils/v4l2-utils
